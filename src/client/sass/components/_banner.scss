@@ -132,7 +132,7 @@
     }
 
     & img {
-      width: 25rem;
+      width: 24rem;
       height: 100%;
       object-fit: cover;
       @include transition15;
@@ -141,6 +141,10 @@
         &:hover {
           width: 35rem;
         }
+      }
+
+      @include media('<xxl') {
+        width: 22rem;
       }
 
       @include media('<xl') {

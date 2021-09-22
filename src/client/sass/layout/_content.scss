@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+@use '../vendors/include-media' as *;
+
+.content__wrapper {
+  background: linear-gradient(
+    180deg,
+    #374d59 0%,
+    rgba(99, 131, 146, 0.529412) 17.38%,
+    rgba(255, 255, 255, 0) 37.49%,
+    #3a5a6d 100%
+  );
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background-image: url('../assets/images/bg.png');
+  @include fullImage;
+}

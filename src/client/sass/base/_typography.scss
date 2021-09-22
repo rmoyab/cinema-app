@@ -1,0 +1,84 @@
+@use '../abstracts/variables' as *;
+@use '../vendors/include-media' as *;
+
+@font-face {
+  font-family: $font-opensans-light;
+  src: url('../assets/fonts/opensans-regular-webfont.woff2') format('woff2'),
+    url('../assets/fonts/opensans-regular-webfont.woff') format('woff');
+  font-weight: $font-light;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-opensans-regular;
+  src: url('../assets/fonts/opensans-light-webfont.woff2') format('woff2'),
+    url('../assets/fonts/opensans-light-webfont.woff') format('woff');
+  font-weight: $font-regular;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-opensans-bold;
+  src: url('../assets/fonts/opensans-bold-webfont.woff2') format('woff2'),
+    url('../assets/fonts/opensans-bold-webfont.woff') format('woff');
+  font-weight: $font-bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-lato-black-italic;
+  src: url('../assets/fonts/lato-blackitalic-webfont.woff2') format('woff2'),
+    url('../assets/fonts/lato-blackitalic-webfont.woff') format('woff');
+  font-weight: $font-black;
+  font-style: italic;
+  font-display: swap;
+}
+
+%heading {
+  font-family: $font-opensans-bold;
+  line-height: 1.1;
+}
+
+h1 {
+  @extend %heading;
+  font-size: $heading-1;
+
+  @include media('>=md') {
+    font-size: 5rem;
+  }
+
+  @include media('>=xl') {
+    font-size: 6rem;
+  }
+}
+
+h2 {
+  @extend %heading;
+  font-size: $heading-2;
+}
+
+h3 {
+  @extend %heading;
+  font-size: $heading-3;
+}
+
+h4 {
+  @extend %heading;
+  font-size: $heading-4;
+}
+
+p,
+li {
+  font-family: $font-opensans-light;
+  font-size: $paragraph-xs;
+  line-height: 1.5;
+}
+
+label,
+input {
+  font-family: $font-opensans-regular;
+  font-size: $paragraph-s;
+}

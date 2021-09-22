@@ -1,0 +1,185 @@
+@use '../abstracts' as *;
+@use '../vendors/include-media' as *;
+
+.banner {
+  position: relative;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include media('<=md') {
+    height: 50vh;
+  }
+
+  &__title {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    opacity: 0.9;
+    padding: 10px;
+    width: fit-content;
+    max-width: 60%;
+    max-height: 40vh;
+    z-index: 1;
+    border-radius: 16px;
+    backdrop-filter: blur(17px);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-image: linear-gradient(
+      90deg,
+      #192437 52%,
+      rgba(99, 131, 146, 0) 100%
+    );
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    animation: fadeInLeft 1s;
+    @include transition15;
+
+    @include media('<=md') {
+      max-width: 90%;
+      width: 90%;
+      height: fit-content;
+      max-height: 50vh;
+      opacity: 0.8;
+      animation: none;
+    }
+
+    @include media('<xl') {
+      top: 5%;
+    }
+
+    & h1 {
+      cursor: pointer;
+      font-family: $font-lato-black-italic;
+      line-height: 1em;
+      max-height: 2em;
+      text-transform: uppercase;
+      font-kerning: none;
+      font-size: 10rem;
+      transform: translateX(0);
+      @include transition15;
+
+      &:hover {
+        color: $color-sorrell-brown;
+        transform: translateX(2px);
+      }
+
+      @include media('<=md') {
+        font-size: 1.8rem;
+        line-height: normal;
+        max-height: none;
+      }
+
+      @include media('<=lg') {
+        font-size: 3rem;
+      }
+
+      @include media('<=xl') {
+        font-size: 3.2rem;
+      }
+    }
+
+    h4 {
+      border: 1px solid $color-horizon;
+      color: $color-horizon;
+      width: fit-content;
+      border-radius: 10px;
+      padding: 5px;
+      font-family: $font-opensans-regular;
+
+      @include media('<=md') {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  &__cover {
+    position: absolute;
+    right: 5%;
+    top: 10%;
+    z-index: 1;
+    overflow: hidden;
+    cursor: pointer;
+    max-width: 40%;
+    border-radius: 10px;
+    box-shadow: rgba(2, 26, 46, 0.7) 0px 5px 15px;
+    animation: backInDown 2s $ease-out-expo;
+    @include transition15;
+
+    &:hover {
+      transform: scale(1.06);
+    }
+
+    &:hover ~ .banner__image img {
+      filter: blur(8px);
+    }
+
+    @include media('>=xl') {
+      &:hover {
+        transform: rotate(15deg);
+        top: 0;
+      }
+
+      &:hover ~ .banner__image img {
+        filter: blur(8px);
+      }
+    }
+
+    @include media('<=md') {
+      visibility: hidden;
+    }
+
+    & img {
+      width: 25rem;
+      height: 100%;
+      object-fit: cover;
+      @include transition15;
+
+      @include media('>=xl') {
+        &:hover {
+          width: 35rem;
+        }
+      }
+
+      @include media('<xl') {
+        width: 16rem;
+      }
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    background: $color-black-currant;
+    background-image: linear-gradient(
+      90deg,
+      $color-black-currant 0%,
+      $color-tangaroa 58%,
+      $color-cello 80%,
+      rgba(99, 131, 146, 0) 100%
+    );
+    background-size: cover;
+
+    @include media('<=md') {
+      background: none;
+    }
+
+    & img {
+      object-fit: cover;
+      width: 100%;
+      object-position: center;
+      height: 100%;
+      border-radius: 20px;
+      opacity: 0.4;
+      filter: blur(0);
+      @include transition15;
+
+      @include media('<=md') {
+        opacity: 1;
+      }
+    }
+  }
+}

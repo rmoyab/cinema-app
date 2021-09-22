@@ -1,0 +1,24 @@
+@mixin fullImage {
+  background-size: cover;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+}
+
+@mixin transition15 {
+  transition: (all 0.15s ease-out 0s);
+}
+
+@mixin changeMode($mode) {
+  @media only screen and (prefers-color-scheme: #{$mode}) {
+    @content;
+  }
+}
+
+@mixin centerElement {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

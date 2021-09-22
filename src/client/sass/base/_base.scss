@@ -1,0 +1,40 @@
+@use '../abstracts' as *;
+@use '../vendors/include-media' as *;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%; // 1rem = 10px // 10/16 = 62.5
+
+  @include media('<=xl') {
+    font-size: 75%;
+  }
+}
+
+body {
+  font-size: 1.6rem;
+  box-sizing: content-box;
+  color: $color-mercury;
+}
+
+a:link,
+a:visited {
+  color: blueviolet;
+  @include transition15;
+}
+
+a:hover,
+a:active {
+  color: $color-cello;
+}
+
+::selection {
+  background-color: $color-dove-gray;
+  color: $color-dark-shark;
+}

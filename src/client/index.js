@@ -1,5 +1,5 @@
 import { render } from 'react-dom'
-import App from './app/App'
+import MoviesApp from './app/MoviesApp'
 
 const root = document.getElementById('root')
-render(<App />, root)
+render(<MoviesApp />, root)

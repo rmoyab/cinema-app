@@ -1,4 +1,4 @@
-import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Movie = ({ movie, posterUrl, genres }) => {
   let releaseYear = movie.release_date.substring(0, 4).slice(2, 4)
@@ -38,6 +38,9 @@ const Movie = ({ movie, posterUrl, genres }) => {
       <div className="movie__info"></div>
       <div className="movie__overview">
         <h4 className="txt-c mb-s">{movie.title}</h4>
+        <Link to={`/movie/${movie.id}`} className="card-link">
+          More...
+        </Link>
         <div
           className={`movie__overview__vote movie__overview__vote--${setVoteClass(
             movie.vote_average

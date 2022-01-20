@@ -1,6 +1,6 @@
 import React from 'react'
 import Banner from './Banner'
-import Search from './Search'
+import Search from '../search/Search'
 
 const Header = ({
   bannerMovies,

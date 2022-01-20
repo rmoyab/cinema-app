@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import 'regenerator-runtime/runtime'
 import axios from 'axios'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -9,16 +9,18 @@ import {
   backdropUrl,
   genreUrl,
   keyUrl,
-} from './utils/apiUrl'
+} from '../../utils/apiUrl.js'
 
-import Loader from './components/Loader'
-import Navigation from './components/Navigation'
-import Header from './components/Header'
-import Movies from './components/Movies'
+import Loader from '../../components/ui/Loader'
+import Navigation from '../../components/ui/Navigation'
+import Header from '../../components/ui/Header'
+import MoviesList from '../../components/movie/MoviesList'
+import { MovieContext } from '../../store/MovieContext.js'
 
-const App = () => {
+const MoviesScreen = () => {
+  const { movies, setMovies } = useContext(MovieContext)
+
   const [username, setUsername] = useState(null)
-  const [movies, setMovies] = useState([])
   const [page, setPage] = useState(1)
   const [query, setQuery] = useState('')
   const [genres, setGenres] = useState([])
@@ -95,7 +97,7 @@ const App = () => {
             hasMore={true}
             loader={<Loader />}
           >
-            <Movies movies={movies} posterUrl={posterUrl} genres={genres} />
+            <MoviesList movies={movies} posterUrl={posterUrl} genres={genres} />
           </InfiniteScroll>
         </section>
       </div>
@@ -103,4 +105,4 @@ const App = () => {
   )
 }
 
-export default App
+export default MoviesScreen

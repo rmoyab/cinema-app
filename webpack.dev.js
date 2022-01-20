@@ -17,7 +17,8 @@ module.exports = merge(config, {
     compress: true,
     historyApiFallback: true,
     proxy: {
-      '/api': 'http://localhost:3001',
+      context: ['/api'],
+      target: 'http://localhost:3001',
     },
     // open: true,
     // writeToDisk: true,

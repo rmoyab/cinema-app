@@ -28,7 +28,7 @@
 
   &__search {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin-top: 30px;
 
     @include media('<=md') {

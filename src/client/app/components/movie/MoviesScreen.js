@@ -3,70 +3,20 @@ import 'regenerator-runtime/runtime'
 import axios from 'axios'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import {
-  apiUrl,
-  posterUrl,
-  backdropUrl,
-  genreUrl,
-  keyUrl,
-} from '../../utils/apiUrl.js'
-
 import Loader from '../../components/ui/Loader'
 import Navigation from '../../components/ui/Navigation'
 import Header from '../../components/ui/Header'
 import MoviesList from '../../components/movie/MoviesList'
+
 import { MovieContext } from '../../store/MovieContext.js'
+import { useFetchMovies } from '../../hooks/useFetchMovies.js'
+
+import { posterUrl, backdropUrl } from '../../utils/apiUrl.js'
 
 const MoviesScreen = () => {
   const { movies, setMovies } = useContext(MovieContext)
-
-  const [username, setUsername] = useState(null)
-  const [page, setPage] = useState(1)
-  const [query, setQuery] = useState('')
-  const [genres, setGenres] = useState([])
-  const [bannerMovies, setBannerMovies] = useState([])
-
-  const getGenders = async () => {
-    const { data } = await axios.get(genreUrl)
-    const { genres: res } = data
-    setGenres(res)
-  }
-
-  useEffect(() => {
-    fetchMovies()
-    getGenders()
-  }, [query])
-
-  useEffect(() => {
-    fetchBannerMovies()
-  }, [])
-
-  const fetchMovies = async () => {
-    let url = ''
-    if (query.length) {
-      url = `${apiUrl}/search/movie?${keyUrl}&query=${query}&page=${page}`
-    } else {
-      url = `${apiUrl}/discover/movie?${keyUrl}&page=${page}`
-    }
-    if (page <= 1) {
-      const { data } = await axios.get(url)
-      const { results: res } = data
-      setMovies(res)
-      setPage(2)
-    } else {
-      const { data } = await axios.get(url)
-      const { results: res } = data
-      setMovies(movies.concat(res))
-      setPage(page + 1)
-    }
-  }
-
-  const fetchBannerMovies = async () => {
-    const url = `${apiUrl}/discover/movie?${keyUrl}&primary_release_date.gte=2021-09-30&primary_release_date.lte=2021-10-30`
-    const { data } = await axios.get(url)
-    const { results: res } = data
-    setBannerMovies(res)
-  }
+  const { state, fetchMovies, genres, bannerMovies, setPage, query, setQuery } =
+    useFetchMovies('')
 
   const onSearchChange = (e) => {
     setQuery(e.target.value)

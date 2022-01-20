@@ -1,6 +1,6 @@
 import MovieCard from './MovieCard'
 
-const Movies = ({ movies, posterUrl, genres }) => {
+const MoviesList = ({ movies, posterUrl, genres }) => {
   return (
     <div className="movies__wrapper">
       <div className="movies grid-auto-xl grid-gap-lg">
@@ -21,4 +21,4 @@ const Movies = ({ movies, posterUrl, genres }) => {
   )
 }
 
-export default Movies
+export default MoviesList

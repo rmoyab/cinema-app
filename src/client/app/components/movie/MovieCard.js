@@ -1,19 +1,10 @@
 import { Link } from 'react-router-dom'
 
-const Movie = ({ movie, posterUrl, genres }) => {
-  let releaseYear = movie.release_date.substring(0, 4).slice(2, 4)
-  let releaseMonth = movie.release_date.substring(5, 7)
-  let releaseFull = `${releaseMonth}/${releaseYear}`
-  let movieGenres = movie.genre_ids
-  let namesMovieGenres = []
+import { yearMovie, genreMovie } from '../../utils/movieUtils'
 
-  for (let i = 0; i < genres.length; i++) {
-    for (let j = 0; j < movieGenres.length; j++) {
-      if (genres[i].id === movieGenres[j]) {
-        namesMovieGenres.push(genres[i].name)
-      }
-    }
-  }
+const MovieCard = ({ movie, posterUrl, genres }) => {
+  const releaseFull = yearMovie(movie)
+  const namesMovieGenres = genreMovie(movie, genres)
 
   const setVoteClass = (vote) => {
     if (vote >= 7) {
@@ -66,4 +57,4 @@ const Movie = ({ movie, posterUrl, genres }) => {
   )
 }
 
-export default Movie
+export default MovieCard

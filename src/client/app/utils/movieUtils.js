@@ -9,6 +9,18 @@ export const yearMovie = (movie) => {
   return `${releaseMonth}/${releaseYear}`
 }
 
+export const setVoteClass = (vote) => {
+  if (vote >= 7) {
+    return 'good'
+  } else if (vote >= 4) {
+    return 'medium'
+  } else if (vote >= 1) {
+    return 'bad'
+  } else {
+    return 'nr'
+  }
+}
+
 export const genreMovie = (movie, genres) => {
   const movieGenres = movie.genre_ids
   const namesMovieGenres = []

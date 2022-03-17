@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 
-import MovieScreen from '../components/movie/MovieScreen'
-import MoviesScreen from '../components/movie/MoviesScreen'
+import MovieDetailScreen from '../components/screen/MovieDetailScreen'
+import MovieScreen from '../components/screen/MovieScreen'
 
 import MoviesApp from '../MoviesApp'
 
@@ -9,8 +9,9 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MoviesScreen />} />
-        <Route path="movie/:movieId" element={<MovieScreen />} />
+        <Route path="/" element={<MovieScreen />} />
+        <Route path="movie/:id" element={<MovieDetailScreen />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
   )

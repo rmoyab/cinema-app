@@ -2,21 +2,11 @@ import React from 'react'
 import Banner from './Banner'
 import Search from '../search/Search'
 
-const Header = ({
-  bannerMovies,
-  backdropUrl,
-  posterUrl,
-  query,
-  onSearchChange,
-}) => {
+const Header = ({ upcomingMovies, isLoaded }) => {
   return (
     <div className="header__wrapper">
-      <Banner
-        bannerMovies={bannerMovies}
-        backdropUrl={backdropUrl}
-        posterUrl={posterUrl}
-      />
-      <Search query={query} onSearchChange={onSearchChange} />
+      <Banner upcomingMovies={upcomingMovies} isLoaded={isLoaded} />
+      {/* <Search query={query} onSearchChange={onSearchChange} /> */}
     </div>
   )
 }

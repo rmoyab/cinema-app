@@ -1,36 +1,25 @@
 import { Link } from 'react-router-dom'
 
-import { yearMovie, genreMovie } from '../../utils/movieUtils'
+import { yearMovie, setVoteClass } from '../../utils/movieUtils'
+import { getImageUrl } from '../../api/url'
 
-const MovieCard = ({ movie, posterUrl, genres }) => {
+const MovieCard = ({ movie }) => {
   const releaseFull = yearMovie(movie)
-  const namesMovieGenres = genreMovie(movie, genres)
-
-  const setVoteClass = (vote) => {
-    if (vote >= 7) {
-      return 'good'
-    } else if (vote >= 4) {
-      return 'medium'
-    } else if (vote >= 1) {
-      return 'bad'
-    } else {
-      return 'nr'
-    }
-  }
 
   return (
     <div className="movie" key={movie.id}>
       <div className="movie__image">
-        <img
-          src={`${posterUrl}/${movie.poster_path}`}
-          alt={movie.original_title}
-        />
+        <Link to={`/movie/${movie.id}`}>
+          <img
+            src={getImageUrl(movie.poster_path, 'w300')}
+            alt={movie.original_title}
+          />
+        </Link>
       </div>
       <div className="movie__info"></div>
       <div className="movie__overview">
-        <h4 className="txt-c mb-s">{movie.title}</h4>
-        <Link to={`/movie/${movie.id}`} className="card-link">
-          More...
+        <Link to={`/movie/${movie.id}`}>
+          <h4 className="txt-c mb-s">{movie.title}</h4>
         </Link>
         <div
           className={`movie__overview__vote movie__overview__vote--${setVoteClass(
@@ -44,13 +33,13 @@ const MovieCard = ({ movie, posterUrl, genres }) => {
         </div>
         <div>
           <h4>{releaseFull}</h4>
-          <ul className="movie__overview__genres">
+          {/* <ul className="movie__overview__genres">
             {namesMovieGenres.slice(0, 2).map((genre, i) => (
               <li key={i} className="movie__overview__genres__genre">
                 {genre}
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>

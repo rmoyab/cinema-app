@@ -17,7 +17,7 @@
     top: 10%;
     left: 5%;
     opacity: 0.9;
-    padding: 10px;
+    padding: 26px;
     width: fit-content;
     max-width: 60%;
     max-height: 40vh;
@@ -174,7 +174,7 @@
     & img {
       object-fit: cover;
       width: 100%;
-      object-position: center;
+      object-position: left top;
       height: 100%;
       border-radius: 20px;
       opacity: 0.4;

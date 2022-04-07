@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 
 import { requestMovieDetailScreen } from '../../api/api'
 import { getImageUrl } from '../../api/url'
+import { Children } from 'react/cjs/react.production.min'
+import lib from 'react-slick/lib'
 
 const MovieDetailScreen = () => {
   const { id } = useParams()
@@ -17,8 +19,8 @@ const MovieDetailScreen = () => {
     isLoaded: false,
   })
 
-  useEffect(async () => {
-    await requestMovieDetailScreen(id, callbackRequest)
+  useEffect(() => {
+    requestMovieDetailScreen(id, callbackRequest)
   }, [])
 
   const callbackRequest = (response) => {
@@ -42,20 +44,41 @@ const MovieDetailScreen = () => {
     return <Navigate to="/" />
   }
 
+  const styles = {
+    backgroundImage: `url(${backdropImage})`,
+    backgroundColor: `Black`,
+    height: '100vh',
+    width: '100vw',
+    backgroundPosition: 'top center',
+    backgroundSize: 'cover',
+  }
+
   return (
-    <div>
+    <div style={{ height: '100vh' }}>
       {!isLoaded ? (
         <div>Loading...</div>
       ) : (
-        <div className="movie__detail">
+        <div className="movie__detail" style={styles}>
           <h1>{movieData.title}</h1>
-          <div className="movie__image">
+          <div
+            className="movie__image"
+            style={{ width: '300px', height: '400px' }}
+          >
             <img
               src={posterImage}
               alt={movieData.original_title}
-              style={{ width: 300 }}
+              style={{ width: '100%', height: '100%' }}
             />
-            <img src={backdropImage} alt={movieData.original_title} />
+
+            <h2>
+              {credit.cast.slice(0, 5).map((e) => (
+                <li key={e.id}>
+                  {e.name} <br />
+                  <small>{e.character}</small>
+                </li>
+              ))}
+            </h2>
+            {/* <img src={backdropImage} alt={movieData.original_title} /> */}
           </div>
         </div>
       )}

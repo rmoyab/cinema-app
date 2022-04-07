@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import AppRouter from './routers/AppRouter'
+import AppRouter from './router/AppRouter'
 
 const MoviesApp = () => {
   return <AppRouter />

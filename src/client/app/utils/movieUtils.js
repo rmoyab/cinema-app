@@ -1,3 +1,5 @@
+import { getImageUrl } from '../api/url'
+
 export const yearMovie = (movie) => {
   const releaseYear = movie.release_date
     ? movie.release_date.substring(0, 4).slice(2, 4)
@@ -34,4 +36,22 @@ export const genreMovie = (movie, genres) => {
   }
 
   return namesMovieGenres
+}
+
+export const movieTrailer = (videos) => {
+  for (const key in videos.results) {
+    const video = videos.results[key]
+    if (video.site === 'YouTube' && video.name === 'Official Trailer') {
+      return `https://www.youtube.com/embed/${video.key}`
+    }
+  }
+}
+
+export const movieLogo = (images) => {
+  for (const key in images.logos) {
+    const logo = images.logos[key]
+    if (logo.iso_639_1 === 'en') {
+      return getImageUrl(logo.file_path)
+    }
+  }
 }

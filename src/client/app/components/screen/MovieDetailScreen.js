@@ -5,6 +5,7 @@ import { requestMovieDetailScreen } from '../../api/api'
 import { getImageUrl } from '../../api/url'
 import { Children } from 'react/cjs/react.production.min'
 import lib from 'react-slick/lib'
+import { movieLogo, movieTrailer } from '../../utils/movieUtils'
 
 const MovieDetailScreen = () => {
   const { id } = useParams()
@@ -44,7 +45,7 @@ const MovieDetailScreen = () => {
     return <Navigate to="/" />
   }
 
-  const styles = {
+  const bgStyles = {
     backgroundImage: `url(${backdropImage})`,
     backgroundColor: `Black`,
     height: '100vh',
@@ -53,12 +54,27 @@ const MovieDetailScreen = () => {
     backgroundSize: 'cover',
   }
 
+  const vidRes = {
+    overflow: 'hidden',
+    paddingBottom: '56.25%',
+    position: 'relative',
+    height: '0',
+  }
+
+  const vidResFrame = {
+    left: '0',
+    top: '0',
+    height: '100%',
+    width: '100%',
+    position: 'absolute',
+  }
+
   return (
     <div style={{ height: '100vh' }}>
       {!isLoaded ? (
         <div>Loading...</div>
       ) : (
-        <div className="movie__detail" style={styles}>
+        <div className="movie__detail" style={bgStyles}>
           <h1>{movieData.title}</h1>
           <div
             className="movie__image"
@@ -69,6 +85,22 @@ const MovieDetailScreen = () => {
               alt={movieData.original_title}
               style={{ width: '100%', height: '100%' }}
             />
+
+            <div style={vidRes}>
+              <iframe
+                style={vidResFrame}
+                width="853"
+                height="480"
+                src={movieTrailer(videos)}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Embedded youtube"
+              />
+            </div>
+            <div>
+              <img src={movieLogo(images)} alt="" width={200} />
+            </div>
 
             <h2>
               {credit.cast.slice(0, 5).map((e) => (

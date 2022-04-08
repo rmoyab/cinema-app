@@ -79,3 +79,14 @@
     transform: scaleX(1);
   }
 }
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: translate(0, 30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}

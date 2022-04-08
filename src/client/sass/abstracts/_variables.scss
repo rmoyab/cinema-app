@@ -39,6 +39,8 @@ $grid-columns: 12;
 $gap: 1.5rem;
 
 $ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+$timing: 0.25s;
+$bezier: cubic-bezier(0.215, 0.61, 0.355, 1);
 
 $z-indexes: (
   'navigation',

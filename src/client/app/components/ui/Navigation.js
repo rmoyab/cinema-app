@@ -4,18 +4,18 @@ import Logo from './Logo'
 const Navigation = () => {
   return (
     <div className="navigation">
-      <div className="navigation__logo">
+      <NavLink to="/" className="navigation__logo">
         <Logo />
-      </div>
+      </NavLink>
       <div className="navigation__nav">
-        <ul className="navigation__nav__items">
-          <NavLink to="/login">
-            <li className="navigation__nav__items__item">Login</li>
+        <nav className="navigation__nav__items">
+          <NavLink to="/login" className="navigation__nav__items__item">
+            Login
           </NavLink>
-          <NavLink to="/register">
-            <li className="navigation__nav__items__item">Register</li>
+          <NavLink to="/register" className="navigation__nav__items__item">
+            Register
           </NavLink>
-        </ul>
+        </nav>
       </div>
     </div>
   )

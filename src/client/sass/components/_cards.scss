@@ -5,8 +5,9 @@
   position: relative;
   overflow: hidden;
   border-radius: 10px;
-  animation: fadeIn 2s ease-in-out;
-  @include transition15;
+  // animation: fadeIn 2s ease-in-out;
+  animation: fade $timing $bezier both;
+  // @include transition15;
 
   &__image {
     height: 100%;

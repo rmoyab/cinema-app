@@ -12,6 +12,8 @@
 
   &__logo {
     cursor: pointer;
+    animation: fade $timing $bezier both;
+    animation-delay: calc(2 * $timing);
 
     #logo {
       &:hover {
@@ -31,10 +33,19 @@
         font-family: $font-opensans-regular;
         color: $color-mercury;
         cursor: pointer;
+        animation: fade $timing $bezier both;
 
         &:hover {
           color: $color-sorrell-brown;
         }
+      }
+
+      &__item:first-child {
+        animation-delay: calc(3 * $timing);
+      }
+
+      &__item:last-child {
+        animation-delay: calc(4 * $timing);
       }
     }
   }

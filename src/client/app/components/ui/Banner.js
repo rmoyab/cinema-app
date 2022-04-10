@@ -39,19 +39,19 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
             {upcomingMovies.results.map((movie, i) => (
               <div key={movie.id} className="banner">
                 <div className="banner__title">
-                  <h4 className="mb-s">
-                    Coming Soon... {handleDate(movie.release_date)}
-                  </h4>
-
                   <Link to={`/movie/${movie.id}`}>
-                    <h2 className="mb-s">{movie.title}</h2>
+                    <h1 className="mb-s">{movie.title}</h1>
                   </Link>
 
-                  <div className="banner__overview mb-s">
-                    <p>{movie.overview}</p>
-                  </div>
+                  {/* <h4 className="mb-s">
+                    Coming Soon... {handleDate(movie.release_date)}
+                  </h4> */}
 
-                  <div
+                  {/* <div className="banner__overview mb-s">
+                    <p>{movie.overview}</p>
+                  </div> */}
+
+                  {/* <div
                     className={`banner__vote banner__vote--${setVoteClass(
                       movie.vote_average
                     )}`}
@@ -59,7 +59,7 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                     <h3>
                       {movie.vote_average ? `${movie.vote_average}/10` : 'NR'}
                     </h3>
-                  </div>
+                  </div> */}
 
                   {/* <ul className="banner__genres">
                       {genreMovie(movie, genres)

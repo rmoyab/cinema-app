@@ -37,8 +37,29 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: $font-meshed-display-black;
+  src: url('../assets/fonts/MeshedDisplay-Black.woff') format('woff'),
+    url('../assets/fonts/MeshedDisplay-Black.woff2') format('woff2'),
+    url('../assets/fonts/MeshedDisplay-Black.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-rockstar-bold;
+  src: url('../assets/fonts/Rockstar-ExtraBold.woff') format('woff');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+}
+
 %heading {
-  font-family: $font-opensans-bold;
+  // font-family: $font-opensans-bold;
+  font-family: $font-rockstar-bold;
   line-height: 1.1;
 }
 
@@ -72,7 +93,8 @@ h4 {
 
 p,
 li {
-  font-family: $font-opensans-light;
+  // font-family: $font-opensans-light;
+  font-family: $font-rockstar-bold;
   font-size: $paragraph-s;
   line-height: 1.5;
 }

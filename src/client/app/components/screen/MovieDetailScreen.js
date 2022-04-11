@@ -1,5 +1,6 @@
 import { Navigate, useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 
 import { requestMovieDetailScreen } from '../../api/api'
 import { getImageUrl } from '../../api/url'
@@ -69,52 +70,66 @@ const MovieDetailScreen = () => {
     position: 'absolute',
   }
 
+  const animationConfiguration = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+  }
+
   return (
-    <div style={{ height: '100vh' }}>
-      {!isLoaded ? (
-        <div>Loading...</div>
-      ) : (
-        <div className="movie__detail" style={bgStyles}>
-          <h1>{movieData.title}</h1>
-          <div
-            className="movie__image"
-            style={{ width: '300px', height: '400px' }}
-          >
-            <img
-              src={posterImage}
-              alt={movieData.original_title}
-              style={{ width: '100%', height: '100%' }}
-            />
-
-            <div style={vidRes}>
-              <iframe
-                style={vidResFrame}
-                width="853"
-                height="480"
-                src={movieTrailer(videos)}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Embedded youtube"
+    <motion.div
+      variants={animationConfiguration}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 1.5 }}
+    >
+      <div style={{ height: '100vh' }}>
+        {!isLoaded ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="movie__detail" style={bgStyles}>
+            <h1>{movieData.title}</h1>
+            <div
+              className="movie__image"
+              style={{ width: '300px', height: '400px' }}
+            >
+              <img
+                src={posterImage}
+                alt={movieData.original_title}
+                style={{ width: '100%', height: '100%' }}
               />
-            </div>
-            <div>
-              <img src={movieLogo(images)} alt="" width={200} />
-            </div>
 
-            <h2>
-              {credit.cast.slice(0, 5).map((e) => (
-                <li key={e.id}>
-                  {e.name} <br />
-                  <small>{e.character}</small>
-                </li>
-              ))}
-            </h2>
-            {/* <img src={backdropImage} alt={movieData.original_title} /> */}
+              <div style={vidRes}>
+                <iframe
+                  style={vidResFrame}
+                  width="853"
+                  height="480"
+                  src={movieTrailer(videos)}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title="Embedded youtube"
+                />
+              </div>
+              <div>
+                <img src={movieLogo(images)} alt="" width={200} />
+              </div>
+
+              <h2>
+                {credit.cast.slice(0, 5).map((e) => (
+                  <li key={e.id}>
+                    {e.name} <br />
+                    <small>{e.character}</small>
+                  </li>
+                ))}
+              </h2>
+              {/* <img src={backdropImage} alt={movieData.original_title} /> */}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </motion.div>
   )
 }
 

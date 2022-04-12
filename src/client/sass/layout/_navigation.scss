@@ -1,13 +1,19 @@
 @use '../abstracts' as *;
 @use '../vendors/include-media' as *;
 
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
 .navigation {
+  position: absolute;
+  padding: 2rem 0;
+  z-index: 2;
   width: 90%;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
   align-items: center;
-  padding: 10px;
   pointer-events: fill;
 
   &__logo {

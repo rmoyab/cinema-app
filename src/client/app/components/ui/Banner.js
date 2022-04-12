@@ -34,24 +34,24 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
       {!isLoaded ? (
         <div>Loading...</div>
       ) : (
-        <div>
+        <div className="header__banner__wrapper">
           <Slider {...settings}>
             {upcomingMovies.results.map((movie, i) => (
-              <div key={movie.id} className="banner">
-                <div className="banner__title">
+              <div key={movie.id} className="banner__section">
+                <div className="banner__section__title">
                   <Link to={`/movie/${movie.id}`}>
                     <h1 className="mb-s">{movie.title}</h1>
                   </Link>
 
-                  {/* <h4 className="mb-s">
+                  <h4 className="mb-s">
                     Coming Soon... {handleDate(movie.release_date)}
-                  </h4> */}
+                  </h4>
 
-                  {/* <div className="banner__overview mb-s">
+                  <div className="banner__overview mb-s">
                     <p>{movie.overview}</p>
-                  </div> */}
+                  </div>
 
-                  {/* <div
+                  <div
                     className={`banner__vote banner__vote--${setVoteClass(
                       movie.vote_average
                     )}`}
@@ -59,7 +59,7 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                     <h3>
                       {movie.vote_average ? `${movie.vote_average}/10` : 'NR'}
                     </h3>
-                  </div> */}
+                  </div>
 
                   {/* <ul className="banner__genres">
                       {genreMovie(movie, genres)
@@ -72,13 +72,13 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                     </ul> */}
                 </div>
 
-                <div className="banner__cover" ref={coverRef}>
+                <div className="banner__section__cover" ref={coverRef}>
                   <Link to={`/movie/${movie.id}`}>
                     <img src={getImageUrl(movie.poster_path, 'w300')} alt="" />
                   </Link>
                 </div>
 
-                <div className="banner__image">
+                <div className="banner__section__image">
                   <img
                     src={getImageUrl(movie.backdrop_path, 'original')}
                     alt=""

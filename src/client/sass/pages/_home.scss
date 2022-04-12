@@ -2,17 +2,18 @@
 @use '../vendors/include-media' as *;
 
 .movies__section {
+  position: relative;
+  z-index: 3;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0) 0%,
-    #192437 25.86%,
-    #04050b 86.24%
+    rgba(255, 255, 255, 0) 0,
+    rgb(0, 0, 0) 100%
   );
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  min-height: 100vh;
 }
 
 .movies__wrapper {
   width: 90%;
   margin: 0 auto;
+  padding: 2rem;
 }

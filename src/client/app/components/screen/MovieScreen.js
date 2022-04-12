@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { motion } from 'framer-motion'
 
 import Navigation from '../ui/Navigation'
 import Header from '../ui/Header'
@@ -44,8 +45,20 @@ const MovieScreen = () => {
     setPage(1)
   }
 
+  const animationConfiguration = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+  }
+
   return (
-    <>
+    <motion.div
+      variants={animationConfiguration}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 1.2 }}
+    >
       <div>
         {!isLoaded ? (
           <div>Loading...</div>
@@ -64,7 +77,7 @@ const MovieScreen = () => {
           </div>
         )}
       </div>
-    </>
+    </motion.div>
   )
 }
 

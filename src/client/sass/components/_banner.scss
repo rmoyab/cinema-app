@@ -1,9 +1,9 @@
 @use '../abstracts' as *;
 @use '../vendors/include-media' as *;
 
-.banner {
-  position: relative;
-  height: 50vh;
+.banner__section {
+  position: sticky;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,25 +14,23 @@
 
   &__title {
     position: absolute;
-    top: 10%;
-    left: 5%;
-    opacity: 0.9;
-    padding: 26px;
+    top: 20%;
+    left: 10%;
     width: fit-content;
-    max-width: 60%;
-    max-height: 40vh;
+    max-width: 50%;
+    max-height: 60vh;
     z-index: 1;
     border-radius: 16px;
-    backdrop-filter: blur(17px);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-image: linear-gradient(
-      90deg,
-      #192437 52%,
-      rgba(99, 131, 146, 0) 100%
-    );
+    // backdrop-filter: blur(17px);
+    // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    // background-image: linear-gradient(
+    //   90deg,
+    //   #192437 52%,
+    //   rgba(99, 131, 146, 0) 100%
+    // );
     word-wrap: break-word;
     white-space: pre-wrap;
-    overflow: hidden;
+    // overflow: hidden;
     text-overflow: ellipsis;
     animation: fadeInLeft 1s;
     @include transition15;
@@ -52,8 +50,8 @@
 
     & h1 {
       cursor: pointer;
-      // font-family: $font-lato-black-italic;
-      font-family: $font-meshed-display-black;
+      font-family: $font-lato-black-italic;
+      // font-family: $font-meshed-display-black;
       line-height: 1em;
       max-height: 2em;
       text-transform: uppercase;
@@ -99,33 +97,38 @@
 
   &__cover {
     position: absolute;
-    right: 5%;
-    top: 10%;
+    right: 15%;
+    top: 18%;
     z-index: 1;
     overflow: hidden;
     cursor: pointer;
     max-width: 40%;
     border-radius: 10px;
-    box-shadow: rgba(2, 26, 46, 0.7) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 5px 15px;
     animation: backInDown 2s $ease-out-expo;
     @include transition15;
 
     &:hover {
-      transform: scale(1.06);
+      transform: scale(0.5);
     }
 
-    &:hover ~ .banner__image img {
+    &:hover ~ .banner__section__image img {
       filter: blur(8px);
     }
 
     @include media('>=xl') {
       &:hover {
         transform: rotate(15deg);
-        top: 0;
       }
 
-      &:hover ~ .banner__image img {
+      &:hover ~ .banner__section__image img {
         filter: blur(8px);
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0) 0,
+            rgb(0, 0, 0, 1) 80%
+          ),
+          radial-gradient(circle, transparent, rgba(0, 0, 0, 0.5) 100%);
       }
     }
 
@@ -141,7 +144,7 @@
 
       @include media('>=xl') {
         &:hover {
-          width: 35rem;
+          width: 28rem;
         }
       }
 
@@ -156,31 +159,39 @@
   }
 
   &__image {
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-    background: $color-black-currant;
-    background-image: linear-gradient(
-      90deg,
-      $color-black-currant 0%,
-      $color-tangaroa 58%,
-      $color-cello 80%,
-      rgba(99, 131, 146, 0) 100%
-    );
-    background-size: cover;
+    position: relative;
+    height: 60vh;
+    width: 100vw;
 
     @include media('<=md') {
       background: none;
     }
 
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 0,
+          rgb(0, 0, 0, 1) 80%
+        ),
+        radial-gradient(circle, transparent, rgba(0, 0, 0, 0.5) 100%);
+      // radial-gradient(ellipse at bottom, transparent, rgb(0, 0, 0));
+    }
+
     & img {
       object-fit: cover;
       width: 100%;
+      height: 96%;
       object-position: left top;
-      height: 100%;
-      border-radius: 20px;
-      opacity: 0.4;
-      filter: blur(0);
+      // opacity: 0.4;
+      // filter: blur(5px);
+      overflow: hidden;
       @include transition15;
 
       @include media('<=md') {
@@ -189,3 +200,7 @@
     }
   }
 }
+
+// .slick-slide {
+//   height: 59vh;
+// }

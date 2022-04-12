@@ -28,7 +28,6 @@ a:link,
 a:visited {
   // color: blueviolet;
   @include transition15;
-  font-family: $font-rockstar-bold;
 }
 
 a:hover,

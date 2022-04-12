@@ -1,12 +1,20 @@
 import { Navigate, useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import moment from 'moment'
 
 import { requestMovieDetailScreen } from '../../api/api'
 import { getImageUrl } from '../../api/url'
 import { Children } from 'react/cjs/react.production.min'
 import lib from 'react-slick/lib'
-import { movieLogo, movieTrailer } from '../../utils/movieUtils'
+import {
+  getTime,
+  movieCompanies,
+  movieDirector,
+  movieLogo,
+  movieTrailer,
+  movieWriters,
+} from '../../utils/movieUtils'
 
 const MovieDetailScreen = () => {
   const { id } = useParams()
@@ -41,33 +49,16 @@ const MovieDetailScreen = () => {
 
   const backdropImage = getImageUrl(movieData.backdrop_path, 'original')
   const posterImage = getImageUrl(movieData.poster_path, 'w300')
+  const movieCompaniesInfo = movieCompanies(movieData)
+  const director = movieDirector(credit)
+  const writers = movieWriters(credit)
 
   if (!movieData) {
     return <Navigate to="/" />
   }
 
-  const bgStyles = {
+  const bgImage = {
     backgroundImage: `url(${backdropImage})`,
-    backgroundColor: `Black`,
-    height: '100vh',
-    width: '100vw',
-    backgroundPosition: 'top center',
-    backgroundSize: 'cover',
-  }
-
-  const vidRes = {
-    overflow: 'hidden',
-    paddingBottom: '56.25%',
-    position: 'relative',
-    height: '0',
-  }
-
-  const vidResFrame = {
-    left: '0',
-    top: '0',
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
   }
 
   const animationConfiguration = {
@@ -88,10 +79,11 @@ const MovieDetailScreen = () => {
         {!isLoaded ? (
           <div>Loading...</div>
         ) : (
-          <div className="movie__detail" style={bgStyles}>
+          <div className="movie__detail">
             <h1>{movieData.title}</h1>
+            <h3>{movieData.tagline}</h3>
             <div
-              className="movie__image"
+              className="movie__detail__image"
               style={{ width: '300px', height: '400px' }}
             >
               <img
@@ -100,9 +92,8 @@ const MovieDetailScreen = () => {
                 style={{ width: '100%', height: '100%' }}
               />
 
-              <div style={vidRes}>
+              <div className="movie__detail__video">
                 <iframe
-                  style={vidResFrame}
                   width="853"
                   height="480"
                   src={movieTrailer(videos)}
@@ -113,19 +104,68 @@ const MovieDetailScreen = () => {
                 />
               </div>
               <div>
+                <p>DIRECTED BY: {director}</p>
+              </div>
+              <div>
+                <p>Writers: {writers}</p>
+              </div>
+              <div>
                 <img src={movieLogo(images)} alt="" width={200} />
               </div>
+              <div>
+                <a href={movieData.homepage}>Homepage: {movieData.homepage}</a>
+              </div>
 
-              <h2>
-                {credit.cast.slice(0, 5).map((e) => (
+              <div>
+                <p>Description: {movieData.overview}</p>
+              </div>
+              <div>
+                <p>
+                  Released:{' '}
+                  {movieData.release_date
+                    ? moment(movieData.release_date).format('LL')
+                    : 'N/A'}
+                </p>
+              </div>
+              <div>
+                <p>Vote Average:{movieData.vote_average}</p>
+              </div>
+
+              <div>
+                <p>Duration: {getTime(movieData.runtime)}</p>
+              </div>
+
+              <div>
+                <p>Cast:</p>
+                {credit.cast.slice(0, 3).map((e) => (
                   <li key={e.id}>
                     {e.name} <br />
                     <small>{e.character}</small>
                   </li>
                 ))}
-              </h2>
+              </div>
+
+              <div>
+                <p>Genres:</p>
+                {movieData.genres.slice(0, 4).map((e) => (
+                  <li key={e.id}>
+                    {e.name} <br />
+                  </li>
+                ))}
+              </div>
+
+              <div>
+                <p>Companies:</p>
+                {movieCompaniesInfo.map((e) => (
+                  <li key={e.id}>
+                    <img src={getImageUrl(e.logo_path, 'w300')} alt={e.name} />
+                  </li>
+                ))}
+              </div>
+
               {/* <img src={backdropImage} alt={movieData.original_title} /> */}
             </div>
+            <div className="movie__detail__bg" style={bgImage}></div>
           </div>
         )}
       </div>

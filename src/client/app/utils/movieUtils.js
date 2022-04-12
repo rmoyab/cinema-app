@@ -55,3 +55,46 @@ export const movieLogo = (images) => {
     }
   }
 }
+
+export const movieCompanies = (movieData) => {
+  if (!!movieData.production_companies) {
+    const companies = movieData.production_companies.map((e) => e)
+    let companiesWithLogo = []
+    for (const company of companies) {
+      if (company.logo_path !== null) {
+        companiesWithLogo.push(company)
+      }
+    }
+    return companiesWithLogo
+  }
+}
+
+export const movieDirector = (credit) => {
+  var directors = []
+  if (credit.crew) {
+    credit.crew.forEach((entry) => {
+      if (entry.job === 'Director') {
+        directors.push(entry.name)
+      }
+    })
+  }
+  return directors.join(', ')
+}
+
+export const movieWriters = (credit) => {
+  var writers = []
+  if (credit.crew) {
+    credit.crew.forEach((entry) => {
+      if (entry.job === 'Screenplay') {
+        writers.push(entry.name)
+      }
+    })
+  }
+  return writers.join(', ')
+}
+
+export const getTime = (time) => {
+  return (
+    Math.floor(time / 60) + 'h ' + ('0' + Math.floor(time % 60)).slice(-2) + 'm'
+  )
+}

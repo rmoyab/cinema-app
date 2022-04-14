@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom'
 import Slider from 'react-slick'
 import moment from 'moment'
 
-import { setVoteClass } from '../../utils/movieUtils'
+import {
+  genreMovie,
+  movieUnreleased,
+  setVoteClass,
+} from '../../utils/movieUtils'
 import { getImageUrl } from '../../api/url'
 
 import 'slick-carousel/slick/slick.css'
@@ -23,11 +27,27 @@ let settings = {
 }
 
 const Banner = ({ upcomingMovies, isLoaded }) => {
+  const [movies, setMovies] = useState({
+    newMovies: [],
+    isLoading: true,
+  })
   const coverRef = useRef()
 
   const handleDate = (date) => {
     return moment(date).format('DD-MM-YYYY')
   }
+
+  const getMovies = async () => {
+    const res = await movieUnreleased(upcomingMovies)
+    if (res) {
+      setMovies({
+        newMovies: res,
+        isLoading: false,
+      })
+    }
+  }
+  getMovies()
+  const { newMovies, isLoading } = movies
 
   return (
     <div className="header__banner">
@@ -38,21 +58,29 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
           <Slider {...settings}>
             {upcomingMovies.results.map((movie, i) => (
               <div key={movie.id} className="banner__section">
-                <div className="banner__section__title">
-                  <Link to={`/movie/${movie.id}`}>
-                    <h1 className="mb-s">{movie.title}</h1>
-                  </Link>
+                <div className="banner__section__info">
+                  <div className="info__title">
+                    <Link to={`/movie/${movie.id}`}>
+                      <h1>
+                        {movie.title}
+                        <span className="info__title__year">
+                          {' '}
+                          {`(${moment(movie.release_date).format('YYYY')})`}
+                        </span>
+                      </h1>
+                    </Link>
+                  </div>
 
-                  <h4 className="mb-s">
-                    Coming Soon... {handleDate(movie.release_date)}
-                  </h4>
+                  <div className="info__date">
+                    <h4>{moment(movie.release_date).format('L')}</h4>
+                  </div>
 
-                  <div className="banner__overview mb-s">
+                  <div className="info__overview mt-s">
                     <p>{movie.overview}</p>
                   </div>
 
                   <div
-                    className={`banner__vote banner__vote--${setVoteClass(
+                    className={`info__vote mt-s info__vote--${setVoteClass(
                       movie.vote_average
                     )}`}
                   >
@@ -61,15 +89,15 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                     </h3>
                   </div>
 
-                  {/* <ul className="banner__genres">
-                      {genreMovie(movie, genres)
-                        .slice(0, 2)
-                        .map((genre, i) => (
-                          <li key={i} className="banner__genres__genre">
-                            {genre}
-                          </li>
-                        ))}
-                    </ul> */}
+                  <ul className="banner__genres">
+                    {/* {genreMovie(movie, genres)
+                      .slice(0, 2)
+                      .map((genre, i) => (
+                        <li key={i} className="banner__genres__genre">
+                          {genre}
+                        </li>
+                      ))} */}
+                  </ul>
                 </div>
 
                 <div className="banner__section__cover" ref={coverRef}>

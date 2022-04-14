@@ -12,9 +12,6 @@
   }
 
   &__banner__wrapper {
-    @include media('<=md') {
-      // height: 50vh;
-    }
   }
 
   &__search {

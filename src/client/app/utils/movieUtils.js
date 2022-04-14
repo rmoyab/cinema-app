@@ -1,4 +1,6 @@
-import { getImageUrl } from '../api/url'
+import moment from 'moment'
+import { request } from '../api/api'
+import { getImageUrl, getUpcomingMoviesUrl } from '../api/url'
 
 export const yearMovie = (movie) => {
   const releaseYear = movie.release_date
@@ -70,7 +72,7 @@ export const movieCompanies = (movieData) => {
 }
 
 export const movieDirector = (credit) => {
-  var directors = []
+  let directors = []
   if (credit.crew) {
     credit.crew.forEach((entry) => {
       if (entry.job === 'Director') {
@@ -82,7 +84,7 @@ export const movieDirector = (credit) => {
 }
 
 export const movieWriters = (credit) => {
-  var writers = []
+  let writers = []
   if (credit.crew) {
     credit.crew.forEach((entry) => {
       if (entry.job === 'Screenplay') {
@@ -91,6 +93,33 @@ export const movieWriters = (credit) => {
     })
   }
   return writers.join(', ')
+}
+
+export const movieUnreleased = async (upcomingMovies) => {
+  let allMovies = []
+  let movies = []
+  let isLoading = true
+
+  for (let i = 0; i < upcomingMovies.total_pages; i++) {
+    upcomingMovies.page += 1
+    const response = await request(getUpcomingMoviesUrl(upcomingMovies.page))
+    if (response) {
+      allMovies = [...response.results, ...allMovies]
+    }
+  }
+
+  if (allMovies.length) {
+    allMovies.forEach((e) => {
+      const releaseDate = moment(e.release_date)
+      const date = moment()
+      if (releaseDate.isAfter(date)) {
+        movies.push(e)
+      }
+      isLoading = false
+    })
+
+    return movies
+  }
 }
 
 export const getTime = (time) => {

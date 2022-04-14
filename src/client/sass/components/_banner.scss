@@ -2,7 +2,7 @@
 @use '../vendors/include-media' as *;
 
 .banner__section {
-  position: sticky;
+  position: relative;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -12,12 +12,12 @@
     height: 50vh;
   }
 
-  &__title {
+  &__info {
     position: absolute;
     top: 20%;
     left: 10%;
     width: fit-content;
-    max-width: 50%;
+    max-width: 54%;
     max-height: 60vh;
     z-index: 1;
     border-radius: 16px;
@@ -35,6 +35,13 @@
     animation: fadeInLeft 1s;
     @include transition15;
 
+    @include media('<=xl') {
+    }
+
+    @include media('<=lg') {
+      top: 20%;
+    }
+
     @include media('<=md') {
       max-width: 90%;
       width: 90%;
@@ -44,19 +51,19 @@
       animation: none;
     }
 
-    @include media('<xl') {
-      top: 5%;
+    @include media('<=sm') {
+      left: 5%;
     }
 
-    & h1 {
+    & .info__title {
       cursor: pointer;
       font-family: $font-lato-black-italic;
       // font-family: $font-meshed-display-black;
       line-height: 1em;
-      max-height: 2em;
+      height: fit-content;
+      overflow: hidden;
       text-transform: uppercase;
       font-kerning: none;
-      font-size: 8rem;
       transform: translateX(0);
       @include transition15;
 
@@ -65,33 +72,45 @@
         transform: translateX(2px);
       }
 
+      @include media('<=xl') {
+        font-size: 3.2rem;
+      }
+
+      @include media('<=lg') {
+        // font-size: 3rem;
+      }
+
       @include media('<=md') {
         font-size: 1.8rem;
         line-height: normal;
         max-height: none;
       }
 
-      @include media('<=lg') {
-        font-size: 3rem;
-      }
-
-      @include media('<=xl') {
-        font-size: 3.2rem;
+      &__year {
+        font-family: $font-opensans-bold;
+        font-weight: $font-bold;
       }
     }
 
-    h4 {
-      border: 1px solid $color-horizon;
-      color: $color-horizon;
+    & .info__date {
       width: fit-content;
-      border-radius: 10px;
       padding: 5px;
-      // font-family: $font-opensans-regular;
-      font-family: $font-rockstar-bold;
+
+      & h4 {
+        font-family: $font-opensans-regular;
+      }
 
       @include media('<=md') {
-        font-size: 1.5rem;
       }
+    }
+
+    & .info__overview {
+      @include media('<=lg') {
+        display: none;
+      }
+    }
+
+    & .info__vote {
     }
   }
 
@@ -109,7 +128,7 @@
     @include transition15;
 
     &:hover {
-      transform: scale(0.5);
+      // transform: scale(0.5);
     }
 
     &:hover ~ .banner__section__image img {
@@ -129,6 +148,13 @@
             rgb(0, 0, 0, 1) 80%
           ),
           radial-gradient(circle, transparent, rgba(0, 0, 0, 0.5) 100%);
+      }
+    }
+
+    @include media('<=lg') {
+      top: 25%;
+      &:hover {
+        transform: scale(1.1);
       }
     }
 

@@ -3,12 +3,17 @@
 
 .banner__section {
   position: relative;
-  height: 100%;
+  // height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: $head-height;
 
-  @include media('<=md') {
+  @include media('<=lg') {
+    height: 60vh;
+  }
+
+  @include media('<=sm') {
     height: 50vh;
   }
 
@@ -35,11 +40,9 @@
     animation: fadeInLeft 1s;
     @include transition15;
 
-    @include media('<=xl') {
-    }
-
     @include media('<=lg') {
-      top: 20%;
+      // top: 24%;
+      max-width: 50%;
     }
 
     @include media('<=md') {
@@ -53,6 +56,9 @@
 
     @include media('<=sm') {
       left: 5%;
+      top: 40%;
+      width: 90%;
+      margin: 0 auto;
     }
 
     & .info__title {
@@ -67,6 +73,19 @@
       transform: translateX(0);
       @include transition15;
 
+      & h1 {
+        font-size: $heading-2;
+
+        @include media('<=md') {
+          line-height: normal;
+          max-height: none;
+        }
+
+        @include media('<=sm') {
+          font-size: 1.8rem;
+        }
+      }
+
       &:hover {
         color: $color-sorrell-brown;
         transform: translateX(2px);
@@ -78,12 +97,6 @@
 
       @include media('<=lg') {
         // font-size: 3rem;
-      }
-
-      @include media('<=md') {
-        font-size: 1.8rem;
-        line-height: normal;
-        max-height: none;
       }
 
       &__year {
@@ -105,6 +118,9 @@
     }
 
     & .info__overview {
+      & p {
+        font-size: $paragraph-s;
+      }
       @include media('<=lg') {
         display: none;
       }
@@ -128,16 +144,17 @@
     @include transition15;
 
     &:hover {
-      // transform: scale(0.5);
+      scale: 1.1;
     }
 
     &:hover ~ .banner__section__image img {
       filter: blur(8px);
     }
 
-    @include media('>=xl') {
+    @include media('>=xxl') {
       &:hover {
-        transform: rotate(15deg);
+        rotate: 15deg;
+        scale: 1.2;
       }
 
       &:hover ~ .banner__section__image img {
@@ -152,9 +169,9 @@
     }
 
     @include media('<=lg') {
-      top: 25%;
+      // top: 25%;
       &:hover {
-        transform: scale(1.1);
+        scale: 1.03;
       }
     }
 
@@ -168,16 +185,6 @@
       object-fit: cover;
       @include transition15;
 
-      @include media('>=xl') {
-        &:hover {
-          width: 28rem;
-        }
-      }
-
-      @include media('<xxl') {
-        width: 22rem;
-      }
-
       @include media('<xl') {
         width: 16rem;
       }
@@ -186,11 +193,15 @@
 
   &__image {
     position: relative;
-    height: 60vh;
+    height: $head-height;
     width: 100vw;
 
-    @include media('<=md') {
-      background: none;
+    @include media('<=lg') {
+      height: 60vh;
+    }
+
+    @include media('<=sm') {
+      height: 50vh;
     }
 
     &::after {
@@ -220,6 +231,9 @@
       overflow: hidden;
       @include transition15;
 
+      @include media('<=xxl') {
+        object-position: center top;
+      }
       @include media('<=md') {
         opacity: 1;
       }

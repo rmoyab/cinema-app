@@ -60,7 +60,7 @@ const MovieDetailScreen = () => {
   const bgImage = {
     backgroundImage: `url(${backdropImage})`,
   }
-
+  console.log(writers)
   const animationConfiguration = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -75,96 +75,109 @@ const MovieDetailScreen = () => {
       exit="exit"
       transition={{ duration: 1.5 }}
     >
-      <div style={{ height: '100vh' }}>
+      <div className="">
         {!isLoaded ? (
           <div>Loading...</div>
         ) : (
           <div className="movie__detail">
-            <h1>{movieData.title}</h1>
-            <h3>{movieData.tagline}</h3>
-            <div
-              className="movie__detail__image"
-              style={{ width: '300px', height: '400px' }}
-            >
-              <img
-                src={posterImage}
-                alt={movieData.original_title}
-                style={{ width: '100%', height: '100%' }}
-              />
+            <div className="grid">
+              <div className="col-start-3 col-end-11">
+                <div className='className="movie__detail__title'>
+                  <h1>{movieData.title}</h1>
+                  <h3>{movieData.tagline}</h3>
+                </div>
 
-              <div className="movie__detail__video">
-                <iframe
-                  width="853"
-                  height="480"
-                  src={movieTrailer(videos)}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title="Embedded youtube"
-                />
-              </div>
-              <div>
-                <p>DIRECTED BY: {director}</p>
-              </div>
-              <div>
-                <p>Writers: {writers}</p>
-              </div>
-              <div>
-                <img src={movieLogo(images)} alt="" width={200} />
-              </div>
-              <div>
-                <a href={movieData.homepage}>Homepage: {movieData.homepage}</a>
-              </div>
+                <div className="movie__detail__image">
+                  <img src={posterImage} alt={movieData.original_title} />
 
-              <div>
-                <p>Description: {movieData.overview}</p>
-              </div>
-              <div>
-                <p>
-                  Released:{' '}
-                  {movieData.release_date
-                    ? moment(movieData.release_date).format('LL')
-                    : 'N/A'}
-                </p>
-              </div>
-              <div>
-                <p>Vote Average:{movieData.vote_average}</p>
-              </div>
+                  {/* <img src={backdropImage} alt={movieData.original_title} /> */}
+                </div>
 
-              <div>
-                <p>Duration: {getTime(movieData.runtime)}</p>
-              </div>
+                <div className="movie__detail__logo">
+                  <img src={movieLogo(images)} alt="" width={200} />
+                </div>
 
-              <div>
-                <p>Cast:</p>
-                {credit.cast.slice(0, 3).map((e) => (
-                  <li key={e.id}>
-                    {e.name} <br />
-                    <small>{e.character}</small>
-                  </li>
-                ))}
-              </div>
+                <div className="movie__detail__data">
+                  <div className="data__release">
+                    <p>
+                      Released:{' '}
+                      {movieData.release_date
+                        ? moment(movieData.release_date).format('LL')
+                        : 'N/A'}
+                    </p>
+                  </div>
+                  <div className="data__vote__average">
+                    <p>Vote Average:{movieData.vote_average}</p>
+                  </div>
 
-              <div>
-                <p>Genres:</p>
-                {movieData.genres.slice(0, 4).map((e) => (
-                  <li key={e.id}>
-                    {e.name} <br />
-                  </li>
-                ))}
-              </div>
+                  <div className="data__duration">
+                    <p>Duration: {getTime(movieData.runtime)}</p>
+                  </div>
 
-              <div>
-                <p>Companies:</p>
-                {movieCompaniesInfo.map((e) => (
-                  <li key={e.id}>
-                    <img src={getImageUrl(e.logo_path, 'w300')} alt={e.name} />
-                  </li>
-                ))}
-              </div>
+                  <div className="data__link">
+                    <a href={movieData.homepage}>
+                      Homepage: {movieData.homepage}
+                    </a>
+                  </div>
 
-              {/* <img src={backdropImage} alt={movieData.original_title} /> */}
+                  <div className="data__genres">
+                    <p>Genres:</p>
+                    {movieData.genres.slice(0, 4).map((e) => (
+                      <li key={e.id}>
+                        {e.name} <br />
+                      </li>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="movie__detail__overview">
+                  <p>Overview: {movieData.overview}</p>
+                </div>
+
+                <div className="movie__detail__credits">
+                  <div>
+                    <p>Director: {director}</p>
+                  </div>
+                  <div>
+                    <p>Writers: {writers}</p>
+                  </div>
+                  <div>
+                    <p>Cast:</p>
+                    {credit.cast.slice(0, 3).map((e) => (
+                      <li key={e.id}>
+                        {e.name} <br />
+                        <small>{e.character}</small>
+                      </li>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="movie__detail__video">
+                  <iframe
+                    width="853"
+                    height="480"
+                    src={movieTrailer(videos)}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title="Embedded youtube"
+                  />
+                </div>
+
+                <div className="movie__detail__companies">
+                  <p>Companies:</p>
+                  {movieCompaniesInfo.map((e) => (
+                    <li key={e.id}>
+                      <img
+                        src={getImageUrl(e.logo_path, 'w300')}
+                        alt={e.name}
+                      />
+                    </li>
+                  ))}
+                </div>
+              </div>
             </div>
+
             <div className="movie__detail__bg" style={bgImage}></div>
           </div>
         )}

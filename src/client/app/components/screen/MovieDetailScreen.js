@@ -15,6 +15,7 @@ import {
   movieTrailer,
   movieWriters,
 } from '../../utils/movieUtils'
+import TrailerModal from '../movie/TrailerModal'
 
 const MovieDetailScreen = () => {
   const { id } = useParams()
@@ -92,6 +93,8 @@ const MovieDetailScreen = () => {
 
                   {/* <img src={backdropImage} alt={movieData.original_title} /> */}
                 </div>
+
+                <TrailerModal />
 
                 <div className="movie__detail__logo">
                   <img src={movieLogo(images)} alt="" width={200} />

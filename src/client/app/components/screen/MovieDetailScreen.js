@@ -61,7 +61,7 @@ const MovieDetailScreen = () => {
   const bgImage = {
     backgroundImage: `url(${backdropImage})`,
   }
-  console.log(writers)
+
   const animationConfiguration = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -81,8 +81,8 @@ const MovieDetailScreen = () => {
           <div>Loading...</div>
         ) : (
           <div className="movie__detail">
-            <div className="grid">
-              <div className="col-start-3 col-end-11">
+            <div className="">
+              <div className="">
                 <div className='className="movie__detail__title'>
                   <h1>{movieData.title}</h1>
                   <h3>{movieData.tagline}</h3>
@@ -94,7 +94,7 @@ const MovieDetailScreen = () => {
                   {/* <img src={backdropImage} alt={movieData.original_title} /> */}
                 </div>
 
-                <TrailerModal />
+                <TrailerModal videos={videos} />
 
                 <div className="movie__detail__logo">
                   <img src={movieLogo(images)} alt="" width={200} />
@@ -155,7 +155,7 @@ const MovieDetailScreen = () => {
                   </div>
                 </div>
 
-                <div className="movie__detail__video">
+                {/* <div className="movie__detail__video">
                   <iframe
                     width="853"
                     height="480"
@@ -165,7 +165,7 @@ const MovieDetailScreen = () => {
                     allowFullScreen
                     title="Embedded youtube"
                   />
-                </div>
+                </div> */}
 
                 <div className="movie__detail__companies">
                   <p>Companies:</p>

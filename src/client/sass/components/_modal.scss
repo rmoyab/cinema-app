@@ -1,4 +1,49 @@
-/* Modal */
+@use '../abstracts' as *;
+@use '../vendors/include-media' as *;
+
+.out__modal {
+}
+.modal {
+  background: black;
+  border-radius: 5px;
+  color: white;
+  // outline: none;
+  padding: 2rem;
+
+  @include media('<=sm') {
+    padding: 0.5rem;
+  }
+
+  &__video {
+  }
+
+  &__bg {
+    background-color: rgba(0, 0, 0, 0.8);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: fixed;
+  }
+
+  & iframe {
+    @include media('<=lg') {
+      width: 640px;
+      height: 360px;
+    }
+
+    @include media('<=md') {
+      width: 426px;
+      height: 240px;
+    }
+
+    @include media('<=sm') {
+      width: 298px;
+      height: 168px;
+    }
+  }
+}
+
 .ReactModalPortal > div {
   opacity: 0;
 }
@@ -11,29 +56,10 @@
   z-index: 999;
 }
 
-.modal-bg {
-  background-color: rgba(0, 0, 0, 0.8);
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  position: fixed;
-}
-
 .ReactModalPortal .ReactModal__Overlay--after-open {
   opacity: 1;
 }
 
 .ReactModalPortal .ReactModal__Overlay--before-close {
   opacity: 0;
-}
-
-.modal {
-  background: black;
-  border-radius: 5px;
-  color: white;
-  max-height: 38.75rem;
-  max-width: 31.25rem;
-  outline: none;
-  padding: 10px;
 }

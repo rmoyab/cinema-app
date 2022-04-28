@@ -3,21 +3,25 @@ import Logo from './Logo'
 
 const Navigation = () => {
   return (
-    <div className="navigation">
-      <NavLink to="/" className="navigation__logo">
-        <Logo />
-      </NavLink>
-      <div className="navigation__nav">
-        <nav className="navigation__nav__items">
-          <NavLink to="/login" className="navigation__nav__items__item">
-            Login
-          </NavLink>
-          <NavLink to="/register" className="navigation__nav__items__item">
-            Register
-          </NavLink>
-        </nav>
+    <nav className="nav">
+      <div className="nav__elements">
+        <div className="container">
+          <div className="row justify-space-between align-center">
+            <NavLink to="/" className="nav__elements__logo">
+              <Logo />
+            </NavLink>
+            <div className="nav__elements__links">
+              <NavLink to="/login" className="nav__links__item">
+                Login
+              </NavLink>
+              <NavLink to="/register" className="nav__links__item">
+                Register
+              </NavLink>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
   )
 }
 

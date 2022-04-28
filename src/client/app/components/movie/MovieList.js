@@ -33,15 +33,19 @@ const MoviesList = ({ movies, isLoaded }) => {
       hasMore={true}
       loader={<Loader />}
     >
-      <div className="movies__wrapper">
-        {isLoaded && (
-          <div className="movies grid-auto-xl grid-gap-lg">
-            {state.movies.map((movie, id) =>
-              movie.poster_path ? <MovieCard movie={movie} key={id} /> : ''
-            )}
-          </div>
-        )}
-      </div>
+      {isLoaded && (
+        <div className="row gap-2 justify-center">
+          {state.movies.map((movie, id) =>
+            movie.poster_path ? (
+              <div className="col-12-xs col-6-sm col-4-md col-3-xl col-2-xxl">
+                <MovieCard movie={movie} key={id} />
+              </div>
+            ) : (
+              ''
+            )
+          )}
+        </div>
+      )}
     </InfiniteScroll>
   )
 }

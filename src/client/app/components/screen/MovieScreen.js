@@ -59,24 +59,20 @@ const MovieScreen = () => {
       exit="exit"
       transition={{ duration: 1.2 }}
     >
-      <div>
-        {!isLoaded ? (
-          <div>Loading...</div>
-        ) : (
-          <div className="content__wrapper">
-            <nav className="nav">
-              <Navigation />
-            </nav>
-            <header className="header">
-              <Header upcomingMovies={upcoming} isLoaded={isLoaded} />
-            </header>
+      {!isLoaded ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="wrapper">
+          <Navigation />
+          <Header upcomingMovies={upcoming} isLoaded={isLoaded} />
 
+          <div className="container">
             <section className="movies__section">
               <MovieList movies={popular} isLoaded={isLoaded} />
             </section>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </motion.div>
   )
 }

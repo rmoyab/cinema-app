@@ -4,10 +4,10 @@ import Search from '../search/Search'
 
 const Header = ({ upcomingMovies, isLoaded }) => {
   return (
-    <div className="header__wrapper">
+    <header className="header">
       <Banner upcomingMovies={upcomingMovies} isLoaded={isLoaded} />
       {/* <Search query={query} onSearchChange={onSearchChange} /> */}
-    </div>
+    </header>
   )
 }
 

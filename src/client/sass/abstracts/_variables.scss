@@ -39,23 +39,19 @@ $paragraph-s: 1.6rem;
 $paragraph-xs: 1.4rem;
 
 $grid-columns: 12;
-$gap: 1.5rem;
+$grid-gaps: (
+  '0': 0,
+  '1': 1rem,
+  '2': 2rem,
+  '3': 3rem,
+);
+
+$layout-x-values: flex-start, flex-end, center, space-between, space-around;
+$layout-y-values: flex-start, flex-end, center, stretch, baseline;
 
 $ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 $timing: 0.25s;
 $bezier: cubic-bezier(0.215, 0.61, 0.355, 1);
-
-$z-indexes: (
-  'navigation',
-  'content',
-  'noscript',
-  'preloader',
-  'cursor',
-  'navigation',
-  'content',
-  'cases',
-  'canvas'
-);
 
 $breakpoints: (
   'xs': 0,

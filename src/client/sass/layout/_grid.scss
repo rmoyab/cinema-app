@@ -2,97 +2,101 @@
 @use '../vendors/include-media' as *;
 @use 'sass:math';
 
-.grid {
-  --grid-cols: #{$grid-columns};
+.container {
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 2rem;
 
-  display: grid;
-  grid-gap: var(--grid-gap, 0);
-  grid-template-columns: repeat(var(--grid-cols), 1fr);
-
-  & > * {
-    grid-column-end: span var(--grid-cols);
+  @include media('>=xxl') {
+    max-width: 160rem;
   }
 }
 
-@for $i from 1 through $grid-columns {
-  .col-#{$i} {
-    grid-column-end: span #{$i};
-  }
-  .col-start-#{$i} {
-    grid-column-start: #{$i};
-  }
-  .col-end-#{$i + 1} {
-    grid-column-end: #{$i + 1};
+.row {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+@each $key, $val in $grid-gaps {
+  .gap-#{$key} > * {
+    padding: $val;
   }
 
-  @include media('<sm') {
-    .col-xs-#{$i} {
-      grid-column-end: span #{$i};
-    }
+  .gap-#{$key} {
+    margin-left: -$val;
+    margin-right: -$val;
   }
+}
 
-  @include media('>=sm') {
-    .col-sm-#{$i} {
-      grid-column-end: span #{$i};
-    }
+@each $val in $layout-x-values {
+  .justify-#{$val} {
+    justify-content: $val;
   }
+}
 
-  @include media('>=md') {
-    .col-md-#{$i} {
-      grid-column-end: span #{$i};
-    }
+@each $val in $layout-y-values {
+  .align-#{$val} {
+    align-items: $val;
   }
-  @include media('>=lg') {
-    .col-lg-#{$i} {
-      grid-column-end: span #{$i};
-    }
-  }
+}
 
-  @include media('>=xl') {
-    .col-xl-#{$i} {
-      grid-column-end: span #{$i} !important;
+@include media('>=xs') {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i}-xs {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
     }
   }
 }
 
-.grid-auto-xs,
-.grid-auto-sm,
-.grid-auto-md,
-.grid-auto-lg,
-.grid-auto-xl {
-  display: grid;
-  grid-gap: var(--grid-gap, 0);
-  grid-template-columns: repeat(auto-fit, minmax(var(--col-min-width), 1fr));
+@include media('>=sm') {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i}-sm {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
+    }
+  }
 }
 
-.grid-auto-xs {
-  --col-min-width: 8rem;
-}
-.grid-auto-sm {
-  --col-min-width: 10rem;
-}
-.grid-auto-md {
-  --col-min-width: 15rem;
-}
-.grid-auto-lg {
-  --col-min-width: 20rem;
-}
-.grid-auto-xl {
-  --col-min-width: 25rem;
+@include media('>=md') {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i}-md {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
+    }
+  }
 }
 
-.grid-gap-xs {
-  --grid-gap: var(--space-xs, 0.5rem);
+@include media('>=lg') {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i}-lg {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
+    }
+  }
 }
-.grid-gap-sm {
-  --grid-gap: var(--space-sm, 0.75rem);
+
+@include media('>=xl') {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i}-xl {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
+    }
+  }
 }
-.grid-gap-md {
-  --grid-gap: var(--space-md, 1.25rem);
-}
-.grid-gap-lg {
-  --grid-gap: var(--space-lg, 2rem);
-}
-.grid-gap-xl {
-  --grid-gap: var(--space-xl, 3.25rem);
+
+@include media('>=xxl') {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i}-xxl {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
+    }
+  }
 }

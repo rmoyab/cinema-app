@@ -4,36 +4,31 @@
 .nav {
   display: flex;
   justify-content: center;
-}
+  position: relative;
 
-.navigation {
-  position: absolute;
-  padding: 2rem 0;
-  z-index: 2;
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  pointer-events: fill;
+  &__elements {
+    padding: 2rem 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    pointer-events: fill;
 
-  &__logo {
-    cursor: pointer;
-    animation: fade $timing $bezier both;
-    animation-delay: calc(2 * $timing);
+    &__logo {
+      cursor: pointer;
+      animation: fade $timing $bezier both;
+      animation-delay: calc(2 * $timing);
 
-    #logo {
-      &:hover {
-        fill: $color-sorrell-brown;
+      #logo {
+        &:hover {
+          fill: $color-sorrell-brown;
+        }
       }
     }
-  }
 
-  &__nav {
-    &__items {
+    &__links {
       display: flex;
-      list-style: none;
 
-      &__item {
+      .nav__links__item {
         margin-right: 10px;
         font-size: 1.5rem;
         font-family: $font-opensans-regular;
@@ -44,14 +39,15 @@
         &:hover {
           color: $color-sorrell-brown;
         }
-      }
 
-      &__item:first-child {
-        animation-delay: calc(3 * $timing);
-      }
+        &:first-child {
+          animation-delay: calc(3 * $timing);
+        }
 
-      &__item:last-child {
-        animation-delay: calc(4 * $timing);
+        &:last-child {
+          animation-delay: calc(4 * $timing);
+          margin-right: 0;
+        }
       }
     }
   }

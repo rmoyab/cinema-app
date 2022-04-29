@@ -37,9 +37,11 @@ const MoviesList = ({ movies, isLoaded }) => {
         <div className="row gap-2 justify-center">
           {state.movies.map((movie, id) =>
             movie.poster_path ? (
-              <div className="col-12-xs col-6-sm col-4-md col-3-xl col-2-xxl">
-                <MovieCard movie={movie} key={id} />
-              </div>
+              <MovieCard
+                movie={movie}
+                key={id}
+                className="col-12-xs col-6-sm col-4-md col-3-xl col-2-xxl"
+              />
             ) : (
               ''
             )

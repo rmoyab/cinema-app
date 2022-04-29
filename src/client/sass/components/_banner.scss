@@ -2,37 +2,50 @@
 @use '../vendors/include-media' as *;
 
 .banner {
-  &__elements {
-    position: relative;
-
+  &__content {
     height: $head-height;
 
-    @include media('<=lg') {
-      height: 60vh;
+    @include media('<=xl') {
+      height: $head-height-xl;
     }
 
     @include media('<=sm') {
-      height: 50vh;
+      height: $head-height-sm;
     }
 
-    &__front {
-      border: 2px solid red;
-
-      position: absolute;
-      top: 20%;
+    &__elements {
+      height: 30rem;
+      width: 80%;
+      @include centerElement;
       z-index: 1;
-      // overflow: hidden;
+      display: flex;
+      justify-content: space-around;
+      // align-items: center;
+      align-items: flex-start;
+      top: 1;
 
-      height: fit-content;
-      padding: 10px 0;
+      @include media('<=xxl') {
+        top: 50%;
+        height: 40rem;
+      }
 
-      .element__front__info {
-        // top: 30%;
-        // left: 10%;
+      @include media('<=xl') {
+        top: 60%;
+        height: 30rem;
+      }
+
+      @include media('<=sm') {
+        height: 20rem;
+      }
+
+      @include media('>=xxl') {
+        width: 144rem;
+      }
+
+      .banner__elements__info {
         width: fit-content;
-        max-width: 54%;
-        max-height: 60vh;
-        z-index: 1;
+
+        max-width: 60%;
         border-radius: 16px;
         // backdrop-filter: blur(17px);
         // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -41,15 +54,12 @@
         //   #192437 52%,
         //   rgba(99, 131, 146, 0) 100%
         // );
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        // overflow: hidden;
-        text-overflow: ellipsis;
+
         animation: fadeInLeft 1s;
         @include transition15;
+        margin-right: 1.6rem;
 
         @include media('<=lg') {
-          // top: 24%;
           max-width: 50%;
         }
 
@@ -138,11 +148,9 @@
         }
       }
 
-      .element__front__cover {
-        // right: 15%;
-        // top: 30%;
-        // z-index: 1;
-        // overflow: hidden;
+      .banner__elements__cover {
+        height: fit-content;
+        overflow: hidden;
         cursor: pointer;
         max-width: 40%;
         border-radius: 10px;
@@ -154,7 +162,7 @@
           scale: 1.1;
         }
 
-        &:hover ~ .banner__section__image img {
+        &:hover ~ .banner__content__bg__image img {
           filter: blur(8px);
         }
 
@@ -164,7 +172,7 @@
             scale: 1.2;
           }
 
-          &:hover ~ .banner__section__image img {
+          &:hover ~ .banner__content__bg__image img {
             filter: blur(8px);
             background: linear-gradient(
                 180deg,
@@ -176,7 +184,6 @@
         }
 
         @include media('<=lg') {
-          // top: 25%;
           &:hover {
             scale: 1.03;
           }
@@ -200,18 +207,6 @@
     }
 
     &__bg__image {
-      position: relative;
-      height: $head-height;
-      width: 100vw;
-
-      @include media('<=lg') {
-        height: 60vh;
-      }
-
-      @include media('<=sm') {
-        height: 50vh;
-      }
-
       &::after {
         content: '';
         position: absolute;
@@ -223,16 +218,24 @@
         background: linear-gradient(
             180deg,
             rgba(255, 255, 255, 0) 0,
-            rgb(0, 0, 0, 1) 80%
+            rgb(0, 0, 0, 1) 85%
           ),
           radial-gradient(circle, transparent, rgba(0, 0, 0, 0.5) 100%);
         // radial-gradient(ellipse at bottom, transparent, rgb(0, 0, 0));
+        @include media('<=md') {
+          background: linear-gradient(
+              180deg,
+              rgba(255, 255, 255, 0) 0,
+              rgb(0, 0, 0, 1) 85%
+            ),
+            radial-gradient(circle, transparent, rgba(0, 0, 0, 0.2) 100%);
+        }
       }
 
       & img {
         object-fit: cover;
         width: 100%;
-        height: 96%;
+        height: $head-height;
         object-position: left top;
         // opacity: 0.4;
         // filter: blur(5px);
@@ -242,6 +245,15 @@
         @include media('<=xxl') {
           object-position: center top;
         }
+
+        @include media('<=xl') {
+          height: $head-height-xl;
+        }
+
+        @include media('<=sm') {
+          height: $head-height-sm;
+        }
+
         @include media('<=md') {
           opacity: 1;
         }

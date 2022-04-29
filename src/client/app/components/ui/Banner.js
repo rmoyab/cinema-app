@@ -57,69 +57,63 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
         <div className="banner">
           <Slider {...settings}>
             {upcomingMovies.results.map((movie, i) => (
-              <div key={movie.id} className="banner__elements">
-                <div className="container">
-                  <div className="banner__elements__front">
-                    <div className="row">
-                      <div className="element__front__info ">
-                        <div className="info__title">
-                          <Link to={`/movie/${movie.id}`}>
-                            <h1>
-                              {movie.title}
-                              <span className="info__title__year">
-                                {' '}
-                                {`(${moment(movie.release_date).format(
-                                  'YYYY'
-                                )})`}
-                              </span>
-                            </h1>
-                          </Link>
-                        </div>
+              <div key={movie.id} className="banner__content">
+                <div className="banner__content__elements">
+                  <div className="banner__elements__info">
+                    <div className="info__title">
+                      <Link to={`/movie/${movie.id}`}>
+                        <h1>
+                          {movie.title}
+                          <span className="info__title__year">
+                            {' '}
+                            {`(${moment(movie.release_date).format('YYYY')})`}
+                          </span>
+                        </h1>
+                      </Link>
+                    </div>
 
-                        <div className="info__date">
-                          <h4>{moment(movie.release_date).format('L')}</h4>
-                        </div>
+                    <div className="info__date">
+                      <h4>{moment(movie.release_date).format('L')}</h4>
+                    </div>
 
-                        <div className="info__overview mt-s">
-                          <p>{movie.overview}</p>
-                        </div>
+                    <div className="info__overview mt-s">
+                      <p>
+                        {movie.overview.replace(/^(.{100}[^\s]*).*/, '$1')}
+                        <Link to={`/movie/${movie.id}`}> ...more</Link>
+                      </p>
+                    </div>
 
-                        <div
-                          className={`info__vote mt-s info__vote--${setVoteClass(
-                            movie.vote_average
-                          )}`}
-                        >
-                          <h3>
-                            {movie.vote_average
-                              ? `${movie.vote_average}/10`
-                              : 'NR'}
-                          </h3>
-                        </div>
+                    <div
+                      className={`info__vote mt-s info__vote--${setVoteClass(
+                        movie.vote_average
+                      )}`}
+                    >
+                      <h3>
+                        {movie.vote_average ? `${movie.vote_average}/10` : 'NR'}
+                      </h3>
+                    </div>
 
-                        <ul className="banner__genres">
-                          {/* {genreMovie(movie, genres)
+                    <ul className="banner__genres">
+                      {/* {genreMovie(movie, genres)
                       .slice(0, 2)
                       .map((genre, i) => (
                         <li key={i} className="banner__genres__genre">
                           {genre}
                         </li>
                       ))} */}
-                        </ul>
-                      </div>
+                    </ul>
+                  </div>
 
-                      <div className="element__front__cover " ref={coverRef}>
-                        <Link to={`/movie/${movie.id}`}>
-                          <img
-                            src={getImageUrl(movie.poster_path, 'w300')}
-                            alt=""
-                          />
-                        </Link>
-                      </div>
-                    </div>
+                  <div className="banner__elements__cover" ref={coverRef}>
+                    <Link to={`/movie/${movie.id}`}>
+                      <img
+                        src={getImageUrl(movie.poster_path, 'w300')}
+                        alt=""
+                      />
+                    </Link>
                   </div>
                 </div>
-
-                <div className="banner__elements__bg__image">
+                <div className="banner__content__bg__image">
                   <img
                     src={getImageUrl(movie.backdrop_path, 'original')}
                     alt=""

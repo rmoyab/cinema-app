@@ -8,12 +8,16 @@
   height: $head-height;
   width: 100vw;
 
-  @include media('<=lg') {
-    height: 60vh;
+  @include media('<=xl') {
+    height: $head-height-xl;
   }
 
   @include media('<=sm') {
-    height: 50vh;
+    height: $head-height-sm;
+  }
+
+  &__banner {
+    width: 100%;
   }
 
   &__search {

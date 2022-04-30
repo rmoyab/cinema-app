@@ -162,24 +162,10 @@
           scale: 1.1;
         }
 
-        &:hover ~ .banner__content__bg__image img {
-          filter: blur(8px);
-        }
-
         @include media('>=xxl') {
           &:hover {
-            rotate: 15deg;
+            rotate: 8deg;
             scale: 1.2;
-          }
-
-          &:hover ~ .banner__content__bg__image img {
-            filter: blur(8px);
-            background: linear-gradient(
-                180deg,
-                rgba(255, 255, 255, 0) 0,
-                rgb(0, 0, 0, 1) 80%
-              ),
-              radial-gradient(circle, transparent, rgba(0, 0, 0, 0.5) 100%);
           }
         }
 

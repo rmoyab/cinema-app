@@ -31,7 +31,12 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
     newMovies: [],
     isLoading: true,
   })
+  const [hover, setHover] = useState(false)
   const coverRef = useRef()
+
+  const handleHover = (e) => {
+    e.type == 'mouseover' ? setHover(true) : setHover(false)
+  }
 
   const handleDate = (date) => {
     return moment(date).format('DD-MM-YYYY')
@@ -48,6 +53,10 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
   }
   getMovies()
   const { newMovies, isLoading } = movies
+
+  const bgBlur = {
+    filter: 'blur(8px)',
+  }
 
   return (
     <div className="header__banner">
@@ -104,7 +113,12 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                     </ul>
                   </div>
 
-                  <div className="banner__elements__cover" ref={coverRef}>
+                  <div
+                    className="banner__elements__cover"
+                    ref={coverRef}
+                    onMouseOver={handleHover}
+                    onMouseOut={handleHover}
+                  >
                     <Link to={`/movie/${movie.id}`}>
                       <img
                         src={getImageUrl(movie.poster_path, 'w300')}
@@ -113,7 +127,10 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                     </Link>
                   </div>
                 </div>
-                <div className="banner__content__bg__image">
+                <div
+                  className="banner__content__bg__image"
+                  style={hover ? bgBlur : {}}
+                >
                   <img
                     src={getImageUrl(movie.backdrop_path, 'original')}
                     alt=""

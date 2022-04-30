@@ -4,7 +4,7 @@
 .nav {
   display: flex;
   justify-content: center;
-  position: relative;
+  position: inherit;
 
   &__elements {
     padding: 2rem 0;

@@ -34,17 +34,9 @@ const MoviesList = ({ movies, isLoaded }) => {
       loader={<Loader />}
     >
       {isLoaded && (
-        <div className="row gap-2 justify-center">
+        <div className="row gap-1 justify-center">
           {state.movies.map((movie, id) =>
-            movie.poster_path ? (
-              <MovieCard
-                movie={movie}
-                key={id}
-                className="col-12-xs col-6-sm col-4-md col-3-xl col-2-xxl"
-              />
-            ) : (
-              ''
-            )
+            movie.poster_path ? <MovieCard movie={movie} key={id} /> : ''
           )}
         </div>
       )}

@@ -102,4 +102,11 @@
   &:hover &__overview {
     transform: translateY(0);
   }
+
+  @include media('<=md') {
+    &__overview {
+      transform: translateY(0);
+      visibility: hidden;
+    }
+  }
 }

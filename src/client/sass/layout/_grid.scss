@@ -13,6 +13,13 @@
   }
 }
 
+.container-fluid {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  max-width: 192rem;
+}
+
 .row {
   display: flex;
   flex-flow: row wrap;

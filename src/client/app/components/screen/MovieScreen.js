@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { motion } from 'framer-motion'
 
-import Navigation from '../ui/Navigation'
 import Header from '../ui/Header'
 import MovieList from '../movie/MovieList'
 import Loader from '../ui/Loader'
@@ -60,17 +59,18 @@ const MovieScreen = () => {
       transition={{ duration: 1.2 }}
     >
       {!isLoaded ? (
-        <div className="loading">Loading...</div>
+        <div className="loading">
+          <Loader />
+        </div>
       ) : (
         <div className="wrapper">
-          <Navigation />
           <Header upcomingMovies={upcoming} isLoaded={isLoaded} />
 
-          <div className="container">
-            <section className="movies__section">
+          <section className="movies__section">
+            <div className="container-fluid">
               <MovieList movies={popular} isLoaded={isLoaded} />
-            </section>
-          </div>
+            </div>
+          </section>
         </div>
       )}
     </motion.div>

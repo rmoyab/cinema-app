@@ -193,6 +193,8 @@
     }
 
     &__bg__image {
+      @include transition15;
+
       &::after {
         content: '';
         position: absolute;
@@ -223,8 +225,7 @@
         width: 100%;
         height: $head-height;
         object-position: left top;
-        // opacity: 0.4;
-        // filter: blur(5px);
+        opacity: 0.8;
         overflow: hidden;
         @include transition15;
 
@@ -247,7 +248,3 @@
     }
   }
 }
-
-// .slick-slide {
-//   height: 59vh;
-// }

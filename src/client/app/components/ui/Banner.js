@@ -55,7 +55,7 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
   const { newMovies, isLoading } = movies
 
   const bgBlur = {
-    filter: 'blur(8px)',
+    filter: 'blur(4px)',
   }
 
   return (

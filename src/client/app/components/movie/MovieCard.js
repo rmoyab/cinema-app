@@ -7,7 +7,7 @@ const MovieCard = ({ movie }) => {
   const releaseFull = yearMovie(movie)
 
   return (
-    <div className="col-6-xs col-4-md col-3-xl col-2-xxl">
+    <div className="col-6-xs col-4-md col-3-lg col-2-xxl">
       <div className="movie" key={movie.id}>
         <div className="movie__image">
           <Link to={`/movie/${movie.id}`}>

@@ -14,14 +14,13 @@
     }
 
     &__elements {
-      height: 30rem;
+      height: 40rem;
       width: 80%;
       @include centerElement;
       z-index: 1;
       display: flex;
       justify-content: space-around;
-      // align-items: center;
-      align-items: flex-start;
+      align-items: center;
       top: 1;
 
       @include media('<=xxl') {
@@ -44,7 +43,7 @@
 
       .banner__elements__info {
         width: fit-content;
-
+        align-self: center;
         max-width: 60%;
         border-radius: 16px;
         // backdrop-filter: blur(17px);

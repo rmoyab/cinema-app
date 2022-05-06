@@ -9,8 +9,6 @@ import Loader from '../ui/Loader'
 import { requestMovieScreen } from '../../api/api'
 import { getImageUrl, getPopularMoviesUrl } from '../../api/url'
 
-import { MovieTypes } from '../../types/Types'
-
 import { request } from '../../api/api'
 
 const MovieScreen = () => {

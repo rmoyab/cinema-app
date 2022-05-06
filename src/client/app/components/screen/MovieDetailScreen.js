@@ -76,7 +76,7 @@ const MovieDetailScreen = () => {
       exit="exit"
       transition={{ duration: 1.5 }}
     >
-      <div className="">
+      <div>
         {!isLoaded ? (
           <div>Loading...</div>
         ) : (

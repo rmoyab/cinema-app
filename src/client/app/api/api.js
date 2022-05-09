@@ -9,6 +9,7 @@ import {
   getSearchMovieUrl,
   getMovieVideoUrl,
   getMustWatchMoviesUrl,
+  getMovieExternalsIdsUrl,
 } from './url'
 
 export const request = async (url) => {
@@ -43,6 +44,7 @@ export const requestMovieDetailScreen = (id, callback) => {
     request(getMovieImageUrl(id)),
     request(getMovieVideoUrl(id)),
     request(getMovieRecommendationsUrl(id)),
+    request(getMovieExternalsIdsUrl(id)),
   ])
     .then((values) => callback(values))
     .catch((error) => console.log(error))

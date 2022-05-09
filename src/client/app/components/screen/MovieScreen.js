@@ -57,9 +57,7 @@ const MovieScreen = () => {
       transition={{ duration: 1.2 }}
     >
       {!isLoaded ? (
-        <div className="loading">
-          <Loader />
-        </div>
+        <Loader />
       ) : (
         <div className="wrapper">
           <Header upcomingMovies={upcoming} isLoaded={isLoaded} />

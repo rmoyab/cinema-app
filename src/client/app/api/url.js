@@ -48,6 +48,9 @@ export const getMovieVideoUrl = (id) =>
 export const getMovieRecommendationsUrl = (id) =>
   `${ROOT_URL}/movie/${id}/recommendations?${queryString(defaultQuery)}`
 
+export const getMovieExternalsIdsUrl = (id) =>
+  `${ROOT_URL}/movie/${id}/external_ids?${queryString(defaultQuery)}`
+
 export const getSearchMovieUrl = (keyword) =>
   `${ROOT_URL}/search/movie?${queryString({
     ...defaultQuery,

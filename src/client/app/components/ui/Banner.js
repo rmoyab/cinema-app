@@ -60,9 +60,7 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
 
   return (
     <div className="header__banner">
-      {!isLoaded ? (
-        <div>Loading...</div>
-      ) : (
+      {isLoaded && (
         <div className="banner">
           <Slider {...settings}>
             {upcomingMovies.results.map((movie, i) => (

@@ -71,28 +71,27 @@ export const movieCompanies = (movieData) => {
   }
 }
 
-export const movieDirector = (credit) => {
-  let directors = []
-  if (credit.crew) {
-    credit.crew.forEach((entry) => {
-      if (entry.job === 'Director') {
-        directors.push(entry.name)
-      }
-    })
-  }
-  return directors.join(', ')
-}
-
-export const movieWriters = (credit) => {
+export const movieCredits = (credit) => {
   let writers = []
+  let director = {}
+  let cast = []
+
   if (credit.crew) {
-    credit.crew.forEach((entry) => {
-      if (entry.job === 'Screenplay') {
-        writers.push(entry.name)
+    credit.crew.forEach((e) => {
+      if (e.job === 'Director') {
+        director = e
+      }
+      if (e.job === 'Screenplay') {
+        writers.push(e)
       }
     })
   }
-  return writers.join(', ')
+
+  credit.cast?.slice(0, 10).map((e) => {
+    cast.push(e)
+  })
+
+  return { writers, director, cast }
 }
 
 export const movieUnreleased = async (upcomingMovies) => {

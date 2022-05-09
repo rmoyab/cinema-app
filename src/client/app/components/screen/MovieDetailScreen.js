@@ -10,10 +10,9 @@ import lib from 'react-slick/lib'
 import {
   getTime,
   movieCompanies,
-  movieDirector,
+  movieCredits,
   movieLogo,
   movieTrailer,
-  movieWriters,
 } from '../../utils/movieUtils'
 import TrailerModal from '../movie/TrailerModal'
 
@@ -51,8 +50,7 @@ const MovieDetailScreen = () => {
   const backdropImage = getImageUrl(movieData.backdrop_path, 'original')
   const posterImage = getImageUrl(movieData.poster_path, 'w300')
   const movieCompaniesInfo = movieCompanies(movieData)
-  const director = movieDirector(credit)
-  const writers = movieWriters(credit)
+  const credits = movieCredits(credit)
 
   if (!movieData) {
     return <Navigate to="/" />
@@ -113,6 +111,12 @@ const MovieDetailScreen = () => {
                     <p>Vote Average:{movieData.vote_average}</p>
                   </div>
 
+                  <div className="data__imbd">
+                    <a href={`https://www.imdb.com/title/${movieData.imdb_id}`}>
+                      Imbd
+                    </a>
+                  </div>
+
                   <div className="data__duration">
                     <p>Duration: {getTime(movieData.runtime)}</p>
                   </div>
@@ -139,17 +143,25 @@ const MovieDetailScreen = () => {
 
                 <div className="movie__detail__credits">
                   <div>
-                    <p>Director: {director}</p>
+                    <p>Director: {credits.director.name}</p>
+                    <img
+                      src={getImageUrl(credits.director.profile_path)}
+                      alt=""
+                    />
                   </div>
                   <div>
-                    <p>Writers: {writers}</p>
+                    <p>Writers:</p>
+                    {credits.writers.map((w) => (
+                      <li key={w.id}>{w.name}</li>
+                    ))}
                   </div>
                   <div>
                     <p>Cast:</p>
-                    {credit.cast.slice(0, 3).map((e) => (
-                      <li key={e.id}>
-                        {e.name} <br />
-                        <small>{e.character}</small>
+                    {credits.cast.map((c) => (
+                      <li key={c.id}>
+                        {c.name} <br />
+                        <small>{c.character}</small>
+                        <img src={getImageUrl(c.profile_path)} alt={c.name} />
                       </li>
                     ))}
                   </div>

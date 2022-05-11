@@ -37,4 +37,30 @@
       );
     }
   }
+
+  &__credits {
+    display: flex;
+    flex-direction: column;
+
+    .credit {
+      &--cast {
+        width: 18rem;
+        & ul {
+          display: flex;
+
+          & li {
+            margin-right: 1rem;
+          }
+        }
+      }
+
+      &__image {
+        width: 14rem;
+
+        & img {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

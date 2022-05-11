@@ -142,28 +142,43 @@ const MovieDetailScreen = () => {
                 </div>
 
                 <div className="movie__detail__credits">
-                  <div>
+                  <div className="credit">
                     <p>Director: {credits.director.name}</p>
-                    <img
-                      src={getImageUrl(credits.director.profile_path)}
-                      alt=""
-                    />
+                    <div className="credit__image">
+                      <img
+                        src={getImageUrl(credits.director.profile_path)}
+                        alt=""
+                      />
+                    </div>
                   </div>
-                  <div>
+                  <div className="credit">
                     <p>Writers:</p>
                     {credits.writers.map((w) => (
                       <li key={w.id}>{w.name}</li>
                     ))}
                   </div>
-                  <div>
+                  <div className="credit--cast">
                     <p>Cast:</p>
-                    {credits.cast.map((c) => (
-                      <li key={c.id}>
-                        {c.name} <br />
-                        <small>{c.character}</small>
-                        <img src={getImageUrl(c.profile_path)} alt={c.name} />
-                      </li>
-                    ))}
+                    <ul>
+                      {credits.cast.map((c) => (
+                        <li key={c.id}>
+                          <div className="credit__image">
+                            <img
+                              src={getImageUrl(c.profile_path)}
+                              alt={c.name}
+                            />
+                          </div>
+                          <div className="credit__info">
+                            <div className="credit__info__name">
+                              {c.name} <br />
+                            </div>
+                            <div className="credit__info__char">
+                              <small>{c.character}</small>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 

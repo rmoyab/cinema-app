@@ -142,7 +142,7 @@ const MovieDetailScreen = () => {
                 </div>
 
                 <div className="movie__detail__credits">
-                  <div className="credit">
+                  <div className="credit--director">
                     <p>Director: {credits.director.name}</p>
                     <div className="credit__image">
                       <img
@@ -151,7 +151,7 @@ const MovieDetailScreen = () => {
                       />
                     </div>
                   </div>
-                  <div className="credit">
+                  <div className="credit--writter">
                     <p>Writers:</p>
                     {credits.writers.map((w) => (
                       <li key={w.id}>{w.name}</li>

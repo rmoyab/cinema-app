@@ -39,26 +39,32 @@
   }
 
   &__credits {
-    display: flex;
-    flex-direction: column;
-
     .credit {
       &--cast {
-        width: 18rem;
+        width: 100%;
+
         & ul {
           display: flex;
+          justify-content: center;
 
           & li {
             margin-right: 1rem;
+            width: 16rem;
           }
         }
       }
 
       &__image {
-        width: 14rem;
+        width: 12rem;
+        height: 12rem;
+        border-radius: 50%;
+        overflow: hidden;
 
         & img {
           width: 100%;
+          object-fit: cover;
+          object-position: center;
+          // height: 100%;
         }
       }
     }

@@ -79,17 +79,22 @@ const MovieDetailScreen = () => {
           <div>Loading...</div>
         ) : (
           <div className="movie__detail">
-            <div className="">
+            <div className="container">
               <div className="">
-                <div className='className="movie__detail__title'>
-                  <h1>{movieData.title}</h1>
-                  <h3>{movieData.tagline}</h3>
-                </div>
+                <div className="row gap-1 justify-space-between">
+                  <div className="col-12-xs col-4-md col-3-lg col-2-xxl">
+                    <div className="movie__detail__image">
+                      <img src={posterImage} alt={movieData.original_title} />
 
-                <div className="movie__detail__image">
-                  <img src={posterImage} alt={movieData.original_title} />
-
-                  {/* <img src={backdropImage} alt={movieData.original_title} /> */}
+                      {/* <img src={backdropImage} alt={movieData.original_title} /> */}
+                    </div>
+                  </div>
+                  <div className="col-12-xs col-8-md">
+                    <div className='className="movie__detail__title'>
+                      <h1>{movieData.title}</h1>
+                      <h3>{movieData.tagline}</h3>
+                    </div>
+                  </div>
                 </div>
 
                 <TrailerModal videos={videos} />

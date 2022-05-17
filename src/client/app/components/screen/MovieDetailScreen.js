@@ -16,6 +16,9 @@ import {
 } from '../../utils/movieUtils'
 import TrailerModal from '../movie/TrailerModal'
 
+import time from '../../../assets/icons/time.svg'
+import star from '../../../assets/icons/star.svg'
+
 const MovieDetailScreen = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -81,109 +84,141 @@ const MovieDetailScreen = () => {
           <div className="movie__detail">
             <div className="container">
               <div className="">
-                <div className="row gap-1 justify-space-between">
-                  <div className="col-12-xs col-4-md col-3-lg col-2-xxl">
+                <div className="row gap-1 justify-center">
+                  <div className="col-4-md mt-l">
                     <div className="movie__detail__image">
                       <img src={posterImage} alt={movieData.original_title} />
 
                       {/* <img src={backdropImage} alt={movieData.original_title} /> */}
                     </div>
                   </div>
-                  <div className="col-12-xs col-8-md">
+                  <div className="col-5-md mt-l">
                     <div className='className="movie__detail__title'>
-                      <h1>{movieData.title}</h1>
-                      <h3>{movieData.tagline}</h3>
+                      <h1 className="h2">{movieData.title}</h1>
+                    </div>
+
+                    <div className="movie__detail__data">
+                      <div className="data__genres">
+                        <ul>
+                          {movieData.genres.slice(0, 3).map((e) => (
+                            <li key={e.id}>
+                              {e.name} <br />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="data__release mb-s">
+                        <p>
+                          {movieData.release_date
+                            ? moment(movieData.release_date).format('LL')
+                            : 'N/A'}
+                        </p>
+                      </div>
+                      <div className="data__group__icons mb-s">
+                        <div className="data__duration">
+                          <img src={time} alt="" />
+                          <p>{getTime(movieData.runtime)}</p>
+                        </div>
+                        <div className="data__vote__average">
+                          <img src={star} alt="" />
+                          <p>{movieData.vote_average}</p>
+                        </div>
+                      </div>
+
+                      {/* <div className="data__imbd">
+                        <a
+                          href={`https://www.imdb.com/title/${movieData.imdb_id}`}
+                        >
+                          Imbd
+                        </a>
+                      </div> */}
+
+                      {/* <div className="data__link">
+                        <a href={movieData.homepage}>
+                          Homepage: {movieData.homepage}
+                        </a>
+                      </div> */}
+                    </div>
+
+                    <div className="movie__detail__overview">
+                      <h4 className="h4">{movieData.tagline}</h4>
+                      <p>{movieData.overview}</p>
+                    </div>
+
+                    <TrailerModal videos={videos} />
+
+                    <div className="movie__detail__creds mt-xl">
+                      <div className="credit--director">
+                        <p>Director: {credits.director.name}</p>
+                      </div>
+                      <div className="credit--writter">
+                        <p>Writers:</p>
+                        <ul>
+                          {credits.writers.map((w) => (
+                            <li key={w.id}>{w.name}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="credit--studio">
+                        <p>Companies:</p>
+                        {movieCompaniesInfo.map((e) => (
+                          <ul>
+                            <li key={e.id}>{e.name}</li>
+                          </ul>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-3-md mt-l">
+                    <div className="movie__detail__logo">
+                      <img src={movieLogo(images)} alt="" width={200} />
                     </div>
                   </div>
                 </div>
 
-                <TrailerModal videos={videos} />
-
-                <div className="movie__detail__logo">
-                  <img src={movieLogo(images)} alt="" width={200} />
-                </div>
-
-                <div className="movie__detail__data">
-                  <div className="data__release">
-                    <p>
-                      Released:{' '}
-                      {movieData.release_date
-                        ? moment(movieData.release_date).format('LL')
-                        : 'N/A'}
-                    </p>
-                  </div>
-                  <div className="data__vote__average">
-                    <p>Vote Average:{movieData.vote_average}</p>
-                  </div>
-
-                  <div className="data__imbd">
-                    <a href={`https://www.imdb.com/title/${movieData.imdb_id}`}>
-                      Imbd
-                    </a>
-                  </div>
-
-                  <div className="data__duration">
-                    <p>Duration: {getTime(movieData.runtime)}</p>
-                  </div>
-
-                  <div className="data__link">
-                    <a href={movieData.homepage}>
-                      Homepage: {movieData.homepage}
-                    </a>
-                  </div>
-
-                  <div className="data__genres">
-                    <p>Genres:</p>
-                    {movieData.genres.slice(0, 4).map((e) => (
-                      <li key={e.id}>
-                        {e.name} <br />
-                      </li>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="movie__detail__overview">
-                  <p>Overview: {movieData.overview}</p>
-                </div>
-
-                <div className="movie__detail__credits">
-                  <div className="credit--director">
-                    <p>Director: {credits.director.name}</p>
-                    <div className="credit__image">
-                      <img
-                        src={getImageUrl(credits.director.profile_path)}
-                        alt=""
-                      />
+                <div className="row gap-1 justify-center">
+                  <div className="col-4-sm col-8-md col-12-xl">
+                    <div className="movie__detail__credits">
+                      {/* <div className="credit--director">
+                        <p>Director: {credits.director.name}</p>
+                        <div className="credit__image">
+                          <img
+                            src={getImageUrl(credits.director.profile_path)}
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                      <div className="credit--writter">
+                        <p>Writers:</p>
+                        {credits.writers.map((w) => (
+                          <li key={w.id}>{w.name}</li>
+                        ))}
+                      </div> */}
+                      <div className="credit--cast">
+                        <p>Cast:</p>
+                        <ul>
+                          {credits.cast.map((c) => (
+                            <li key={c.id}>
+                              <div className="credit__image">
+                                <img
+                                  src={getImageUrl(c.profile_path)}
+                                  alt={c.name}
+                                />
+                              </div>
+                              <div className="credit__info">
+                                <div className="credit__info__name">
+                                  {c.name} <br />
+                                </div>
+                                <div className="credit__info__char">
+                                  <small>{c.character}</small>
+                                </div>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                  <div className="credit--writter">
-                    <p>Writers:</p>
-                    {credits.writers.map((w) => (
-                      <li key={w.id}>{w.name}</li>
-                    ))}
-                  </div>
-                  <div className="credit--cast">
-                    <p>Cast:</p>
-                    <ul>
-                      {credits.cast.map((c) => (
-                        <li key={c.id}>
-                          <div className="credit__image">
-                            <img
-                              src={getImageUrl(c.profile_path)}
-                              alt={c.name}
-                            />
-                          </div>
-                          <div className="credit__info">
-                            <div className="credit__info__name">
-                              {c.name} <br />
-                            </div>
-                            <div className="credit__info__char">
-                              <small>{c.character}</small>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
                 </div>
 
@@ -199,7 +234,7 @@ const MovieDetailScreen = () => {
                   />
                 </div> */}
 
-                <div className="movie__detail__companies">
+                {/* <div className="movie__detail__companies">
                   <p>Companies:</p>
                   {movieCompaniesInfo.map((e) => (
                     <li key={e.id}>
@@ -209,7 +244,7 @@ const MovieDetailScreen = () => {
                       />
                     </li>
                   ))}
-                </div>
+                </div> */}
               </div>
             </div>
 

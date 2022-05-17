@@ -3,6 +3,8 @@ import Modal from 'react-modal'
 
 import { movieTrailer } from '../../utils/movieUtils'
 
+import play from '../../../assets/icons/play.svg'
+
 const customStyles = {
   content: {
     position: 'absolute',
@@ -29,7 +31,12 @@ const TrailerModal = ({ videos }) => {
 
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      <div className="btn">
+        <button className="btn__trailer" onClick={openModal}>
+          <img src={play} alt="" />
+          <p>Trailer</p>
+        </button>
+      </div>
 
       <Modal
         isOpen={modalIsOpen}

@@ -69,7 +69,7 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                   <div className="banner__elements__info">
                     <div className="info__title">
                       <Link to={`/movie/${movie.id}`}>
-                        <h1>
+                        <h1 className="h1">
                           {movie.title}
                           <span className="info__title__year">
                             {' '}

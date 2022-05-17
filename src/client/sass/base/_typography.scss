@@ -1,6 +1,8 @@
 @use '../abstracts/variables' as *;
 @use '../vendors/include-media' as *;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @font-face {
   font-family: $font-opensans-light;
   src: url('../assets/fonts/opensans-regular-webfont.woff2') format('woff2'),
@@ -58,12 +60,12 @@
 }
 
 %heading {
-  font-family: $font-opensans-bold;
-  // font-family: $font-rockstar-bold;
+  font-family: $font-inter;
+  font-weight: $font-bold;
   line-height: 1.1;
 }
 
-h1 {
+.h1 {
   @extend %heading;
   font-size: $heading-1;
 
@@ -76,31 +78,31 @@ h1 {
   }
 }
 
-h2 {
+.h2 {
   @extend %heading;
   font-size: $heading-2;
 }
 
-h3 {
+.h3 {
   @extend %heading;
   font-size: $heading-3;
 }
 
-h4 {
+.h4 {
   @extend %heading;
   font-size: $heading-4;
 }
 
 p,
-li {
-  font-family: $font-opensans-light;
-  // font-family: $font-rockstar-bold;
+li,
+a {
+  font-family: $font-inter;
   font-size: $paragraph-s;
   line-height: 1.5;
 }
 
 label,
 input {
-  font-family: $font-opensans-regular;
+  font-family: $font-inter;
   font-size: $paragraph-s;
 }

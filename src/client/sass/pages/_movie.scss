@@ -17,6 +17,26 @@
     }
   }
 
+  &__creds {
+    text-transform: uppercase;
+
+    p {
+      color: grey;
+    }
+
+    span {
+      color: white;
+      text-transform: none;
+    }
+  }
+
+  &__links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+  }
+
   &__credits {
     margin-top: 10rem;
     .credit {

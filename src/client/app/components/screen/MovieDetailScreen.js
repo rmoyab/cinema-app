@@ -19,6 +19,13 @@ import TrailerModal from '../movie/TrailerModal'
 import time from '../../../assets/icons/time.svg'
 import star from '../../../assets/icons/star.svg'
 
+import link from '../../../assets/icons/link.svg'
+import imdb from '../../../assets/icons/imdb.svg'
+import fb from '../../../assets/icons/facebook_squared.svg'
+import ig from '../../../assets/icons/instagram_squared.svg'
+import tw from '../../../assets/icons/witter_squared.svg'
+import Navigation from '../ui/Navigation'
+
 const MovieDetailScreen = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -82,8 +89,9 @@ const MovieDetailScreen = () => {
           <div>Loading...</div>
         ) : (
           <div className="movie__detail">
+            <Navigation />
             <div className="container">
-              <div className="">
+              <div className="mt-xxl">
                 <div className="row gap-1 justify-center">
                   <div className="col-4-md mt-l">
                     <div className="movie__detail__image">
@@ -147,26 +155,49 @@ const MovieDetailScreen = () => {
 
                     <TrailerModal videos={videos} />
 
-                    <div className="movie__detail__creds mt-xl">
+                    <div className="movie__detail__creds mt-l">
                       <div className="credit--director">
-                        <p>Director: {credits.director.name}</p>
+                        <p>
+                          Director: <span>{credits.director.name}</span>
+                        </p>
                       </div>
                       <div className="credit--writter">
-                        <p>Writers:</p>
-                        <ul>
+                        {credits.writers[0]?.name && (
+                          <p>
+                            Writer: <span>{credits.writers[0]?.name}</span>
+                          </p>
+                        )}
+                        {/* <ul>
                           {credits.writers.map((w) => (
                             <li key={w.id}>{w.name}</li>
                           ))}
-                        </ul>
+                        </ul> */}
                       </div>
                       <div className="credit--studio">
-                        <p>Companies:</p>
-                        {movieCompaniesInfo.map((e) => (
+                        <p>
+                          Studio: <span>{movieCompaniesInfo[0].name}</span>
+                        </p>
+                        {/* {movieCompaniesInfo.map((e) => (
                           <ul>
                             <li key={e.id}>{e.name}</li>
                           </ul>
-                        ))}
+                        ))} */}
                       </div>
+                    </div>
+
+                    <div className="movie__detail__links mt-m">
+                      <a href={movieData.homepage}>
+                        <img src={link} alt="" />
+                      </a>
+                      <a
+                        href={`https://www.imdb.com/title/${movieData.imdb_id}`}
+                      >
+                        <img src={imdb} alt="" />
+                      </a>
+
+                      <img src={fb} alt="" />
+                      <img src={ig} alt="" />
+                      <img src={tw} alt="" />
                     </div>
                   </div>
 

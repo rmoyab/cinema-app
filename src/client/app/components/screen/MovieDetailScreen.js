@@ -26,6 +26,8 @@ import ig from '../../../assets/icons/instagram_squared.svg'
 import tw from '../../../assets/icons/witter_squared.svg'
 import Navigation from '../ui/Navigation'
 
+import defaultCast from '../../../assets/images/default-cast.png'
+
 const MovieDetailScreen = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -58,7 +60,7 @@ const MovieDetailScreen = () => {
   const { movieData, credit, isLoaded, images, videos, recommendations } = state
 
   const backdropImage = getImageUrl(movieData.backdrop_path, 'original')
-  const posterImage = getImageUrl(movieData.poster_path, 'w300')
+  const posterImage = getImageUrl(movieData.poster_path, 'w500')
   const movieCompaniesInfo = movieCompanies(movieData)
   const credits = movieCredits(credit)
 
@@ -93,14 +95,14 @@ const MovieDetailScreen = () => {
             <div className="container">
               <div className="mt-xxl">
                 <div className="row gap-1 justify-center">
-                  <div className="col-4-md mt-l">
+                  <div className="col-4-md">
                     <div className="movie__detail__image">
                       <img src={posterImage} alt={movieData.original_title} />
 
                       {/* <img src={backdropImage} alt={movieData.original_title} /> */}
                     </div>
                   </div>
-                  <div className="col-5-md mt-l">
+                  <div className="col-5-md">
                     <div className='className="movie__detail__title'>
                       <h1 className="h2">{movieData.title}</h1>
                     </div>
@@ -127,7 +129,6 @@ const MovieDetailScreen = () => {
                           <img src={time} alt="" />
                           <p>{getTime(movieData.runtime)}</p>
                         </div>
-                        <div className="data__vote__average">
                           <img src={star} alt="" />
                           <p>{movieData.vote_average}</p>
                         </div>
@@ -174,9 +175,12 @@ const MovieDetailScreen = () => {
                         </ul> */}
                       </div>
                       <div className="credit--studio">
-                        <p>
-                          Studio: <span>{movieCompaniesInfo[0].name}</span>
-                        </p>
+                        {movieCompaniesInfo[0]?.name && (
+                          <p>
+                            Studio: <span>{movieCompaniesInfo[0]?.name}</span>
+                          </p>
+                        )}
+
                         {/* {movieCompaniesInfo.map((e) => (
                           <ul>
                             <li key={e.id}>{e.name}</li>
@@ -185,7 +189,7 @@ const MovieDetailScreen = () => {
                       </div>
                     </div>
 
-                    <div className="movie__detail__links mt-m">
+                    <div className="movie__detail__links mt-l">
                       <a href={movieData.homepage}>
                         <img src={link} alt="" />
                       </a>
@@ -201,7 +205,7 @@ const MovieDetailScreen = () => {
                     </div>
                   </div>
 
-                  <div className="col-3-md mt-l">
+                  <div className="col-3-md">
                     <div className="movie__detail__logo">
                       <img src={movieLogo(images)} alt="" width={200} />
                     </div>
@@ -232,10 +236,18 @@ const MovieDetailScreen = () => {
                           {credits.cast.map((c) => (
                             <li key={c.id}>
                               <div className="credit__image">
-                                <img
-                                  src={getImageUrl(c.profile_path)}
-                                  alt={c.name}
-                                />
+                                {c.profile_path ? (
+                                  <img
+                                    src={getImageUrl(c.profile_path, 'w300')}
+                                    alt={c.name}
+                                  />
+                                ) : (
+                                  <img
+                                    className="credit__image__default"
+                                    src={defaultCast}
+                                    alt={c.name}
+                                  />
+                                )}
                               </div>
                               <div className="credit__info">
                                 <div className="credit__info__name">

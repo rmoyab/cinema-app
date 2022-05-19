@@ -9,7 +9,7 @@
   width: 100vw;
 
   &__image {
-    width: 30rem;
+    width: 38rem;
     margin: 0 auto;
 
     & img {
@@ -65,6 +65,10 @@
           bottom: 15%;
           width: 100%;
           object-fit: cover;
+        }
+
+        &__default {
+          margin-top: 16px;
         }
       }
     }
@@ -167,4 +171,11 @@
       }
     }
   }
+}
+
+.svg-icon {
+  width: 2rem;
+  height: 2rem;
+  fill: greenyellow;
+  border: 2px solid greenyellow;
 }

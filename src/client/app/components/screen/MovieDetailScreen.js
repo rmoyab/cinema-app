@@ -2,6 +2,7 @@ import { Navigate, useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import moment from 'moment'
+import Slider from 'react-slick'
 
 import { requestMovieDetailScreen } from '../../api/api'
 import { getImageUrl } from '../../api/url'
@@ -27,6 +28,50 @@ import tw from '../../../assets/icons/witter_squared.svg'
 import Navigation from '../ui/Navigation'
 
 import defaultCast from '../../../assets/images/default-cast.png'
+
+let settings = {
+  infinite: true,
+  slidesToShow: 10,
+  slidesToScroll: 10,
+  arrows: false,
+  responsive: [
+    {
+      breakpoint: 1400,
+      settings: {
+        slidesToShow: 7,
+        slidesToScroll: 7,
+      },
+    },
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 6,
+        slidesToScroll: 6,
+      },
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+      },
+    },
+    {
+      breakpoint: 576,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+      },
+    },
+  ],
+}
 
 const MovieDetailScreen = () => {
   const { id } = useParams()
@@ -95,14 +140,16 @@ const MovieDetailScreen = () => {
             <div className="container">
               <div className="mt-xxl">
                 <div className="row gap-1 justify-center">
-                  <div className="col-4-md">
+                  {/* Movie Poster */}
+                  <div className="col-12-xs col-6-lg col-4-xl">
                     <div className="movie__detail__image">
                       <img src={posterImage} alt={movieData.original_title} />
 
                       {/* <img src={backdropImage} alt={movieData.original_title} /> */}
                     </div>
                   </div>
-                  <div className="col-5-md">
+                  {/* Movie Data */}
+                  <div className="col-12-xs col-6-lg col-5-xl">
                     <div className='className="movie__detail__title'>
                       <h1 className="h2">{movieData.title}</h1>
                     </div>
@@ -129,24 +176,10 @@ const MovieDetailScreen = () => {
                           <img src={time} alt="" />
                           <p>{getTime(movieData.runtime)}</p>
                         </div>
-                          <img src={star} alt="" />
-                          <p>{movieData.vote_average}</p>
-                        </div>
+
+                        <img src={star} alt="" />
+                        <p>{movieData.vote_average}</p>
                       </div>
-
-                      {/* <div className="data__imbd">
-                        <a
-                          href={`https://www.imdb.com/title/${movieData.imdb_id}`}
-                        >
-                          Imbd
-                        </a>
-                      </div> */}
-
-                      {/* <div className="data__link">
-                        <a href={movieData.homepage}>
-                          Homepage: {movieData.homepage}
-                        </a>
-                      </div> */}
                     </div>
 
                     <div className="movie__detail__overview">
@@ -204,93 +237,56 @@ const MovieDetailScreen = () => {
                       <img src={tw} alt="" />
                     </div>
                   </div>
-
-                  <div className="col-3-md">
+                  {/* Movie Logo */}
+                  <div className="col-12-xs col-3-xl">
                     <div className="movie__detail__logo">
                       <img src={movieLogo(images)} alt="" width={200} />
                     </div>
                   </div>
                 </div>
-
+                {/* Movie Cast */}
                 <div className="row gap-1 justify-center">
-                  <div className="col-4-sm col-8-md col-12-xl">
-                    <div className="movie__detail__credits">
-                      {/* <div className="credit--director">
-                        <p>Director: {credits.director.name}</p>
-                        <div className="credit__image">
-                          <img
-                            src={getImageUrl(credits.director.profile_path)}
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                      <div className="credit--writter">
-                        <p>Writers:</p>
-                        {credits.writers.map((w) => (
-                          <li key={w.id}>{w.name}</li>
-                        ))}
-                      </div> */}
-                      <div className="credit--cast">
-                        <p>Cast:</p>
+                  <div className="col-12-xs">
+                    <div className="movie__detail__cast">
+                      <div className="cast">
+                        <p className="cast__title">Cast:</p>
                         <ul>
-                          {credits.cast.map((c) => (
-                            <li key={c.id}>
-                              <div className="credit__image">
-                                {c.profile_path ? (
-                                  <img
-                                    src={getImageUrl(c.profile_path, 'w300')}
-                                    alt={c.name}
-                                  />
-                                ) : (
-                                  <img
-                                    className="credit__image__default"
-                                    src={defaultCast}
-                                    alt={c.name}
-                                  />
-                                )}
-                              </div>
-                              <div className="credit__info">
-                                <div className="credit__info__name">
-                                  {c.name} <br />
+                          <Slider {...settings}>
+                            {credits.cast.map((c) => (
+                              <li className="cast__element" key={c.id}>
+                                <div className="cast__image">
+                                  {c.profile_path ? (
+                                    <img
+                                      src={getImageUrl(c.profile_path, 'w300')}
+                                      alt={c.name}
+                                    />
+                                  ) : (
+                                    <img
+                                      className="cast__image__default"
+                                      src={defaultCast}
+                                      alt={c.name}
+                                    />
+                                  )}
                                 </div>
-                                <div className="credit__info__char">
-                                  <small>{c.character}</small>
+                                <div className="cast__info">
+                                  <p className="cast__info__name">
+                                    {c.name} <br />
+                                  </p>
+                                  <div className="cast__info__char">
+                                    <small>{c.character}</small>
+                                  </div>
                                 </div>
-                              </div>
-                            </li>
-                          ))}
+                              </li>
+                            ))}
+                          </Slider>
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                {/* <div className="movie__detail__video">
-                  <iframe
-                    width="853"
-                    height="480"
-                    src={movieTrailer(videos)}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title="Embedded youtube"
-                  />
-                </div> */}
-
-                {/* <div className="movie__detail__companies">
-                  <p>Companies:</p>
-                  {movieCompaniesInfo.map((e) => (
-                    <li key={e.id}>
-                      <img
-                        src={getImageUrl(e.logo_path, 'w300')}
-                        alt={e.name}
-                      />
-                    </li>
-                  ))}
-                </div> */}
               </div>
             </div>
-
+            {/* Movie Bg Image */}
             <div className="movie__detail__bg" style={bgImage}></div>
           </div>
         )}

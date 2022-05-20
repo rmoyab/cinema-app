@@ -9,7 +9,7 @@
   width: 100vw;
 
   &__image {
-    width: 38rem;
+    width: 80%;
     margin: 0 auto;
 
     & img {
@@ -37,21 +37,16 @@
     width: 60%;
   }
 
-  &__credits {
+  &__cast {
     margin-top: 10rem;
-    .credit {
-      &--cast {
-        & ul {
-          display: flex;
-          justify-content: space-between;
-          & li {
-            width: 12rem;
-            overflow: hidden;
-            &:not(:last-child) {
-              margin-right: 1rem;
-            }
-          }
-        }
+    .cast {
+      &__title {
+        margin-bottom: 2rem;
+      }
+
+      &__element {
+        height: 20rem;
+        // overflow: hidden;
       }
 
       &__image {
@@ -59,6 +54,7 @@
         height: 12rem;
         border-radius: 50%;
         overflow: hidden;
+        margin: 0 auto;
 
         & img {
           position: relative;
@@ -70,6 +66,10 @@
         &__default {
           margin-top: 16px;
         }
+      }
+
+      &__info {
+        text-align: center;
       }
     }
   }
@@ -171,11 +171,4 @@
       }
     }
   }
-}
-
-.svg-icon {
-  width: 2rem;
-  height: 2rem;
-  fill: greenyellow;
-  border: 2px solid greenyellow;
 }

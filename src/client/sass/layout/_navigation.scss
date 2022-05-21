@@ -7,8 +7,8 @@
   position: inherit;
 
   &__elements {
-    padding: 2rem 0;
     position: absolute;
+    top: 0;
     z-index: 2;
     width: 100%;
     pointer-events: fill;
@@ -19,6 +19,7 @@
       animation-delay: calc(2 * $timing);
 
       #logo {
+        padding: 1rem 0;
         &:hover {
           fill: $color-sorrell-brown;
         }
@@ -27,6 +28,10 @@
 
     &__links {
       display: flex;
+
+      @include media('<=sm') {
+        display: none;
+      }
 
       .nav__links__item {
         margin-right: 10px;
@@ -47,6 +52,67 @@
         &:last-child {
           animation-delay: calc(4 * $timing);
           margin-right: 0;
+        }
+      }
+    }
+
+    &__box {
+      cursor: pointer;
+      width: 2rem;
+      height: 2rem;
+      z-index: 1;
+      display: none;
+      animation: fade $timing $bezier both;
+      animation-delay: calc(3 * $timing);
+
+      @include media('<=sm') {
+        display: inline-block;
+      }
+
+      &.change {
+        z-index: 2;
+      }
+
+      &-btn {
+        border: none;
+        border-radius: 0;
+        position: relative;
+        top: 1rem;
+        background-color: #fff;
+        height: 0.2rem;
+        width: 2rem;
+
+        &::before,
+        &::after {
+          background-color: #fff;
+          height: 0.2rem;
+          width: 2rem;
+          content: '';
+          position: absolute;
+          display: block;
+          transition: all 0.2s;
+        }
+
+        &::before {
+          transform: translateY(-0.8rem);
+        }
+
+        &::after {
+          transform: translateY(0.8rem);
+        }
+
+        &.change {
+          z-index: 3;
+          background-color: transparent;
+          &::before {
+            top: 0;
+            transform: rotate(135deg);
+          }
+
+          &::after {
+            top: 0;
+            transform: rotate(-135deg);
+          }
         }
       }
     }

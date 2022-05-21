@@ -30,7 +30,7 @@ const TrailerModal = ({ videos }) => {
   }
 
   return (
-    <div>
+    <div className="movie__detail__trailer-btn">
       <div className="btn">
         <button className="btn__trailer" onClick={openModal}>
           <img src={play} alt="" />

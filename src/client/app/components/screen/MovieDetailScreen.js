@@ -29,11 +29,11 @@ import Navigation from '../ui/Navigation'
 
 import defaultCast from '../../../assets/images/default-cast.png'
 
-let settings = {
-  infinite: true,
-  slidesToShow: 10,
-  slidesToScroll: 10,
+let settings = (castItems) => ({
+  slidesToScroll: castItems < 10 ? castItems : 10,
+  slidesToShow: castItems < 10 ? castItems : 10,
   arrows: false,
+
   responsive: [
     {
       breakpoint: 1400,
@@ -71,7 +71,7 @@ let settings = {
       },
     },
   ],
-}
+})
 
 const MovieDetailScreen = () => {
   const { id } = useParams()
@@ -138,10 +138,10 @@ const MovieDetailScreen = () => {
           <div className="movie__detail">
             <Navigation />
             <div className="container">
-              <div className="mt-xxl">
+              <div className="movie__detail__wrapper">
                 <div className="row gap-1 justify-center">
                   {/* Movie Poster */}
-                  <div className="col-12-xs col-6-lg col-4-xl">
+                  <div className="col-12-xs col-6-md  col-4-xl">
                     <div className="movie__detail__image">
                       <img src={posterImage} alt={movieData.original_title} />
 
@@ -149,7 +149,7 @@ const MovieDetailScreen = () => {
                     </div>
                   </div>
                   {/* Movie Data */}
-                  <div className="col-12-xs col-6-lg col-5-xl">
+                  <div className="col-12-xs col-6-md col-5-xl">
                     <div className='className="movie__detail__title'>
                       <h1 className="h2">{movieData.title}</h1>
                     </div>
@@ -176,9 +176,10 @@ const MovieDetailScreen = () => {
                           <img src={time} alt="" />
                           <p>{getTime(movieData.runtime)}</p>
                         </div>
-
-                        <img src={star} alt="" />
-                        <p>{movieData.vote_average}</p>
+                        <div className="data__vote__average">
+                          <img src={star} alt="" />
+                          <p>{movieData.vote_average}</p>
+                        </div>
                       </div>
                     </div>
 
@@ -189,40 +190,42 @@ const MovieDetailScreen = () => {
 
                     <TrailerModal videos={videos} />
 
-                    <div className="movie__detail__creds mt-l">
-                      <div className="credit--director">
-                        <p>
-                          Director: <span>{credits.director.name}</span>
-                        </p>
-                      </div>
-                      <div className="credit--writter">
-                        {credits.writers[0]?.name && (
+                    <div className="movie__detail__credits">
+                      <div className="credit">
+                        <div className="credit--director">
                           <p>
-                            Writer: <span>{credits.writers[0]?.name}</span>
+                            Director <span> {credits.director.name}</span>
                           </p>
-                        )}
-                        {/* <ul>
+                        </div>
+                        <div className="credit--writer">
+                          {credits.writers[0]?.name && (
+                            <p>
+                              Writer <span>{credits.writers[0]?.name}</span>
+                            </p>
+                          )}
+                          {/* <ul>
                           {credits.writers.map((w) => (
                             <li key={w.id}>{w.name}</li>
                           ))}
                         </ul> */}
-                      </div>
-                      <div className="credit--studio">
-                        {movieCompaniesInfo[0]?.name && (
-                          <p>
-                            Studio: <span>{movieCompaniesInfo[0]?.name}</span>
-                          </p>
-                        )}
+                        </div>
+                        <div className="credit--studio">
+                          {movieCompaniesInfo[0]?.name && (
+                            <p>
+                              Studio <span>{movieCompaniesInfo[0]?.name}</span>
+                            </p>
+                          )}
 
-                        {/* {movieCompaniesInfo.map((e) => (
+                          {/* {movieCompaniesInfo.map((e) => (
                           <ul>
                             <li key={e.id}>{e.name}</li>
                           </ul>
                         ))} */}
+                        </div>
                       </div>
                     </div>
 
-                    <div className="movie__detail__links mt-l">
+                    <div className="movie__detail__links">
                       <a href={movieData.homepage}>
                         <img src={link} alt="" />
                       </a>
@@ -238,10 +241,12 @@ const MovieDetailScreen = () => {
                     </div>
                   </div>
                   {/* Movie Logo */}
-                  <div className="col-12-xs col-3-xl">
-                    <div className="movie__detail__logo">
-                      <img src={movieLogo(images)} alt="" width={200} />
-                    </div>
+                  <div className="col-12-xs col-6-md col-3-xl">
+                    {movieLogo(images) && (
+                      <div className="movie__detail__logo">
+                        <img src={movieLogo(images)} alt={movieData.title} />
+                      </div>
+                    )}
                   </div>
                 </div>
                 {/* Movie Cast */}
@@ -249,9 +254,9 @@ const MovieDetailScreen = () => {
                   <div className="col-12-xs">
                     <div className="movie__detail__cast">
                       <div className="cast">
-                        <p className="cast__title">Cast:</p>
+                        <p className="cast__title">Cast</p>
                         <ul>
-                          <Slider {...settings}>
+                          <Slider {...settings(credits.cast.length)}>
                             {credits.cast.map((c) => (
                               <li className="cast__element" key={c.id}>
                                 <div className="cast__image">

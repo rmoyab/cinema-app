@@ -87,7 +87,7 @@ export const movieCredits = (credit) => {
     })
   }
 
-  credit.cast?.slice(0, 10).map((e) => {
+  credit.cast?.slice(0, 15).map((e) => {
     cast.push(e)
   })
 

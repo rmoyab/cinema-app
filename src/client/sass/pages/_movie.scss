@@ -103,13 +103,13 @@
 
     p {
       color: darkgrey;
-      font-size: $paragraph-xs;
+      font-size: $paragraph-m;
     }
 
     span {
       color: white;
       text-transform: none;
-      font-size: $paragraph-s;
+      font-size: $paragraph-l;
     }
   }
 
@@ -150,6 +150,9 @@
     .cast {
       &__title {
         margin-bottom: 2rem;
+        color: darkgrey;
+        text-transform: uppercase;
+        font-size: $paragraph-m;
       }
 
       &__element {
@@ -178,6 +181,13 @@
 
       &__info {
         text-align: center;
+
+        &__name {
+        }
+
+        &__char {
+          color: grey;
+        }
       }
     }
   }

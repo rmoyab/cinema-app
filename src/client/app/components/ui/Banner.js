@@ -80,13 +80,16 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                     </div>
 
                     <div className="info__date">
-                      <h4>{moment(movie.release_date).format('L')}</h4>
+                      <p>{moment(movie.release_date).format('L')}</p>
                     </div>
 
                     <div className="info__overview mt-s">
                       <p>
                         {movie.overview.replace(/^(.{100}[^\s]*).*/, '$1')}
-                        <Link to={`/movie/${movie.id}`}> ...more</Link>
+                        <Link to={`/movie/${movie.id}`}>
+                          {' '}
+                          <span>...more</span>
+                        </Link>
                       </p>
                     </div>
 
@@ -95,9 +98,9 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                         movie.vote_average
                       )}`}
                     >
-                      <h3>
+                      <h4>
                         {movie.vote_average ? `${movie.vote_average}/10` : 'NR'}
-                      </h3>
+                      </h4>
                     </div>
 
                     <ul className="banner__genres">

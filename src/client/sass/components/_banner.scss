@@ -44,8 +44,7 @@
       .banner__elements__info {
         width: fit-content;
         align-self: center;
-        max-width: 60%;
-        border-radius: 16px;
+        // max-width: 80%;
         // backdrop-filter: blur(17px);
         // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         // background-image: linear-gradient(
@@ -59,12 +58,12 @@
         margin-right: 1.6rem;
 
         @include media('<=lg') {
-          max-width: 50%;
+          max-width: 60%;
         }
 
         @include media('<=md') {
-          max-width: 90%;
-          width: 90%;
+          max-width: 100%;
+          width: 100%;
           height: fit-content;
           max-height: 50vh;
           opacity: 0.8;
@@ -80,8 +79,6 @@
 
         & .info__title {
           cursor: pointer;
-          font-family: $font-lato-black-italic;
-          // font-family: $font-meshed-display-black;
           line-height: 1em;
           height: fit-content;
           overflow: hidden;
@@ -90,16 +87,20 @@
           transform: translateX(0);
           @include transition15;
 
+          &__year {
+            font-size: $heading-2;
+            font-weight: $font-medium;
+          }
+
           & h1 {
             font-size: $heading-2;
-
             @include media('<=md') {
-              line-height: normal;
-              max-height: none;
+              // line-height: normal;
+              // max-height: none;
             }
 
             @include media('<=sm') {
-              font-size: 1.8rem;
+              font-size: $heading-4;
             }
           }
 
@@ -109,7 +110,7 @@
           }
 
           @include media('<=xl') {
-            font-size: 3.2rem;
+            // font-size: 3.2rem;
           }
 
           @include media('<=lg') {
@@ -117,26 +118,28 @@
           }
 
           &__year {
-            font-family: $font-opensans-bold;
-            font-weight: $font-bold;
+            // font-family: $font-opensans-bold;
+            // font-weight: $font-bold;
           }
         }
 
         & .info__date {
           width: fit-content;
           padding: 5px;
-
-          & h4 {
-            font-family: $font-opensans-regular;
-          }
-
-          @include media('<=md') {
-          }
         }
 
         & .info__overview {
+          width: 80%;
           & p {
-            font-size: $paragraph-s;
+            font-size: $paragraph-l;
+          }
+
+          span {
+            color: gray;
+
+            &:hover {
+              color: darkgray;
+            }
           }
           @include media('<=lg') {
             display: none;
@@ -175,7 +178,7 @@
         }
 
         @include media('<=md') {
-          visibility: hidden;
+          display: none;
         }
 
         & img {

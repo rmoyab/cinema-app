@@ -26,17 +26,11 @@ const Navigation = () => {
               </NavLink>
             </div>
             <div
-              className={`${
-                isOpen ? 'change nav__elements__box' : 'nav__elements__box'
-              } `}
+              className={`nav__elements__box ${isOpen ? 'change' : ''}`}
               onClick={handleMenu}
             >
               <div
-                className={`${
-                  isOpen
-                    ? 'change nav__elements__box-btn'
-                    : 'nav__elements__box-btn'
-                } `}
+                className={`nav__elements__box-btn ${isOpen ? 'change' : ''}`}
               ></div>
             </div>
           </div>

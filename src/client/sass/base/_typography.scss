@@ -65,30 +65,22 @@
   line-height: 1.1;
 }
 
-.h1 {
+h1 {
   @extend %heading;
   font-size: $heading-1;
-
-  @include media('>=md') {
-    font-size: 5rem;
-  }
-
-  @include media('>=xl') {
-    font-size: 6rem;
-  }
 }
 
-.h2 {
+h2 {
   @extend %heading;
   font-size: $heading-2;
 }
 
-.h3 {
+h3 {
   @extend %heading;
   font-size: $heading-3;
 }
 
-.h4 {
+h4 {
   @extend %heading;
   font-size: $heading-4;
 }
@@ -97,12 +89,12 @@ p,
 li,
 a {
   font-family: $font-inter;
-  font-size: $paragraph-s;
+  font-size: $paragraph-l;
   line-height: 1.5;
 }
 
 label,
 input {
   font-family: $font-inter;
-  font-size: $paragraph-s;
+  font-size: $paragraph-l;
 }

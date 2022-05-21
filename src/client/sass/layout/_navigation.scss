@@ -35,8 +35,9 @@
 
       .nav__links__item {
         margin-right: 10px;
-        font-size: 1.5rem;
-        font-family: $font-opensans-regular;
+        font-size: $paragraph-m;
+        text-transform: uppercase;
+
         color: $color-mercury;
         cursor: pointer;
         animation: fade $timing $bezier both;

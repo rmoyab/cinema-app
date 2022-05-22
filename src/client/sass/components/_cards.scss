@@ -5,9 +5,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 10px;
-  // animation: fadeIn 2s ease-in-out;
   animation: fade $timing $bezier both;
-  // @include transition15;
 
   &__image {
     height: 100%;
@@ -39,13 +37,18 @@
     bottom: 0;
     border-radius: 0 0 10px 10px;
     opacity: 0.9;
-    background: rgb(14, 21, 41);
-    background: linear-gradient(
-      41deg,
-      rgba(14, 21, 41, 1) 0%,
-      rgba(42, 69, 96, 1) 62%,
-      rgba(101, 128, 156, 1) 96%
-    );
+    h4 {
+      text-transform: uppercase;
+      font-size: $paragraph-xl;
+      transform: translateY(0);
+      transition: 0.2s;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+
+    background: linear-gradient(0deg, #080808 64.18%, rgba(8, 8, 8, 0) 140.3%);
     transform: translateY(100%);
     padding: 1rem;
     transition: transform 0.3s ease-in-out;
@@ -57,7 +60,6 @@
       justify-content: center;
       align-items: center;
       margin-top: 2px;
-      color: $color-cello-light;
       width: 16px;
       height: 16px;
       border-radius: 50%;
@@ -66,24 +68,31 @@
       vertical-align: middle;
       padding: 16px;
 
+      h4 {
+        font-size: $paragraph-l;
+      }
+
       &--good {
-        background: #d8d8d8;
-        background-image: linear-gradient(172deg, #afec5b 0%, #77d52f 100%);
+        border: 2px solid #38ba2d;
       }
 
       &--medium {
-        background: #d8d8d8;
-        background-image: linear-gradient(170deg, #d3b50b 13%, #ffe27f 100%);
+        border: 2px solid #e2a300;
       }
 
       &--bad {
-        background: #d8d8d8;
-        background-image: linear-gradient(168deg, #f07b7b 24%, #dc4545 100%);
+        border: 2px solid #bc0909;
       }
 
       &--nr {
         border: 2px solid $color-mercury;
         color: $color-mercury;
+      }
+    }
+
+    &__date {
+      h4 {
+        font-size: $paragraph-l;
       }
     }
 

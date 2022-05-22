@@ -20,17 +20,41 @@
 
       #logo {
         padding: 1rem 0;
+        transition: 0.5s;
+
         &:hover {
-          fill: $color-sorrell-brown;
+          fill: $color-manatee-gray;
         }
       }
     }
 
     &__links {
       display: flex;
+      top: 0;
+      transition: 0.5s;
 
       @include media('<=sm') {
-        display: none;
+        @include centerElement;
+        top: 12rem;
+        width: 90vw;
+        padding: 2rem 0;
+        border-radius: 5px;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(
+          0.11deg,
+          rgba(8, 8, 8, 0.677895) -36.83%,
+          #080808 34.37%,
+          #080808 75.18%,
+          rgba(8, 8, 8, 0.49) 147.28%
+        );
+        translate: 0 -300px;
+
+        &.change {
+          translate: 0;
+        }
       }
 
       .nav__links__item {
@@ -38,12 +62,19 @@
         font-size: $paragraph-m;
         text-transform: uppercase;
 
+        @include media('<=sm') {
+          text-align: center;
+          margin: 0 0 10px 0;
+          font-size: $paragraph-l;
+          width: fit-content;
+        }
+
         color: $color-mercury;
         cursor: pointer;
         animation: fade $timing $bezier both;
 
         &:hover {
-          color: $color-sorrell-brown;
+          color: $color-manatee-gray;
         }
 
         &:first-child {
@@ -72,6 +103,8 @@
 
       &.change {
         z-index: 2;
+        border-radius: 100%;
+        transition: 0.5s;
       }
 
       &-btn {
@@ -82,6 +115,7 @@
         background-color: #fff;
         height: 0.2rem;
         width: 2rem;
+        @include centerElement;
 
         &::before,
         &::after {

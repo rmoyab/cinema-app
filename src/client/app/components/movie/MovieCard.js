@@ -31,7 +31,7 @@ const MovieCard = ({ movie }) => {
           <div>
             <p>{movie.original_language}</p>
           </div>
-          <div>
+          <div className="movie__overview__date">
             <h4>{releaseFull}</h4>
             {/* <ul className="movie__overview__genres">
             {namesMovieGenres.slice(0, 2).map((genre, i) => (

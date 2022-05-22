@@ -17,7 +17,7 @@ const Navigation = () => {
             <NavLink to="/" className="nav__elements__logo">
               <Logo />
             </NavLink>
-            <div className="nav__elements__links">
+            <div className={`nav__elements__links ${isOpen ? 'change' : ''}`}>
               <NavLink to="/login" className="nav__links__item">
                 Login
               </NavLink>

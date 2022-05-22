@@ -34,12 +34,12 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
   const [hover, setHover] = useState(false)
   const coverRef = useRef()
 
-  const handleHover = (e) => {
-    e.type == 'mouseover' ? setHover(true) : setHover(false)
-  }
+  useEffect(() => {
+    getMovies()
+  }, [])
 
-  const handleDate = (date) => {
-    return moment(date).format('DD-MM-YYYY')
+  const handleHover = () => {
+    setHover((s) => !s)
   }
 
   const getMovies = async () => {
@@ -51,7 +51,7 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
       })
     }
   }
-  getMovies()
+
   const { newMovies, isLoading } = movies
 
   const bgBlur = {
@@ -71,16 +71,16 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                       <Link to={`/movie/${movie.id}`}>
                         <h1 className="h1">
                           {movie.title}
-                          <span className="info__title__year">
+                          {/* <span className="info__title__year">
                             {' '}
                             {`(${moment(movie.release_date).format('YYYY')})`}
-                          </span>
+                          </span> */}
                         </h1>
                       </Link>
                     </div>
 
                     <div className="info__date">
-                      <p>{moment(movie.release_date).format('L')}</p>
+                      <p>{moment(movie.release_date).format('LL')}</p>
                     </div>
 
                     <div className="info__overview mt-s">
@@ -99,18 +99,18 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
                       )}`}
                     >
                       <h4>
-                        {movie.vote_average ? `${movie.vote_average}/10` : 'NR'}
+                        {movie.vote_average ? `${movie.vote_average}` : 'NR'}
                       </h4>
                     </div>
 
                     <ul className="banner__genres">
                       {/* {genreMovie(movie, genres)
-                      .slice(0, 2)
-                      .map((genre, i) => (
-                        <li key={i} className="banner__genres__genre">
-                          {genre}
-                        </li>
-                      ))} */}
+                        .slice(0, 2)
+                        .map((genre, i) => (
+                          <li key={i} className="banner__genres__genre">
+                            {genre}
+                          </li>
+                        ))} */}
                     </ul>
                   </div>
 

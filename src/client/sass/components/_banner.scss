@@ -89,7 +89,11 @@
 
           &__year {
             font-size: $heading-2;
-            font-weight: $font-medium;
+            // font-weight: $font-medium;
+
+            @include media('<=sm') {
+              font-size: $heading-4;
+            }
           }
 
           & h1 {
@@ -105,27 +109,23 @@
           }
 
           &:hover {
-            color: $color-sorrell-brown;
             transform: translateX(2px);
           }
 
-          @include media('<=xl') {
-            // font-size: 3.2rem;
-          }
-
-          @include media('<=lg') {
-            // font-size: 3rem;
-          }
-
           &__year {
-            // font-family: $font-opensans-bold;
-            // font-weight: $font-bold;
           }
         }
 
         & .info__date {
           width: fit-content;
           padding: 5px;
+          font-weight: $font-medium;
+
+          @include media('<=sm') {
+            p {
+              font-size: $paragraph-s;
+            }
+          }
         }
 
         & .info__overview {
@@ -135,10 +135,10 @@
           }
 
           span {
-            color: gray;
+            color: $color-manatee-gray;
 
             &:hover {
-              color: darkgray;
+              color: $color-mercury;
             }
           }
           @include media('<=lg') {
@@ -147,6 +147,43 @@
         }
 
         & .info__vote {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 1.4rem;
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          text-align: center;
+          line-height: 10rem;
+          vertical-align: middle;
+          padding: 2rem;
+
+          h4 {
+            font-size: $paragraph-l;
+          }
+
+          &--good {
+            border: 2px solid #38ba2d;
+          }
+
+          &--medium {
+            border: 2px solid #e2a300;
+          }
+
+          &--bad {
+            border: 2px solid #bc0909;
+          }
+
+          &--nr {
+            border: 2px solid $color-mercury;
+            color: $color-mercury;
+          }
+          @include media('<=xl') {
+            width: 1.6rem;
+            height: 1.6rem;
+            padding: 1.6rem;
+          }
         }
       }
 
@@ -208,17 +245,17 @@
         background: linear-gradient(
             180deg,
             rgba(255, 255, 255, 0) 0,
-            rgb(0, 0, 0, 1) 85%
+            rgba(8, 8, 8, 1) 85%
           ),
-          radial-gradient(circle, transparent, rgba(0, 0, 0, 0.5) 100%);
+          radial-gradient(circle, transparent, rgba(8, 8, 8, 0.5) 100%);
         // radial-gradient(ellipse at bottom, transparent, rgb(0, 0, 0));
         @include media('<=md') {
           background: linear-gradient(
               180deg,
               rgba(255, 255, 255, 0) 0,
-              rgb(0, 0, 0, 1) 85%
+              rgb(8, 8, 8, 1) 85%
             ),
-            radial-gradient(circle, transparent, rgba(0, 0, 0, 0.2) 100%);
+            radial-gradient(circle, transparent, rgba(8, 8, 8, 0.2) 100%);
         }
       }
 

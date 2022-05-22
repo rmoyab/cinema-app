@@ -1,0 +1,13 @@
+@use '../abstracts/' as *;
+@use '../vendors/include-media' as *;
+
+.login {
+  position: relative;
+  height: 100vh;
+  &__wrapper {
+    position: absolute;
+    width: 100%;
+    @include centerElement;
+    top: 30%;
+  }
+}

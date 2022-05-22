@@ -58,9 +58,32 @@
       }
 
       .nav__links__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-right: 10px;
-        font-size: $paragraph-m;
-        text-transform: uppercase;
+        border: 1px solid $color-mercury;
+        border-radius: 50px;
+        padding: 0.6rem 2rem;
+        transition: 0.25s;
+
+        &:hover {
+          transform: translateY(-3px);
+          background-color: black;
+          color: $color-manatee-gray;
+          border: 1px solid $color-manatee-gray;
+        }
+
+        &:active {
+          border: 1px solid $color-dove-gray;
+          color: $color-dove-gray;
+        }
+
+        & svg {
+          margin-right: 3px;
+          width: 1.2em;
+          height: 1.2em;
+        }
 
         @include media('<=sm') {
           text-align: center;
@@ -72,10 +95,6 @@
         color: $color-mercury;
         cursor: pointer;
         animation: fade $timing $bezier both;
-
-        &:hover {
-          color: $color-manatee-gray;
-        }
 
         &:first-child {
           animation-delay: calc(3 * $timing);

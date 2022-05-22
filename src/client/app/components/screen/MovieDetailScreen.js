@@ -17,14 +17,19 @@ import {
 } from '../../utils/movieUtils'
 import TrailerModal from '../movie/TrailerModal'
 
-import time from '../../../assets/icons/time.svg'
-import star from '../../../assets/icons/star.svg'
+import {
+  FiClock,
+  FiStar,
+  FiLink,
+  FiFacebook,
+  FiInstagram,
+  FiTwitter,
+} from 'react-icons/fi'
 
-import link from '../../../assets/icons/link.svg'
+import { SiImdb } from 'react-icons/si'
+
 import imdb from '../../../assets/icons/imdb.svg'
-import fb from '../../../assets/icons/facebook_squared.svg'
-import ig from '../../../assets/icons/instagram_squared.svg'
-import tw from '../../../assets/icons/witter_squared.svg'
+
 import Navigation from '../ui/Navigation'
 
 import defaultCast from '../../../assets/images/default-cast.png'
@@ -173,11 +178,11 @@ const MovieDetailScreen = () => {
                       </div>
                       <div className="data__group__icons mb-s">
                         <div className="data__duration">
-                          <img src={time} alt="" />
+                          <FiClock />
                           <p>{getTime(movieData.runtime)}</p>
                         </div>
                         <div className="data__vote__average">
-                          <img src={star} alt="" />
+                          <FiStar />
                           <p>{movieData.vote_average}</p>
                         </div>
                       </div>
@@ -227,17 +232,17 @@ const MovieDetailScreen = () => {
 
                     <div className="movie__detail__links">
                       <a href={movieData.homepage}>
-                        <img src={link} alt="" />
+                        <FiLink />
                       </a>
                       <a
                         href={`https://www.imdb.com/title/${movieData.imdb_id}`}
                       >
-                        <img src={imdb} alt="" />
+                        <SiImdb />
                       </a>
 
-                      <img src={fb} alt="" />
-                      <img src={ig} alt="" />
-                      <img src={tw} alt="" />
+                      <FiFacebook />
+                      <FiInstagram />
+                      <FiTwitter />
                     </div>
                   </div>
                   {/* Movie Logo */}

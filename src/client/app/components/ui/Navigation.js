@@ -2,6 +2,8 @@ import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import Logo from './Logo'
 
+import { FiUser } from 'react-icons/fi'
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -17,13 +19,13 @@ const Navigation = () => {
             <NavLink to="/" className="nav__elements__logo">
               <Logo />
             </NavLink>
-            <div className={`nav__elements__links ${isOpen ? 'change' : ''}`}>
+            <div className={`nav__elements__links  ${isOpen ? 'change' : ''}`}>
               <NavLink to="/login" className="nav__links__item">
-                Login
+                <FiUser /> Login
               </NavLink>
-              <NavLink to="/register" className="nav__links__item">
+              {/* <NavLink to="/register" className="nav__links__item">
                 Register
-              </NavLink>
+              </NavLink> */}
             </div>
             <div
               className={`nav__elements__box ${isOpen ? 'change' : ''}`}

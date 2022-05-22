@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 
 import { movieTrailer } from '../../utils/movieUtils'
 
-import play from '../../../assets/icons/play.svg'
+import { FiPlay } from 'react-icons/fi'
 
 const customStyles = {
   content: {
@@ -31,9 +31,9 @@ const TrailerModal = ({ videos }) => {
 
   return (
     <div className="movie__detail__trailer-btn">
-      <div className="btn">
-        <button className="btn__trailer" onClick={openModal}>
-          <img src={play} alt="" />
+      <div>
+        <button className="btn btn__trailer" onClick={openModal}>
+          <FiPlay />
           <p>Trailer</p>
         </button>
       </div>

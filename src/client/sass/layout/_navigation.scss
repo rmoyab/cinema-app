@@ -37,7 +37,7 @@
         @include centerElement;
         top: 12rem;
         width: 90vw;
-        padding: 2rem 0;
+        padding: 4rem 0;
         border-radius: 5px;
         flex-direction: column;
         text-align: center;
@@ -87,7 +87,7 @@
 
         @include media('<=sm') {
           text-align: center;
-          margin: 0 0 10px 0;
+          // margin: 0 0 10px 0;
           font-size: $paragraph-l;
           width: fit-content;
         }

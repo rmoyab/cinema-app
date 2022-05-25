@@ -72,10 +72,12 @@
   }
 
   &__trailer-btn {
+    display: flex;
+    justify-content: flex-start;
     margin-top: 4rem;
 
     @include media('<=md') {
-      text-align: center;
+      justify-content: center;
     }
   }
 

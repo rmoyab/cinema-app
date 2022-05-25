@@ -23,9 +23,8 @@
       align-items: center;
       top: 1;
 
-      @include media('<=xxl') {
-        top: 50%;
-        height: 40rem;
+      @include media('<=sm') {
+        height: 20rem;
       }
 
       @include media('<=xl') {
@@ -33,8 +32,9 @@
         height: 30rem;
       }
 
-      @include media('<=sm') {
-        height: 20rem;
+      @include media('<=xxl') {
+        top: 50%;
+        height: 40rem;
       }
 
       @include media('>=xxl') {
@@ -201,32 +201,28 @@
           scale: 1.1;
         }
 
-        @include media('>=xxl') {
-          &:hover {
-            rotate: 8deg;
-            scale: 1.2;
-          }
+        @include media('<=md') {
+          display: none;
         }
 
         @include media('<=lg') {
+          max-width: 28%;
           &:hover {
             scale: 1.03;
           }
         }
 
-        @include media('<=md') {
-          display: none;
+        @include media('>=xl') {
+          &:hover {
+            rotate: 8deg;
+          }
         }
 
         & img {
-          width: 24rem;
+          width: 100%;
           height: 100%;
           object-fit: cover;
           @include transition15;
-
-          @include media('<xl') {
-            width: 16rem;
-          }
         }
       }
     }

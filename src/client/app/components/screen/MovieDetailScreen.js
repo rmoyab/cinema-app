@@ -33,6 +33,7 @@ import imdb from '../../../assets/icons/imdb.svg'
 import Navigation from '../ui/Navigation'
 
 import defaultCast from '../../../assets/images/default-cast.png'
+import Loader from '../ui/Loader'
 
 let settings = (castItems) => ({
   slidesToScroll: castItems < 10 ? castItems : 10,
@@ -138,7 +139,7 @@ const MovieDetailScreen = () => {
     >
       <div>
         {!isLoaded ? (
-          <div>Loading...</div>
+          <Loader />
         ) : (
           <div className="movie__detail">
             <Navigation />

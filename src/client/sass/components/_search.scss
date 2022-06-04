@@ -1,0 +1,11 @@
+@use '../abstracts' as *;
+@use '../vendors/include-media' as *;
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+
+  @include media('<=md') {
+    justify-content: center;
+  }
+}

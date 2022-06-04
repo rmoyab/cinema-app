@@ -12,6 +12,8 @@ import { getImageUrl } from '../../api/url'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { requestMovieScreen } from '../../api/api'
+import Loader from './Loader'
 
 let settings = {
   infinite: true,
@@ -26,33 +28,46 @@ let settings = {
   arrows: false,
 }
 
-const Banner = ({ upcomingMovies, isLoaded }) => {
-  const [movies, setMovies] = useState({
-    newMovies: [],
-    isLoading: true,
+const Banner = () => {
+  const [bannerMovies, setBannerMovies] = useState({
+    movies: {},
+    isLoaded: false,
   })
+
   const [hover, setHover] = useState(false)
   const coverRef = useRef()
 
   useEffect(() => {
-    getMovies()
+    fetchBannerMovies()
   }, [])
+
+  const fetchBannerMovies = () => {
+    requestMovieScreen(callbackBannerRequest)
+  }
+
+  let callbackBannerRequest = (response) => {
+    const [upcoming] = response
+    setBannerMovies({
+      movies: upcoming,
+      isLoaded: true,
+    })
+  }
 
   const handleHover = () => {
     setHover((s) => !s)
   }
 
-  const getMovies = async () => {
-    const res = await movieUnreleased(upcomingMovies)
-    if (res) {
-      setMovies({
-        newMovies: res,
-        isLoading: false,
-      })
-    }
-  }
+  // const getMovies = async () => {
+  //   const res = await movieUnreleased(upcomingMovies)
+  //   if (res) {
+  //     setMovies({
+  //       newMovies: res,
+  //       isLoading: false,
+  //     })
+  //   }
+  // }
 
-  const { newMovies, isLoading } = movies
+  const { movies: upcoming, isLoaded } = bannerMovies
 
   const bgBlur = {
     filter: 'blur(4px)',
@@ -60,10 +75,12 @@ const Banner = ({ upcomingMovies, isLoaded }) => {
 
   return (
     <div className="header__banner">
-      {isLoaded && (
+      {!isLoaded ? (
+        <Loader />
+      ) : (
         <div className="banner">
           <Slider {...settings}>
-            {upcomingMovies.results.map((movie, i) => (
+            {upcoming.results.map((movie, i) => (
               <div key={movie.id} className="banner__content">
                 <div className="banner__content__elements">
                   <div className="banner__elements__info">

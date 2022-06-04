@@ -5,41 +5,63 @@ import { motion } from 'framer-motion'
 import Header from '../ui/Header'
 import MovieList from '../movie/MovieList'
 import Loader from '../ui/Loader'
+import Search from '../search/Search'
 
-import { requestMovieScreen } from '../../api/api'
+import { requestMovieScreen, requestSearchMovie } from '../../api/api'
 import { getImageUrl, getPopularMoviesUrl } from '../../api/url'
 
 import { request } from '../../api/api'
 
 const MovieScreen = () => {
-  const [state, setState] = useState({
-    moviesData: {},
+  const [contentMovies, setContentMovies] = useState({
+    movies: {},
     isLoaded: false,
     page: 1,
   })
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
-    requestMovieScreen(callbackRequest)
+    fetchMovies()
   }, [])
+
+  const fetchMovies = () => {
+    requestMovieScreen(callbackRequest)
+  }
 
   let callbackRequest = (response) => {
     const [popular, topRated, mustWatch, upcoming] = response
-    setState({
-      moviesData: { popular, topRated, mustWatch, upcoming },
+    setContentMovies({
+      movies: { popular, topRated, mustWatch, upcoming },
       isLoaded: true,
       page: 1,
     })
   }
 
+  const newMovies = async (query) => {
+    const otherMovies = await requestSearchMovie(query)
+    if (otherMovies) {
+      setContentMovies({
+        movies: otherMovies,
+        isLoaded: true,
+        page: 1,
+      })
+    }
+  }
+
+  // console.log('content', contentMovies.movies)
+
   const {
-    moviesData: { popular, upcoming },
+    movies: { popular },
     isLoaded,
-  } = state
+  } = contentMovies
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    console.log(e)
+  }
 
   const onSearchChange = (e) => {
     setQuery(e.target.value)
-    setMovies([])
-    setPage(1)
   }
 
   const animationConfiguration = {
@@ -56,12 +78,18 @@ const MovieScreen = () => {
       exit="exit"
       transition={{ duration: 1.2 }}
     >
+      <div className="">
+        <Header />
+        <Search
+          query={query}
+          onSearchChange={onSearchChange}
+          handleSearch={handleSearch}
+        />
+      </div>
       {!isLoaded ? (
         <Loader />
       ) : (
         <div className="wrapper">
-          <Header upcomingMovies={upcoming} isLoaded={isLoaded} />
-
           <section className="movies__section">
             <div className="container-fluid">
               <MovieList movies={popular} isLoaded={isLoaded} />

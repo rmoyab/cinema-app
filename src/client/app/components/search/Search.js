@@ -1,21 +1,20 @@
-import React from 'react'
-
-const Search = ({ query, onSearchChange }) => {
+const Search = ({ query, handleSearch, onSearchChange }) => {
   return (
-    <div className="header__search">
-      <form className="search">
-        {/* <label htmlFor="search__movie" className="search__label">
-          Search Movies
-        </label> */}
-        <input
-          id="search__movie"
-          type="text"
-          className="search__movie"
-          placeholder="Search Movies..."
-          value={query}
-          onChange={onSearchChange}
-        />
-      </form>
+    <div className="container-fluid">
+      <div className="search">
+        <form className="form" onSubmit={handleSearch}>
+          <div className="form__group">
+            <input
+              id="search__movie"
+              type="text"
+              className="form__group__control"
+              placeholder="Search Movies..."
+              value={query}
+              onChange={onSearchChange}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

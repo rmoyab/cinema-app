@@ -51,5 +51,8 @@ export const requestMovieDetailScreen = (id, callback) => {
 }
 
 export const requestSearchMovie = async (keyword) => {
-  return await request(getSearchMovieUrl(keyword))
+  const data = await request(getSearchMovieUrl(keyword))
+  if (data) {
+    return data
+  }
 }

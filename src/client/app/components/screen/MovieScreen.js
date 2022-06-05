@@ -22,16 +22,21 @@ const MovieScreen = () => {
 
   useEffect(() => {
     fetchMovies()
-  }, [])
+  }, [query])
 
   const fetchMovies = () => {
-    requestMovieScreen(callbackRequest)
+    if (query !== '') {
+      newMovies(query)
+    } else {
+      requestMovieScreen(callbackRequest)
+    }
   }
 
   let callbackRequest = (response) => {
     const [popular, topRated, mustWatch, upcoming] = response
     setContentMovies({
-      movies: { popular, topRated, mustWatch, upcoming },
+      // movies: { popular, topRated, mustWatch, upcoming },
+      movies: popular,
       isLoaded: true,
       page: 1,
     })
@@ -48,12 +53,9 @@ const MovieScreen = () => {
     }
   }
 
-  // console.log('content', contentMovies.movies)
+  console.log('content', contentMovies)
 
-  const {
-    movies: { popular },
-    isLoaded,
-  } = contentMovies
+  const { movies, isLoaded } = contentMovies
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -92,7 +94,7 @@ const MovieScreen = () => {
         <div className="wrapper">
           <section className="movies__section">
             <div className="container-fluid">
-              <MovieList movies={popular} isLoaded={isLoaded} />
+              <MovieList movies={movies} isLoaded={isLoaded} />
             </div>
           </section>
         </div>

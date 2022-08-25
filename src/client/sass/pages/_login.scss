@@ -4,6 +4,11 @@
 .login {
   position: relative;
   height: 100vh;
+  top: 10rem;
+
+  @include media('<=sm') {
+    top: 4rem;
+  }
   &__wrapper {
     width: 100%;
     padding: 10rem 0;

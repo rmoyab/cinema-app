@@ -39,3 +39,12 @@ a:active {
   background-color: $color-dove-gray;
   color: $color-dark-shark;
 }
+
+.back-section {
+  position: relative;
+  top: 10rem;
+
+  @include media('<=sm') {
+    top: 6rem;
+  }
+}

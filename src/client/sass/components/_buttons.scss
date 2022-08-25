@@ -18,6 +18,18 @@
     color: $color-dove-gray;
   }
 
+  &__back {
+    border-radius: 50%;
+    border: 1px solid white;
+    width: 3.2rem;
+    height: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    padding: 0;
+  }
+
   &__trailer {
     display: flex;
     justify-content: center;

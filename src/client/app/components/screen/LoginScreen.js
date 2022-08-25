@@ -1,5 +1,9 @@
 import { useForm } from '../../hooks/useForm'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
+
+import { FiChevronLeft } from 'react-icons/fi'
+import Navigation from '../ui/Navigation'
 
 const LoginScreen = () => {
   const [formLoginValues, handleLoginInputChange] = useForm({
@@ -13,6 +17,8 @@ const LoginScreen = () => {
     registerPassword: '',
     registerConfirmPassword: '',
   })
+
+  const navigate = useNavigate()
 
   const { loginEmail, loginPassword } = formLoginValues
 
@@ -45,7 +51,18 @@ const LoginScreen = () => {
       exit="exit"
       transition={{ duration: 1.5 }}
     >
+      <Navigation />
       <div className="container">
+        <div className="row gap-1 justify-flex-start">
+          <div className="col-12-xs col-6-md  col-4-xl">
+            <div className="back-section">
+              <button className="btn btn__back" onClick={() => navigate('/')}>
+                {' '}
+                <FiChevronLeft />
+              </button>
+            </div>
+          </div>
+        </div>
         <div className="login">
           <div className="login__wrapper">
             <div className="login__forms__group">

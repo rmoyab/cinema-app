@@ -1,4 +1,4 @@
-import { Navigate, useParams, useNavigate } from 'react-router-dom'
+import { Navigate, useParams, useNavigate, NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import moment from 'moment'
@@ -24,6 +24,7 @@ import {
   FiFacebook,
   FiInstagram,
   FiTwitter,
+  FiChevronLeft,
 } from 'react-icons/fi'
 
 import { SiImdb } from 'react-icons/si'
@@ -144,6 +145,22 @@ const MovieDetailScreen = () => {
           <div className="movie__detail">
             <Navigation />
             <div className="container">
+              {/* <NavLink to="/" className="breadcrumbs">
+                Back
+              </NavLink> */}
+              <div className="row gap-1 justify-flex-start">
+                <div className="col-12-xs col-6-md  col-4-xl">
+                  <div className="back-section">
+                    <button
+                      className="btn btn__back"
+                      onClick={() => navigate(-1)}
+                    >
+                      {' '}
+                      <FiChevronLeft />
+                    </button>
+                  </div>
+                </div>
+              </div>
               <div className="movie__detail__wrapper">
                 <div className="row gap-1 justify-center">
                   {/* Movie Poster */}

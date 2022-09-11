@@ -1,0 +1,17 @@
+@use '../abstracts' as *;
+@use '../vendors/include-media' as *;
+
+.footer {
+  height: 10rem;
+  text-align: center;
+  // background: linear-gradient(0deg, #080808 64.18%, rgba(8, 8, 8, 0) 140.3%);
+
+  & #logo {
+    margin-top: 3rem;
+    cursor: pointer;
+
+    &:hover {
+      fill: $color-manatee-gray;
+    }
+  }
+}

@@ -1,4 +1,7 @@
-const ROOT_URL = 'https://api.themoviedb.org/3'
+import axios from 'axios'
+
+import { axiosWithoutToken, movieAxios } from './api'
+
 const IMAGE_URL = 'https://image.tmdb.org/t/p/'
 const API_KEY = process.env.TMDB_API_KEY
 
@@ -7,58 +10,115 @@ const defaultQuery = {
   language: 'en-US',
 }
 
-const queryString = (obj) => {
+const queryString = obj => {
   return Object.entries(obj)
     .map(([index, val]) => `${index}=${val}`)
     .join('&')
 }
 
-export const getPopularMoviesUrl = (page) =>
-  `${ROOT_URL}/movie/popular?${queryString({ ...defaultQuery, ...page })}`
+// const getPopularMoviesUrl = page => {
+//   return axiosWithoutToken(
+//     `/movie/popular?${queryString({ ...defaultQuery, ...page })}`,
+//     {},
+//     'GET',
+//     'movie'
+//   )
+// }
+const getPopularMoviesUrl = page => {
+  return movieAxios.get(
+    `/movie/popular?${queryString({ ...defaultQuery, ...page })}`
+  )
+}
 
-export const getTopRatedMoviesUrl = (page) =>
-  `${ROOT_URL}/discover/movie?${queryString({
-    ...defaultQuery,
-    ...{ sort_by: 'vote_count.desc' },
-    ...page,
-  })}`
+const getTopRatedMoviesUrl = page =>
+  movieAxios.get(
+    `/discover/movie?${queryString({
+      ...defaultQuery,
+      ...{ sort_by: 'vote_count.desc' },
+      ...page,
+    })}`
+  )
 
-export const getMustWatchMoviesUrl = (page) =>
-  `${ROOT_URL}/discover/movie?${queryString({
-    ...defaultQuery,
-    ...{ sort_by: 'revenue.desc' },
-    ...page,
-  })}`
+const getMustWatchMoviesUrl = page =>
+  movieAxios.get(
+    `/discover/movie?${queryString({
+      ...defaultQuery,
+      ...{ sort_by: 'revenue.desc' },
+      ...page,
+    })}`
+  )
 
-export const getUpcomingMoviesUrl = (page) =>
-  `${ROOT_URL}/movie/upcoming?${queryString({ ...defaultQuery, ...page })}`
+export const getUpcomingMoviesUrl = page =>
+  movieAxios.get(`/movie/upcoming?${queryString({ ...defaultQuery, ...page })}`)
 
-export const getMovieDetailUrl = (id) =>
-  `${ROOT_URL}/movie/${id}?${queryString(defaultQuery)}`
+const getMovieDetailUrl = id =>
+  movieAxios.get(`/movie/${id}?${queryString(defaultQuery)}`)
 
-export const getMovieCreditUrl = (id) =>
-  `${ROOT_URL}/movie/${id}/credits?${queryString(defaultQuery)}`
+const getMovieCreditUrl = id =>
+  movieAxios.get(`/movie/${id}/credits?${queryString(defaultQuery)}`)
 
-export const getMovieImageUrl = (id) =>
-  `${ROOT_URL}/movie/${id}/images?${queryString({ api_key: API_KEY })}`
+const getMovieImageUrl = id =>
+  movieAxios.get(`/movie/${id}/images?${queryString({ api_key: API_KEY })}`)
 
-export const getMovieVideoUrl = (id) =>
-  `${ROOT_URL}/movie/${id}/videos?${queryString({ api_key: API_KEY })}`
+const getMovieVideoUrl = id =>
+  movieAxios.get(`/movie/${id}/videos?${queryString({ api_key: API_KEY })}`)
 
-export const getMovieRecommendationsUrl = (id) =>
-  `${ROOT_URL}/movie/${id}/recommendations?${queryString(defaultQuery)}`
+const getMovieRecommendationsUrl = id =>
+  movieAxios.get(`/movie/${id}/recommendations?${queryString(defaultQuery)}`)
 
-export const getMovieExternalsIdsUrl = (id) =>
-  `${ROOT_URL}/movie/${id}/external_ids?${queryString(defaultQuery)}`
+const getMovieExternalsIdsUrl = id =>
+  movieAxios.get(`/movie/${id}/external_ids?${queryString(defaultQuery)}`)
 
-export const getSearchMovieUrl = (keyword) =>
-  `${ROOT_URL}/search/movie?${queryString({
-    ...defaultQuery,
-    ...{ query: keyword },
-  })}`
+const getSearchMovieUrl = keyword =>
+  movieAxios.get(
+    `/search/movie?${queryString({
+      ...defaultQuery,
+      ...{ query: keyword },
+    })}`
+  )
 
 export const getImageUrl = (path, width = 'w500') => {
   return `${IMAGE_URL}${width}${path}`
+}
+
+export const requestMovieScreen = page => {
+  return Promise.all([
+    getPopularMoviesUrl(page),
+    getTopRatedMoviesUrl(page),
+    getMustWatchMoviesUrl(page),
+    getUpcomingMoviesUrl(page),
+  ])
+  // .then(
+  //   ([
+  //     { data: popular },
+  //     { data: toprated },
+  //     { data: mustwatch },
+  //     { data: upcoming },
+  //   ]) => callback({ popular, toprated, mustwatch, upcoming })
+  // )
+
+  // .then((values) => callback(values))
+  // .catch(err)
+}
+
+export const requestMovieDetailScreen = id => {
+  return Promise.all([
+    getMovieDetailUrl(id),
+    getMovieCreditUrl(id),
+    getMovieImageUrl(id),
+    getMovieVideoUrl(id),
+    getMovieRecommendationsUrl(id),
+    getMovieExternalsIdsUrl(id),
+  ])
+  // .then(values => callback(values))
+  // .catch(error => console.log(error))
+}
+
+export const requestSearchMovie = async keyword => {
+  const data = await getSearchMovieUrl(keyword)
+  if (data) {
+    return data
+  }
 }
 
 // export const getImageUrl = (path, key = "uri", width = "w500") => {

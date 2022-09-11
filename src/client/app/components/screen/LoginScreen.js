@@ -1,11 +1,16 @@
-import { useForm } from '../../hooks/useForm'
+import { useDispatch } from 'react-redux'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 import { FiChevronLeft } from 'react-icons/fi'
+
+import { startLogin, startRegister } from '../../store/actions/auth'
+import { useForm } from '../../hooks/useForm'
 import Navigation from '../ui/Navigation'
 
 const LoginScreen = () => {
+  const dispatch = useDispatch()
+
   const [formLoginValues, handleLoginInputChange] = useForm({
     loginEmail: '',
     loginPassword: '',
@@ -29,12 +34,19 @@ const LoginScreen = () => {
     registerConfirmPassword,
   } = formRegisterValues
 
-  const handleLogin = (e) => {
+  const handleLogin = e => {
     e.preventDefault()
+    dispatch(startLogin(loginEmail, loginPassword))
   }
 
-  const handleRegister = (e) => {
+  const handleRegister = e => {
     e.preventDefault()
+    if (registerPassword !== registerConfirmPassword) {
+      // return Swal.fire('Error', 'Passwords should match', 'error')
+      console.log('error password')
+    }
+
+    dispatch(startRegister(registerName, registerEmail, registerPassword))
   }
 
   const animationConfiguration = {

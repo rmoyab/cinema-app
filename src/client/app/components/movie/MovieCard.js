@@ -7,12 +7,12 @@ const MovieCard = ({ movie }) => {
   const releaseFull = yearMovie(movie)
 
   return (
-    <div className="col-6-xs col-4-md col-3-lg col-2-xxl">
+    <div className="col-6-xs col-4-md col-3-lg col-3-xl ">
       <div className="movie" key={movie.id}>
         <div className="movie__image">
           <Link to={`/movie/${movie.id}`}>
             <img
-              src={getImageUrl(movie.poster_path, 'w300')}
+              src={getImageUrl(movie.poster_path, 'w500')}
               alt={movie.original_title}
             />
           </Link>

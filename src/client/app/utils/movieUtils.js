@@ -1,8 +1,7 @@
 import moment from 'moment'
-import { request } from '../api/api'
 import { getImageUrl, getUpcomingMoviesUrl } from '../api/url'
 
-export const yearMovie = (movie) => {
+export const yearMovie = movie => {
   const releaseYear = movie.release_date
     ? movie.release_date.substring(0, 4).slice(2, 4)
     : '-'
@@ -13,7 +12,7 @@ export const yearMovie = (movie) => {
   return `${releaseMonth}/${releaseYear}`
 }
 
-export const setVoteClass = (vote) => {
+export const setVoteClass = vote => {
   if (vote >= 7) {
     return 'good'
   } else if (vote >= 4) {
@@ -40,7 +39,7 @@ export const genreMovie = (movie, genres) => {
   return namesMovieGenres
 }
 
-export const movieTrailer = (videos) => {
+export const movieTrailer = videos => {
   for (const key in videos.results) {
     const video = videos.results[key]
     if (video.site === 'YouTube' && video.name === 'Official Trailer') {
@@ -49,7 +48,7 @@ export const movieTrailer = (videos) => {
   }
 }
 
-export const movieLogo = (images) => {
+export const movieLogo = images => {
   for (const key in images.logos) {
     const logo = images.logos[key]
     if (logo.iso_639_1 === 'en') {
@@ -58,9 +57,9 @@ export const movieLogo = (images) => {
   }
 }
 
-export const movieCompanies = (movieData) => {
+export const movieCompanies = movieData => {
   if (!!movieData.production_companies) {
-    const companies = movieData.production_companies.map((e) => e)
+    const companies = movieData.production_companies.map(e => e)
     let companiesWithLogo = []
     for (const company of companies) {
       if (company.logo_path !== null) {
@@ -71,13 +70,13 @@ export const movieCompanies = (movieData) => {
   }
 }
 
-export const movieCredits = (credit) => {
+export const movieCredits = credit => {
   let writers = []
   let director = {}
   let cast = []
 
   if (credit.crew) {
-    credit.crew.forEach((e) => {
+    credit.crew.forEach(e => {
       if (e.job === 'Director') {
         director = e
       }
@@ -87,28 +86,28 @@ export const movieCredits = (credit) => {
     })
   }
 
-  credit.cast?.slice(0, 15).map((e) => {
+  credit.cast?.slice(0, 15).map(e => {
     cast.push(e)
   })
 
   return { writers, director, cast }
 }
 
-export const movieUnreleased = async (upcomingMovies) => {
+export const movieUnreleased = async upcomingMovies => {
   let allMovies = []
   let movies = []
   let isLoading = true
 
   for (let i = 0; i < upcomingMovies.total_pages; i++) {
     upcomingMovies.page += 1
-    const response = await request(getUpcomingMoviesUrl(upcomingMovies.page))
+    const response = await getUpcomingMoviesUrl(upcomingMovies.page)
     if (response) {
       allMovies = [...response.results, ...allMovies]
     }
   }
 
   if (allMovies.length) {
-    allMovies.forEach((e) => {
+    allMovies.forEach(e => {
       const releaseDate = moment(e.release_date)
       const date = moment()
       if (releaseDate.isAfter(date)) {
@@ -121,7 +120,7 @@ export const movieUnreleased = async (upcomingMovies) => {
   }
 }
 
-export const getTime = (time) => {
+export const getTime = time => {
   return (
     Math.floor(time / 60) + 'h ' + ('0' + Math.floor(time % 60)).slice(-2) + 'm'
   )

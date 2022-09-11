@@ -1,27 +1,24 @@
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
+const { dbConnection } = require('./db/config')
 require('dotenv').config()
-
-const publicPath = path.join(__dirname, '../..', 'dist')
 
 const app = express()
 
+dbConnection()
+
 app.use(cors())
+
 app.use(express.static('dist'))
+
+app.use(express.json())
 
 app.get('/', (req, res) => res.send('<h1>Root</h1>'))
 
-app.use(require('./routes/helloExpress'))
+app.use('/api/auth', require('./routes/auth'))
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html')),
-    function (err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    }
-})
+app.get('*', (req, res) => res.redirect('/'))
 
 const { env } = process
 const PORT = env.PORT || env.DEV_PORT

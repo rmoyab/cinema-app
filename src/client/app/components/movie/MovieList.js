@@ -1,53 +1,104 @@
 import MovieCard from './MovieCard'
 import { Link } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { request } from '../../api/api'
 import { getPopularMoviesUrl } from '../../api/url'
 
 import Loader from '../ui/Loader'
+import axios from 'axios'
+import { getMovieList } from '../../store/actions/movies'
+import Scroll from '../ui/Scroll'
 
-const MoviesList = ({ movies, isLoaded }) => {
-  const [movieList, setMovieList] = useState({
-    page: 1,
-    movies: movies.results,
-  })
+const MoviesList = () => {
+  const dispatch = useDispatch()
+
+  const moviesRef = useRef()
+
+  const { items: movies, loading } = useSelector(state => state.movieList)
+
+  const [type, setType] = useState('Popular')
+  const [active, setActive] = useState(false)
 
   useEffect(() => {
-    setMovieList({
-      page: 1,
-      movies: movies.results,
-    })
-  }, [movies])
+    dispatch(getMovieList(type))
+  }, [])
 
-  const onReachEnd = async () => {
-    const page = { page: movieList.page + 1 }
-    const response = await request(getPopularMoviesUrl(page))
+  // const onReachEnd = async () => {
+  //   const page = movies.page + 1
+  //   const res = dispatch(getMovieList(page))
+  //   console.log(res)
 
-    if (response) {
-      setMovieList((prev) => ({
-        page: prev.page + 1,
-        movies: [...prev.movies, ...response.results],
-      }))
-    }
+  //   if (res) {
+  //     setTimeout(() => {
+  //       setMovieList(prev => ({
+  //         page: prev.page + 1,
+  //         items: [...prev.items, ...res.data.results],
+  //       }))
+  //     }, 2000)
+  //   }
+  // }
+
+  const handleType = e => {
+    e.preventDefault()
+    const newType = e.target.innerText
+    setType(newType)
+    // setActive(true)
+    dispatch(getMovieList(newType))
+    // let rect = moviesRef.current.getBoundingClientRect()
+    // console.log(rect.top)
+    // const h = window.scrollY
+    // console.log(h)
+  }
+
+  const loadMore = () => {
+    const page = movies.page + 1
+    setTimeout(() => {
+      // dispatch(getMovieList(page))
+    }, 2000)
   }
 
   return (
-    <InfiniteScroll
-      dataLength={movieList.movies.length}
-      next={onReachEnd}
-      hasMore={true}
-      loader={<Loader />}
-    >
-      {isLoaded && (
-        <div className="row gap-1 justify-center">
-          {movieList.movies.map((movie, id) =>
-            movie.poster_path ? <MovieCard movie={movie} key={id} /> : ''
-          )}
-        </div>
-      )}
-    </InfiniteScroll>
+    <div className="" ref={moviesRef}>
+      <button type="button" onClick={handleType} className="btn">
+        Popular
+      </button>
+      <button type="button" onClick={handleType} className="btn">
+        Must Watch
+      </button>
+      <button type="button" onClick={handleType} className="btn">
+        Top Rated
+      </button>
+      <button
+        type="button"
+        onClick={handleType}
+        className="btn"
+        disabled={active}
+      >
+        Upcoming
+      </button>
+      <h3 className="mb-l mt-l">{type} Movies</h3>
+      <Scroll>
+        {!loading && (
+          <InfiniteScroll
+            dataLength={movies[0].results.length}
+            next={loadMore}
+            hasMore={false}
+            loader={<Loader />}
+          >
+            <div className="row gap-1 justify-flex-start">
+              {movies[0].results.map((movie, id) =>
+                movie.poster_path ? <MovieCard movie={movie} key={id} /> : ''
+              )}
+            </div>
+          </InfiniteScroll>
+        )}
+      </Scroll>
+      {/* <button onClick={loadMore} className="btn">
+        LOAD MORE
+      </button> */}
+    </div>
   )
 }
 

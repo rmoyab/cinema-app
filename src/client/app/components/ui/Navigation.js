@@ -2,13 +2,15 @@ import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import Logo from './Logo'
 
-import { FiUser } from 'react-icons/fi'
+import { FiUser, FiHeart } from 'react-icons/fi'
+import { useSelector } from 'react-redux'
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { checking, uid } = useSelector(state => state.auth)
 
   const handleMenu = () => {
-    setIsOpen((s) => !s)
+    setIsOpen(s => !s)
   }
 
   return (
@@ -20,12 +22,15 @@ const Navigation = () => {
               <Logo />
             </NavLink>
             <div className={`nav__elements__links  ${isOpen ? 'change' : ''}`}>
-              <NavLink to="/login" className="nav__links__item">
-                <FiUser /> Login
-              </NavLink>
-              {/* <NavLink to="/register" className="nav__links__item">
-                Register
-              </NavLink> */}
+              {!uid ? (
+                <NavLink to="/login" className="nav__links__item">
+                  <FiUser /> Login
+                </NavLink>
+              ) : (
+                <NavLink to="/favorites" className="nav__links__item">
+                  <FiHeart /> Favs
+                </NavLink>
+              )}
             </div>
             <div
               className={`nav__elements__box ${isOpen ? 'change' : ''}`}

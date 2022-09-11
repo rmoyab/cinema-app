@@ -1,5 +1,5 @@
-import { Navigate } from 'react-router';
+import { Navigate } from 'react-router'
 
-export const PublicRoute = ({ isAuth, children }) => {
-  return isAuth ? <Navigate to="/" /> : children;
-};
+export const PublicRoute = ({ children }) => {
+  return children
+}

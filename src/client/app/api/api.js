@@ -1,58 +1,55 @@
-import {
-  getPopularMoviesUrl,
-  getTopRatedMoviesUrl,
-  getUpcomingMoviesUrl,
-  getMovieDetailUrl,
-  getMovieCreditUrl,
-  getMovieImageUrl,
-  getMovieRecommendationsUrl,
-  getSearchMovieUrl,
-  getMovieVideoUrl,
-  getMustWatchMoviesUrl,
-  getMovieExternalsIdsUrl,
-} from './url'
+import axios from 'axios'
 
-export const request = async (url) => {
-  return fetch(url)
-    .then(handleErrors)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error(error)
-    })
+export const userAxios = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+})
+
+export const movieAxios = axios.create({
+  baseURL: 'https://api.themoviedb.org/3',
+})
+
+export const axiosWithoutToken = (url, data, method = 'GET') => {
+  console.log(url)
+  if (method === 'GET') {
+    return userAxios(url)
+  } else {
+    const options = {
+      method,
+      url,
+      headers: {
+        'Content-type': 'application/json',
+      },
+      data,
+    }
+    return userAxios(options)
+  }
 }
 
-const handleErrors = (response) => {
-  if (!response.ok) throw Error(response.statusText)
-  return response
-}
-
-export const requestMovieScreen = (callback, err) => {
-  return Promise.all([
-    request(getPopularMoviesUrl()),
-    request(getTopRatedMoviesUrl()),
-    request(getMustWatchMoviesUrl()),
-    request(getUpcomingMoviesUrl()),
-  ])
-    .then((values) => callback(values))
-    .catch(err)
-}
-
-export const requestMovieDetailScreen = (id, callback) => {
-  return Promise.all([
-    request(getMovieDetailUrl(id)),
-    request(getMovieCreditUrl(id)),
-    request(getMovieImageUrl(id)),
-    request(getMovieVideoUrl(id)),
-    request(getMovieRecommendationsUrl(id)),
-    request(getMovieExternalsIdsUrl(id)),
-  ])
-    .then((values) => callback(values))
-    .catch((error) => console.log(error))
-}
-
-export const requestSearchMovie = async (keyword) => {
-  const data = await request(getSearchMovieUrl(keyword))
-  if (data) {
-    return data
+export const axiosWithToken = (url, data, method = 'GET') => {
+  try {
+    const token = localStorage.getItem('token') || ''
+    if (method === 'GET') {
+      const options = {
+        method,
+        url,
+        headers: {
+          'x-auth-token': token,
+        },
+      }
+      return userAxios(options)
+    } else {
+      const options = {
+        method,
+        url,
+        headers: {
+          'Content-type': 'application/json',
+          'x-auth-token': token,
+        },
+        data,
+      }
+      return userAxios(options)
+    }
+  } catch (error) {
+    console.log(error)
   }
 }

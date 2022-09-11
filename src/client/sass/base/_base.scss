@@ -48,3 +48,10 @@ a:active {
     top: 6rem;
   }
 }
+
+.scroll-box {
+  overflow: scroll;
+  // border: 5px solid black;
+  height: 100rem;
+  border-radius: 10px;
+}

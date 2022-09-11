@@ -14,6 +14,8 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { requestMovieScreen } from '../../api/api'
 import Loader from './Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMovieBanner } from '../../store/actions/movies'
 
 let settings = {
   infinite: true,
@@ -29,45 +31,20 @@ let settings = {
 }
 
 const Banner = () => {
-  const [bannerMovies, setBannerMovies] = useState({
-    movies: {},
-    isLoaded: false,
-  })
+  const dispatch = useDispatch()
 
   const [hover, setHover] = useState(false)
   const coverRef = useRef()
 
+  const { items, loading } = useSelector(state => state.movieBanner)
+
   useEffect(() => {
-    fetchBannerMovies()
+    dispatch(getMovieBanner())
   }, [])
 
-  const fetchBannerMovies = () => {
-    requestMovieScreen(callbackBannerRequest)
-  }
-
-  let callbackBannerRequest = (response) => {
-    const [upcoming] = response
-    setBannerMovies({
-      movies: upcoming,
-      isLoaded: true,
-    })
-  }
-
   const handleHover = () => {
-    setHover((s) => !s)
+    setHover(s => !s)
   }
-
-  // const getMovies = async () => {
-  //   const res = await movieUnreleased(upcomingMovies)
-  //   if (res) {
-  //     setMovies({
-  //       newMovies: res,
-  //       isLoading: false,
-  //     })
-  //   }
-  // }
-
-  const { movies: upcoming, isLoaded } = bannerMovies
 
   const bgBlur = {
     filter: 'blur(4px)',
@@ -75,12 +52,12 @@ const Banner = () => {
 
   return (
     <div className="header__banner">
-      {!isLoaded ? (
+      {loading ? (
         <Loader />
       ) : (
         <div className="banner">
           <Slider {...settings}>
-            {upcoming.results.map((movie, i) => (
+            {items.results.map((movie, i) => (
               <div key={movie.id} className="banner__content">
                 <div className="banner__content__elements">
                   <div className="banner__elements__info">
@@ -89,9 +66,9 @@ const Banner = () => {
                         <h1 className="h1">
                           {movie.title}
                           {/* <span className="info__title__year">
-                            {' '}
-                            {`(${moment(movie.release_date).format('YYYY')})`}
-                          </span> */}
+                              {' '}
+                              {`(${moment(movie.release_date).format('YYYY')})`}
+                            </span> */}
                         </h1>
                       </Link>
                     </div>
@@ -122,12 +99,12 @@ const Banner = () => {
 
                     <ul className="banner__genres">
                       {/* {genreMovie(movie, genres)
-                        .slice(0, 2)
-                        .map((genre, i) => (
-                          <li key={i} className="banner__genres__genre">
-                            {genre}
-                          </li>
-                        ))} */}
+                          .slice(0, 2)
+                          .map((genre, i) => (
+                            <li key={i} className="banner__genres__genre">
+                              {genre}
+                            </li>
+                          ))} */}
                     </ul>
                   </div>
 

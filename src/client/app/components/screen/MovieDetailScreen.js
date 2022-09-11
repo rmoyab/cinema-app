@@ -35,8 +35,11 @@ import Navigation from '../ui/Navigation'
 
 import defaultCast from '../../../assets/images/default-cast.png'
 import Loader from '../ui/Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMovieDetail } from '../../store/actions/movies'
+import Footer from '../ui/Footer'
 
-let settings = (castItems) => ({
+let settings = castItems => ({
   slidesToScroll: castItems < 10 ? castItems : 10,
   slidesToShow: castItems < 10 ? castItems : 10,
   arrows: false,
@@ -81,47 +84,42 @@ let settings = (castItems) => ({
 })
 
 const MovieDetailScreen = () => {
+  const dispatch = useDispatch()
+
+  const { items, loading } = useSelector(state => state.movieDetail)
+
+  const [movieData, credit, images, videos, recommendations] = items
+
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const [state, setState] = useState({
-    movieData: {},
-    credit: {},
-    images: {},
-    videos: {},
-    recommendations: {},
-    isLoaded: false,
-  })
-
   useEffect(() => {
-    requestMovieDetailScreen(id, callbackRequest)
+    dispatch(getMovieDetail(id))
   }, [])
 
-  const callbackRequest = (response) => {
-    const [movieData, credit, images, videos, recommendations] = response
-    setState({
-      movieData,
-      credit,
-      images,
-      videos,
-      recommendations,
-      isLoaded: true,
-    })
+  let movieDetailInfo = {
+    backdropImage: {},
+    posterImage: {},
+    movieCompaniesInfo: {},
+    credits: {},
   }
 
-  const { movieData, credit, isLoaded, images, videos, recommendations } = state
+  if (!loading) {
+    const [movieData, credit, images, videos, recommendations] = items
+    movieDetailInfo = {
+      backdropImage: getImageUrl(movieData.data.backdrop_path, 'original'),
+      posterImage: getImageUrl(movieData.data.poster_path, 'w500'),
+      movieCompaniesInfo: movieCompanies(movieData.data),
+      credits: movieCredits(credit.data),
+    }
 
-  const backdropImage = getImageUrl(movieData.backdrop_path, 'original')
-  const posterImage = getImageUrl(movieData.poster_path, 'w500')
-  const movieCompaniesInfo = movieCompanies(movieData)
-  const credits = movieCredits(credit)
-
-  if (!movieData) {
-    return <Navigate to="/" />
+    if (!movieData.data) {
+      return <Navigate to="/" />
+    }
   }
 
   const bgImage = {
-    backgroundImage: `url(${backdropImage})`,
+    backgroundImage: `url(${movieDetailInfo.backdropImage})`,
   }
 
   const animationConfiguration = {
@@ -138,187 +136,202 @@ const MovieDetailScreen = () => {
       exit="exit"
       transition={{ duration: 1.5 }}
     >
-      <div>
-        {!isLoaded ? (
-          <Loader />
-        ) : (
-          <div className="movie__detail">
-            <Navigation />
-            <div className="container">
-              {/* <NavLink to="/" className="breadcrumbs">
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="movie__detail">
+          <Navigation />
+          <div className="container">
+            {/* <NavLink to="/" className="breadcrumbs">
                 Back
               </NavLink> */}
-              <div className="row gap-1 justify-flex-start">
-                <div className="col-12-xs col-6-md  col-4-xl">
-                  <div className="back-section">
-                    <button
-                      className="btn btn__back"
-                      onClick={() => navigate(-1)}
-                    >
-                      {' '}
-                      <FiChevronLeft />
-                    </button>
-                  </div>
+            <div className="row gap-1 justify-flex-start">
+              <div className="col-12-xs col-6-md  col-4-xl">
+                <div className="back-section">
+                  <button
+                    className="btn btn__back"
+                    onClick={() => navigate(-1)}
+                  >
+                    {' '}
+                    <FiChevronLeft />
+                  </button>
                 </div>
               </div>
-              <div className="movie__detail__wrapper">
-                <div className="row gap-1 justify-center">
-                  {/* Movie Poster */}
-                  <div className="col-12-xs col-6-md  col-4-xl">
-                    <div className="movie__detail__image">
-                      <img src={posterImage} alt={movieData.original_title} />
+            </div>
+            <div className="movie__detail__wrapper">
+              <div className="row gap-1 justify-center">
+                {/* Movie Poster */}
+                <div className="col-12-xs col-6-md  col-4-xl">
+                  <div className="movie__detail__image">
+                    <img
+                      src={movieDetailInfo.posterImage}
+                      alt={movieData.data.original_title}
+                    />
 
-                      {/* <img src={backdropImage} alt={movieData.original_title} /> */}
+                    {/* <img src={backdropImage} alt={movieData.original_title} /> */}
+                  </div>
+                </div>
+                {/* Movie Data */}
+                <div className="col-12-xs col-6-md col-5-xl">
+                  <div className='className="movie__detail__title'>
+                    <h1 className="h2">{movieData.data.title}</h1>
+                  </div>
+
+                  <div className="movie__detail__data">
+                    <div className="data__genres">
+                      <ul>
+                        {movieData.data.genres.slice(0, 3).map(e => (
+                          <li key={e.id}>
+                            {e.name} <br />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="data__release mb-s">
+                      <p>
+                        {movieData.data.release_date
+                          ? moment(movieData.data.release_date).format('LL')
+                          : 'N/A'}
+                      </p>
+                    </div>
+                    <div className="data__group__icons mb-s">
+                      <div className="data__duration">
+                        <FiClock />
+                        <p>{getTime(movieData.data.runtime)}</p>
+                      </div>
+                      <div className="data__vote__average">
+                        <FiStar />
+                        <p>{movieData.data.vote_average}</p>
+                      </div>
                     </div>
                   </div>
-                  {/* Movie Data */}
-                  <div className="col-12-xs col-6-md col-5-xl">
-                    <div className='className="movie__detail__title'>
-                      <h1 className="h2">{movieData.title}</h1>
-                    </div>
 
-                    <div className="movie__detail__data">
-                      <div className="data__genres">
-                        <ul>
-                          {movieData.genres.slice(0, 3).map((e) => (
-                            <li key={e.id}>
-                              {e.name} <br />
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="data__release mb-s">
+                  <div className="movie__detail__overview">
+                    <h4 className="h4">{movieData.data.tagline}</h4>
+                    <p>{movieData.data.overview}</p>
+                  </div>
+
+                  <TrailerModal videos={videos.data} />
+
+                  <div className="movie__detail__credits">
+                    <div className="credit">
+                      <div className="credit--director">
                         <p>
-                          {movieData.release_date
-                            ? moment(movieData.release_date).format('LL')
-                            : 'N/A'}
+                          Director{' '}
+                          <span> {movieDetailInfo.credits.director.name}</span>
                         </p>
                       </div>
-                      <div className="data__group__icons mb-s">
-                        <div className="data__duration">
-                          <FiClock />
-                          <p>{getTime(movieData.runtime)}</p>
-                        </div>
-                        <div className="data__vote__average">
-                          <FiStar />
-                          <p>{movieData.vote_average}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="movie__detail__overview">
-                      <h4 className="h4">{movieData.tagline}</h4>
-                      <p>{movieData.overview}</p>
-                    </div>
-
-                    <TrailerModal videos={videos} />
-
-                    <div className="movie__detail__credits">
-                      <div className="credit">
-                        <div className="credit--director">
+                      <div className="credit--writer">
+                        {movieDetailInfo.credits.writers[0]?.name && (
                           <p>
-                            Director <span> {credits.director.name}</span>
+                            Writer{' '}
+                            <span>
+                              {movieDetailInfo.credits.writers[0]?.name}
+                            </span>
                           </p>
-                        </div>
-                        <div className="credit--writer">
-                          {credits.writers[0]?.name && (
-                            <p>
-                              Writer <span>{credits.writers[0]?.name}</span>
-                            </p>
-                          )}
-                          {/* <ul>
+                        )}
+                        {/* <ul>
                           {credits.writers.map((w) => (
                             <li key={w.id}>{w.name}</li>
                           ))}
                         </ul> */}
-                        </div>
-                        <div className="credit--studio">
-                          {movieCompaniesInfo[0]?.name && (
-                            <p>
-                              Studio <span>{movieCompaniesInfo[0]?.name}</span>
-                            </p>
-                          )}
+                      </div>
+                      <div className="credit--studio">
+                        {movieDetailInfo.movieCompaniesInfo[0]?.name && (
+                          <p>
+                            Studio{' '}
+                            <span>
+                              {movieDetailInfo.movieCompaniesInfo[0]?.name}
+                            </span>
+                          </p>
+                        )}
 
-                          {/* {movieCompaniesInfo.map((e) => (
+                        {/* {movieCompaniesInfo.map((e) => (
                           <ul>
                             <li key={e.id}>{e.name}</li>
                           </ul>
                         ))} */}
-                        </div>
                       </div>
-                    </div>
-
-                    <div className="movie__detail__links">
-                      <a href={movieData.homepage}>
-                        <FiLink />
-                      </a>
-                      <a
-                        href={`https://www.imdb.com/title/${movieData.imdb_id}`}
-                      >
-                        <SiImdb />
-                      </a>
-
-                      <FiFacebook />
-                      <FiInstagram />
-                      <FiTwitter />
                     </div>
                   </div>
-                  {/* Movie Logo */}
-                  <div className="col-12-xs col-6-md col-3-xl">
-                    {movieLogo(images) && (
-                      <div className="movie__detail__logo">
-                        <img src={movieLogo(images)} alt={movieData.title} />
-                      </div>
-                    )}
+
+                  <div className="movie__detail__links">
+                    <a href={movieData.data.homepage}>
+                      <FiLink />
+                    </a>
+                    <a
+                      href={`https://www.imdb.com/title/${movieData.data.imdb_id}`}
+                    >
+                      <SiImdb />
+                    </a>
+
+                    <FiFacebook />
+                    <FiInstagram />
+                    <FiTwitter />
                   </div>
                 </div>
-                {/* Movie Cast */}
-                <div className="row gap-1 justify-center">
-                  <div className="col-12-xs">
-                    <div className="movie__detail__cast">
-                      <div className="cast">
-                        <p className="cast__title">Cast</p>
-                        <ul>
-                          <Slider {...settings(credits.cast.length)}>
-                            {credits.cast.map((c) => (
-                              <li className="cast__element" key={c.id}>
-                                <div className="cast__image">
-                                  {c.profile_path ? (
-                                    <img
-                                      src={getImageUrl(c.profile_path, 'w300')}
-                                      alt={c.name}
-                                    />
-                                  ) : (
-                                    <img
-                                      className="cast__image__default"
-                                      src={defaultCast}
-                                      alt={c.name}
-                                    />
-                                  )}
+                {/* Movie Logo */}
+                <div className="col-12-xs col-6-md col-3-xl">
+                  {movieLogo(images.data) && (
+                    <div className="movie__detail__logo">
+                      <img
+                        src={movieLogo(images.data)}
+                        alt={movieData.data.title}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+              {/* Movie Cast */}
+              <div className="row gap-1 justify-center">
+                <div className="col-12-xs">
+                  <div className="movie__detail__cast">
+                    <div className="cast">
+                      <p className="cast__title">Cast</p>
+                      <ul>
+                        <Slider
+                          {...settings(movieDetailInfo.credits.cast.length)}
+                        >
+                          {movieDetailInfo.credits.cast.map(c => (
+                            <li className="cast__element" key={c.id}>
+                              <div className="cast__image">
+                                {c.profile_path ? (
+                                  <img
+                                    src={getImageUrl(c.profile_path, 'w300')}
+                                    alt={c.name}
+                                  />
+                                ) : (
+                                  <img
+                                    className="cast__image__default"
+                                    src={defaultCast}
+                                    alt={c.name}
+                                  />
+                                )}
+                              </div>
+                              <div className="cast__info">
+                                <p className="cast__info__name">
+                                  {c.name} <br />
+                                </p>
+                                <div className="cast__info__char">
+                                  <small>{c.character}</small>
                                 </div>
-                                <div className="cast__info">
-                                  <p className="cast__info__name">
-                                    {c.name} <br />
-                                  </p>
-                                  <div className="cast__info__char">
-                                    <small>{c.character}</small>
-                                  </div>
-                                </div>
-                              </li>
-                            ))}
-                          </Slider>
-                        </ul>
-                      </div>
+                              </div>
+                            </li>
+                          ))}
+                        </Slider>
+                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {/* Movie Bg Image */}
-            <div className="movie__detail__bg" style={bgImage}></div>
           </div>
-        )}
-      </div>
+
+          {/* Movie Bg Image */}
+          <div className="movie__detail__bg" style={bgImage}></div>
+          <Footer />
+        </div>
+      )}
     </motion.div>
   )
 }

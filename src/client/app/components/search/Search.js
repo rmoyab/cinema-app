@@ -1,4 +1,24 @@
-const Search = ({ query, handleSearch, onSearchChange }) => {
+import { clearConfigCache } from 'prettier'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { searchMovies } from '../../store/actions/movies'
+
+const Search = () => {
+  const dispatch = useDispatch()
+  const state = useSelector(state => state.movies)
+
+  const [query, setQuery] = useState('')
+
+  const handleSearch = e => {
+    e.preventDefault()
+    dispatch(searchMovies(query))
+    setQuery('')
+  }
+
+  const onSearchChange = e => {
+    setQuery(e.target.value)
+  }
+
   return (
     <div className="container-fluid">
       <div className="search">

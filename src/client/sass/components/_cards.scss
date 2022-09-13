@@ -106,6 +106,20 @@
         margin-right: 10px;
       }
     }
+
+    &__like,
+    &__dislike {
+      width: fit-content;
+      cursor: pointer;
+      transform: scale(1);
+
+      &:hover {
+        transform: scale(1.1);
+        // svg {
+        //   fill: red;
+        // }
+      }
+    }
   }
 
   &:hover &__overview {

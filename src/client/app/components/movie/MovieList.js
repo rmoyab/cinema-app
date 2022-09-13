@@ -61,23 +61,36 @@ const MoviesList = () => {
 
   return (
     <div className="" ref={moviesRef}>
-      <button type="button" onClick={handleType} className="btn">
-        Popular
-      </button>
-      <button type="button" onClick={handleType} className="btn">
-        Must Watch
-      </button>
-      <button type="button" onClick={handleType} className="btn">
-        Top Rated
-      </button>
-      <button
-        type="button"
-        onClick={handleType}
-        className="btn"
-        disabled={active}
-      >
-        Upcoming
-      </button>
+      <div className="btn-group">
+        <button
+          type="button"
+          onClick={handleType}
+          className="btn btn-group__item btn__small"
+        >
+          Popular
+        </button>
+        <button
+          type="button"
+          onClick={handleType}
+          className="btn btn-group__item btn__small"
+        >
+          Must Watch
+        </button>
+        <button
+          type="button"
+          onClick={handleType}
+          className="btn btn-group__item btn__small"
+        >
+          Top Rated
+        </button>
+        <button
+          type="button"
+          onClick={handleType}
+          className="btn btn-group__item btn__small"
+        >
+          Upcoming
+        </button>
+      </div>
       <h3 className="mb-l mt-l">{type} Movies</h3>
       <Scroll>
         {!loading && (

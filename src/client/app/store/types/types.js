@@ -23,4 +23,16 @@ export const types = {
   movieRequestFailed: '[movies] Movie Failed',
 
   moviesSearchField: '[movies] Movies Search Field',
+
+  favoriteAddNew: '[favs] Favorite Add New',
+  favoriteAddNewSuccess: '[favs] Favorite Add New Success',
+  favoriteAddNewFailed: '[favs] Favorite Add New Failed',
+
+  favoriteRequestLoading: '[favs] Favs Loading',
+  favoriteRequestSuccess: '[favs] Favs Success',
+  favoriteRequestFailed: '[favs] Favs Failed',
+
+  favoriteDelete: '[favs] Favorite delete',
+  favoriteDeleteSuccess: '[favs] Favorite delete success',
+  favoriteDeleteFailed: '[favs] Favorite delete failed',
 }

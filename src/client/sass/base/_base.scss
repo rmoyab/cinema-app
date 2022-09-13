@@ -55,3 +55,13 @@ a:active {
   height: 100rem;
   border-radius: 10px;
 }
+
+.favorite {
+  position: relative;
+  height: 100vh;
+  top: 10rem;
+  &__wrapper {
+    width: 100%;
+    // padding: 10rem 0;
+  }
+}

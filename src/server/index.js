@@ -17,6 +17,7 @@ app.use(express.json())
 app.get('/', (req, res) => res.send('<h1>Root</h1>'))
 
 app.use('/api/auth', require('./routes/auth'))
+app.use('/api/favorites', require('./routes/favorites'))
 
 app.get('*', (req, res) => res.redirect('/'))
 

@@ -6,9 +6,9 @@ The central idea was create an app where I can save my liked movies, the process
 
 - Use the api and get movie data ( 99.9% 😉 ).
 - Create unique page with overview data to each movie ( 99% 🏃🏻‍♂️ ).
-- Create backend to manage users and his favs movies. ( 0 🤔 )
+- Create backend to manage users and his favs movies. ( 80% ⚡️ )
 
-You can see the result [here](https://rm-movies-app.herokuapp.com) ⚡️
+You can see the demo v1 [here](https://rm-movies-app.herokuapp.com) ⚡️
 
 ### Stack
 
@@ -16,5 +16,5 @@ You can see the result [here](https://rm-movies-app.herokuapp.com) ⚡️
 - Sass
 - Node
 - Express
-- DB (Not defined yet 🤔)
+- MongoDB
 - Webpack

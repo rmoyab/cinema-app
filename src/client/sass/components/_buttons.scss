@@ -8,6 +8,16 @@
   transition: 0.25s;
   margin: 1rem 0;
 
+  &-group {
+    width: fit-content;
+
+    & button {
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
   &:hover {
     transform: translateY(-3px);
     background-color: $color-dark-shark;
@@ -40,5 +50,10 @@
       width: 1.2em;
       height: 1.2em;
     }
+  }
+
+  &__small {
+    padding: 0.8rem 1.8rem;
+    font-size: $paragraph-m;
   }
 }

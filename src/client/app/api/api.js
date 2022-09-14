@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const userAxios = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: process.env.baseURL || process.env.REACT_APP_BASE_URL,
 })
 
 export const movieAxios = axios.create({

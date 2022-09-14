@@ -1,7 +1,8 @@
 import { types } from '../types/types'
 
 const initialState = {
-  items: [],
+  item: {},
+  results: [],
   loading: true,
   page: 1,
   error: {},
@@ -16,10 +17,27 @@ const movieList = (state = initialState, action) => {
       }
 
     case types.moviesRequestSuccess:
+      return {
+        ...state,
+        item: action.payload,
+        results: action.payload.results,
+        loading: false,
+        page: state.page + 1,
+      }
+
+    case types.moreMoviesRequestSuccess:
+      return {
+        ...state,
+        results: [...state.results, ...action.payload.results],
+        loading: false,
+        page: state.page + 1,
+      }
+
     case types.moviesSearchField:
       return {
         ...state,
-        items: action.payload,
+        item: action.payload,
+        results: action.payload.results,
         loading: false,
       }
 
@@ -73,7 +91,7 @@ const movieDetail = (state = initialState, action) => {
     case types.movieRequestSuccess:
       return {
         ...state,
-        items: [...action.payload],
+        results: [...action.payload],
         loading: false,
       }
 

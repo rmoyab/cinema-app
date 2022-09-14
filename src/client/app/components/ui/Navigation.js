@@ -1,16 +1,24 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import Logo from './Logo'
 
-import { FiUser, FiHeart } from 'react-icons/fi'
-import { useSelector } from 'react-redux'
+import { FiUser, FiHeart, FiLogOut } from 'react-icons/fi'
+import { useDispatch, useSelector } from 'react-redux'
+import { startLogout } from '../../store/actions/auth'
 
 const Navigation = () => {
+  const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false)
   const { checking, uid } = useSelector(state => state.auth)
+  const location = useLocation()
 
   const handleMenu = () => {
     setIsOpen(s => !s)
+  }
+
+  const handleLogout = e => {
+    e.preventDefault()
+    dispatch(startLogout())
   }
 
   return (
@@ -27,9 +35,19 @@ const Navigation = () => {
                   <FiUser /> Login
                 </NavLink>
               ) : (
-                <NavLink to="/favorites" className="nav__links__item">
-                  <FiHeart /> Favs
-                </NavLink>
+                <>
+                  {location.pathname !== '/favorites' ? (
+                    <NavLink to="/favorites" className="nav__links__item">
+                      <FiHeart /> Favs
+                    </NavLink>
+                  ) : (
+                    ''
+                  )}
+
+                  <button onClick={handleLogout} className="nav__links__item">
+                    <FiLogOut /> Logout
+                  </button>
+                </>
               )}
             </div>
             <div

@@ -26,7 +26,7 @@ const MovieCard = ({ movie }) => {
   }
 
   return (
-    <div className="col-6-xs col-4-md col-3-lg col-3-xl ">
+    <div className="col-6-xs col-4-md col-3-lg col-2-xl ">
       <div className="movie" key={movie.id}>
         <div className="movie__image">
           <Link to={`/movie/${movie.id}`}>

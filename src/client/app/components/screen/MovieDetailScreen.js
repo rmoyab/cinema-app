@@ -86,7 +86,7 @@ let settings = castItems => ({
 const MovieDetailScreen = () => {
   const dispatch = useDispatch()
 
-  const { items, loading } = useSelector(state => state.movieDetail)
+  const { loading, results: items } = useSelector(state => state.movieDetail)
 
   const [movieData, credit, images, videos, recommendations] = items
 

@@ -8,6 +8,7 @@ const API_KEY = process.env.TMDB_API_KEY
 const defaultQuery = {
   api_key: API_KEY,
   language: 'en-US',
+  include_adult: 'false',
 }
 
 const queryString = obj => {
@@ -26,30 +27,33 @@ const queryString = obj => {
 // }
 const getPopularMoviesUrl = page => {
   return movieAxios.get(
-    `/movie/popular?${queryString({ ...defaultQuery, ...page })}`
+    `/movie/popular?${queryString({ ...defaultQuery, page })}`
   )
 }
 
-const getTopRatedMoviesUrl = page =>
-  movieAxios.get(
+const getTopRatedMoviesUrl = page => {
+  return movieAxios.get(
     `/discover/movie?${queryString({
       ...defaultQuery,
       ...{ sort_by: 'vote_count.desc' },
-      ...page,
+      page,
     })}`
   )
+  // movieAxios.get(`/movie/top_rated?${queryString({ ...defaultQuery, page })}`)
+}
 
-const getMustWatchMoviesUrl = page =>
-  movieAxios.get(
+const getMustWatchMoviesUrl = page => {
+  return movieAxios.get(
     `/discover/movie?${queryString({
       ...defaultQuery,
       ...{ sort_by: 'revenue.desc' },
-      ...page,
+      page,
     })}`
   )
+}
 
 export const getUpcomingMoviesUrl = page =>
-  movieAxios.get(`/movie/upcoming?${queryString({ ...defaultQuery, ...page })}`)
+  movieAxios.get(`/movie/upcoming?${queryString({ ...defaultQuery, page })}`)
 
 const getMovieDetailUrl = id =>
   movieAxios.get(`/movie/${id}?${queryString(defaultQuery)}`)

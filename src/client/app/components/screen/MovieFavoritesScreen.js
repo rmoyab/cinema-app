@@ -29,6 +29,15 @@ const MovieFavoritesScreen = () => {
     dispatch(deleteFavorite(id))
   }
 
+  if (favorites.length === 0) {
+    return (
+      <div>
+        <p>Nothing here...</p>
+        <Link to={`/`}> Add some movies to favorites</Link>
+      </div>
+    )
+  }
+
   return (
     <motion.div
       variants={animationConfiguration}

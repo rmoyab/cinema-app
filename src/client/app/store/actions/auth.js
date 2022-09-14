@@ -38,9 +38,11 @@ export const startRegister = (name, email, password) => async dispatch => {
 
 export const startChecking = () => async dispatch => {
   const token = localStorage.getItem('token')
+
   if (token) {
     const res = await axiosWithToken('auth/validate')
     const body = await res.data
+
     if (body.ok) {
       localStorage.setItem('token', body.token)
       localStorage.setItem('token-init-date', new Date().getTime())
@@ -53,7 +55,6 @@ export const startChecking = () => async dispatch => {
 
 export const startLogout = () => dispatch => {
   localStorage.clear()
-
   dispatch(logout())
 }
 

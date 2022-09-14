@@ -9,7 +9,6 @@ export const movieAxios = axios.create({
 })
 
 export const axiosWithoutToken = (url, data, method = 'GET') => {
-  console.log(url)
   if (method === 'GET') {
     return userAxios(url)
   } else {

@@ -5,6 +5,8 @@ const initialState = {
   results: [],
   loading: true,
   page: 1,
+  searching: false,
+  keyword: '',
   error: {},
 }
 
@@ -22,7 +24,8 @@ const movieList = (state = initialState, action) => {
         item: action.payload,
         results: action.payload.results,
         loading: false,
-        page: state.page + 1,
+        page: 2,
+        searching: false,
       }
 
     case types.moreMoviesRequestSuccess:
@@ -31,14 +34,27 @@ const movieList = (state = initialState, action) => {
         results: [...state.results, ...action.payload.results],
         loading: false,
         page: state.page + 1,
+        searching: false,
       }
 
     case types.moviesSearchField:
       return {
         ...state,
-        item: action.payload,
-        results: action.payload.results,
+        item: action.payload.data,
+        results: action.payload.data.results,
+        keyword: action.payload.keyword,
         loading: false,
+        page: 2,
+        searching: true,
+      }
+
+    case types.moreMoviesSearchField:
+      return {
+        ...state,
+        results: [...state.results, ...action.payload.results],
+        loading: false,
+        page: state.page + 1,
+        searching: true,
       }
 
     case types.moviesRequestFailed:

@@ -6,9 +6,10 @@ import {
   requestSearchMovie,
 } from '../../api/url'
 
-export const getMovieList = (type, page) => async dispatch => {
-  dispatch(getMovies())
-  if (page) {
+export const getMovieList =
+  (type, page = 1) =>
+  async dispatch => {
+    dispatch(getMovies())
     const res = await requestMovieScreen(page)
       .then(
         ([
@@ -35,35 +36,7 @@ export const getMovieList = (type, page) => async dispatch => {
         console.log(err)
         dispatch(getMoviesFail({ err }))
       })
-  } else {
-    const res = await requestMovieScreen()
-      .then(
-        ([
-          { data: popular },
-          { data: toprated },
-          { data: mustwatch },
-          { data: upcoming },
-        ]) => {
-          if (type === 'Popular') {
-            return dispatch(getMoviesSuccess(popular))
-          }
-          if (type === 'Top Rated') {
-            return dispatch(getMoviesSuccess(toprated))
-          }
-          if (type === 'Must Watch') {
-            return dispatch(getMoviesSuccess(mustwatch))
-          }
-          if (type === 'Upcoming') {
-            return dispatch(getMoviesSuccess(upcoming))
-          }
-        }
-      )
-      .catch(err => {
-        console.log(err)
-        dispatch(getMoviesFail({ err }))
-      })
   }
-}
 
 export const getMoreMovies = type => async (dispatch, getState) => {
   const { page } = getState().movieList
@@ -95,6 +68,16 @@ export const getMoreMovies = type => async (dispatch, getState) => {
     })
 }
 
+export const getMoreSearchMovies = keyword => async (dispatch, getState) => {
+  const { page, keyword } = getState().movieList
+
+  const res = await requestSearchMovie(keyword, page)
+    .then(({ data }) => dispatch(getMoreSearchSuccess(data)))
+    .catch(err => {
+      console.log(err)
+    })
+}
+
 export const getMovieBanner = () => async dispatch => {
   dispatch(getBanner())
   const res = await requestMovieScreen()
@@ -114,16 +97,23 @@ export const getMovieDetail = id => async dispatch => {
     })
 }
 
-export const searchMovies = keyword => async dispatch => {
-  const res = await requestSearchMovie(keyword)
-    .then(({ data }) => dispatch(changeSearchField(data)))
-    .catch(err => {
-      console.log(err)
-    })
-}
+export const searchMovies =
+  (keyword, page = 1) =>
+  async dispatch => {
+    const res = await requestSearchMovie(keyword, page)
+      .then(({ data }) => dispatch(changeSearchField({ data, keyword })))
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
 const getMoreSuccess = data => ({
   type: types.moreMoviesRequestSuccess,
+  payload: data,
+})
+
+const getMoreSearchSuccess = data => ({
+  type: types.moreMoviesSearchField,
   payload: data,
 })
 

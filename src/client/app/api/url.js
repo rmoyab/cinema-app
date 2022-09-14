@@ -9,6 +9,8 @@ const defaultQuery = {
   api_key: API_KEY,
   language: 'en-US',
   include_adult: 'false',
+  // certification_country: 'US',
+  // 'certification.lte': 'PG-13',
 }
 
 const queryString = obj => {
@@ -27,8 +29,15 @@ const queryString = obj => {
 // }
 const getPopularMoviesUrl = page => {
   return movieAxios.get(
-    `/movie/popular?${queryString({ ...defaultQuery, page })}`
+    `/discover/movie?${queryString({
+      ...defaultQuery,
+      ...{ sort_by: 'popularity.desc' },
+      page,
+    })}`
   )
+  // return movieAxios.get(
+  //   `/movie/popular?${queryString({ ...defaultQuery, page })}`
+  // )
 }
 
 const getTopRatedMoviesUrl = page => {
@@ -73,11 +82,12 @@ const getMovieRecommendationsUrl = id =>
 const getMovieExternalsIdsUrl = id =>
   movieAxios.get(`/movie/${id}/external_ids?${queryString(defaultQuery)}`)
 
-const getSearchMovieUrl = keyword =>
+const getSearchMovieUrl = (keyword, page) =>
   movieAxios.get(
     `/search/movie?${queryString({
       ...defaultQuery,
       ...{ query: keyword },
+      page,
     })}`
   )
 
@@ -118,8 +128,8 @@ export const requestMovieDetailScreen = id => {
   // .catch(error => console.log(error))
 }
 
-export const requestSearchMovie = async keyword => {
-  const data = await getSearchMovieUrl(keyword)
+export const requestSearchMovie = async (keyword, page) => {
+  const data = await getSearchMovieUrl(keyword, page)
   if (data) {
     return data
   }

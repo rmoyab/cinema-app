@@ -8,21 +8,32 @@ import { getPopularMoviesUrl } from '../../api/url'
 
 import Loader from '../ui/Loader'
 import axios from 'axios'
-import { getMoreMovies, getMovieList } from '../../store/actions/movies'
+import {
+  getMoreMovies,
+  getMoreSearchMovies,
+  getMovieList,
+} from '../../store/actions/movies'
 import Scroll from '../ui/Scroll'
+import { getFavoriteList } from '../../store/actions/favorites'
 
 const MoviesList = () => {
   const dispatch = useDispatch()
 
   const moviesRef = useRef()
 
-  const { results: movies, loading } = useSelector(state => state.movieList)
+  const {
+    results: movies,
+    loading,
+    searching,
+  } = useSelector(state => state.movieList)
+  const { favorites } = useSelector(state => state.favs)
 
   const [type, setType] = useState('Popular')
   const [active, setActive] = useState(false)
 
   useEffect(() => {
     dispatch(getMovieList(type))
+    dispatch(getFavoriteList())
   }, [])
 
   const handleType = e => {
@@ -37,7 +48,18 @@ const MoviesList = () => {
     // console.log(h)
   }
 
-  const loadMore = () => dispatch(getMoreMovies(type))
+  const loadMore = () => {
+    console.log(searching)
+    if (searching) {
+      setTimeout(() => {
+        dispatch(getMoreSearchMovies())
+      }, 1000)
+    } else {
+      setTimeout(() => {
+        dispatch(getMoreMovies(type))
+      }, 1000)
+    }
+  }
 
   return (
     <div className="" ref={moviesRef}>
@@ -82,7 +104,11 @@ const MoviesList = () => {
         >
           <div className="row gap-1 justify-flex-start">
             {movies.map((movie, id) =>
-              movie.poster_path ? <MovieCard movie={movie} key={id} /> : ''
+              movie.poster_path ? (
+                <MovieCard movie={movie} favorites={favorites} key={id} />
+              ) : (
+                ''
+              )
             )}
           </div>
         </InfiniteScroll>

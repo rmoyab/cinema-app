@@ -4,12 +4,14 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { yearMovie, setVoteClass } from '../../utils/movieUtils'
 import { getImageUrl } from '../../api/url'
 import { addFavorite } from '../../store/actions/favorites'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, favorites }) => {
   const dispatch = useDispatch()
   const releaseFull = yearMovie(movie)
+
+  const { uid } = useSelector(state => state.auth)
 
   const now = moment().toDate()
 
@@ -24,6 +26,10 @@ const MovieCard = ({ movie }) => {
 
     dispatch(addFavorite(favorite))
   }
+
+  const checkFavorite = () =>
+    favorites.some(f => parseInt(f.movieId) === movie.id)
+  const isFavorite = checkFavorite()
 
   return (
     <div className="col-6-xs col-4-md col-3-lg col-2-xl ">
@@ -60,9 +66,11 @@ const MovieCard = ({ movie }) => {
             ))}
           </ul> */}
           </div>
-          <div className="movie__overview__like" onClick={handleNewFav}>
-            <AiOutlineHeart />
-          </div>
+          {uid && (
+            <div className="movie__overview__like" onClick={handleNewFav}>
+              {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
+            </div>
+          )}
         </div>
       </div>
     </div>

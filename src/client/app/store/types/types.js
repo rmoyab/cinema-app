@@ -23,6 +23,7 @@ export const types = {
   movieRequestFailed: '[movies] Movie Failed',
 
   moviesSearchField: '[movies] Movies Search Field',
+  moreMoviesSearchField: '[movies] More Movies',
 
   favoriteAddNew: '[favs] Favorite Add New',
   favoriteAddNewSuccess: '[favs] Favorite Add New Success',

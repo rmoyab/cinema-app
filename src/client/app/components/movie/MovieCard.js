@@ -37,7 +37,7 @@ const MovieCard = ({ movie, favorites }) => {
         <div className="movie__image">
           <Link to={`/movie/${movie.id}`}>
             <img
-              src={getImageUrl(movie.poster_path, 'w500')}
+              src={getImageUrl(movie.poster_path, 'w300')}
               alt={movie.title}
             />
           </Link>

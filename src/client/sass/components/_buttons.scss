@@ -6,7 +6,7 @@
   border-radius: 50px;
   padding: 1rem 2.5rem;
   transition: 0.25s;
-  margin: 1rem 0;
+  // margin: 1rem 0;
 
   &-group {
     width: fit-content;
@@ -40,7 +40,7 @@
     padding: 0;
   }
 
-  &__trailer {
+  &__icon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,4 +56,10 @@
     padding: 0.8rem 1.8rem;
     font-size: $paragraph-m;
   }
+}
+
+.load-more-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

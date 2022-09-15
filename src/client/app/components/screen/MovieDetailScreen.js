@@ -107,7 +107,7 @@ const MovieDetailScreen = () => {
   if (!loading) {
     const [movieData, credit, images, videos, recommendations] = items
     movieDetailInfo = {
-      backdropImage: getImageUrl(movieData.data.backdrop_path, 'original'),
+      backdropImage: getImageUrl(movieData.data.backdrop_path, 'w1280'),
       posterImage: getImageUrl(movieData.data.poster_path, 'w500'),
       movieCompaniesInfo: movieCompanies(movieData.data),
       credits: movieCredits(credit.data),

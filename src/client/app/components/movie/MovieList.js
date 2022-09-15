@@ -15,6 +15,7 @@ import {
 } from '../../store/actions/movies'
 import Scroll from '../ui/Scroll'
 import { getFavoriteList } from '../../store/actions/favorites'
+import { FiChevronDown } from 'react-icons/fi'
 
 const MoviesList = () => {
   const dispatch = useDispatch()
@@ -25,15 +26,19 @@ const MoviesList = () => {
     results: movies,
     loading,
     searching,
+    keyword,
   } = useSelector(state => state.movieList)
   const { favorites } = useSelector(state => state.favs)
+  const { uid } = useSelector(state => state.auth)
 
   const [type, setType] = useState('Popular')
   const [active, setActive] = useState(false)
 
   useEffect(() => {
     dispatch(getMovieList(type))
-    dispatch(getFavoriteList())
+    if (uid) {
+      dispatch(getFavoriteList())
+    }
   }, [])
 
   const handleType = e => {
@@ -49,14 +54,15 @@ const MoviesList = () => {
   }
 
   const loadMore = () => {
-    console.log(searching)
     if (searching) {
       setTimeout(() => {
         dispatch(getMoreSearchMovies())
+        setActive(true)
       }, 1000)
     } else {
       setTimeout(() => {
         dispatch(getMoreMovies(type))
+        setActive(true)
       }, 1000)
     }
   }
@@ -85,21 +91,19 @@ const MoviesList = () => {
         >
           Top Rated
         </button>
-        <button
-          type="button"
-          onClick={handleType}
-          className="btn btn-group__item btn__small"
-        >
-          Upcoming
-        </button>
       </div>
-      <h3 className="mb-l mt-l">{type} Movies</h3>
+
+      {searching ? (
+        <h3 className="mb-l mt-l">Movies about: "{keyword}"</h3>
+      ) : (
+        <h3 className="mb-l mt-l">{type} Movies</h3>
+      )}
 
       {!loading && (
         <InfiniteScroll
           dataLength={movies.length}
           next={loadMore}
-          hasMore={true}
+          hasMore={active}
           loader={<Loader />}
         >
           <div className="row gap-1 justify-flex-start">
@@ -114,9 +118,14 @@ const MoviesList = () => {
         </InfiniteScroll>
       )}
 
-      {/* <button onClick={loadMore} className="btn">
-        LOAD MORE
-      </button> */}
+      <div className="load-more-btn">
+        {!active && (
+          <button onClick={loadMore} className="btn btn__icon">
+            <FiChevronDown />
+            Load More
+          </button>
+        )}
+      </div>
     </div>
   )
 }

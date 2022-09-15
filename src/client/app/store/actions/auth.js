@@ -49,6 +49,8 @@ export const startChecking = () => async dispatch => {
       dispatch(login({ uid: body.uid, name: body.name }))
     }
   } else {
+    localStorage.clear()
+    dispatch(logout())
     dispatch(checkingFinish())
   }
 }

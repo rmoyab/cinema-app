@@ -100,7 +100,6 @@ export const requestMovieScreen = page => {
     getPopularMoviesUrl(page),
     getTopRatedMoviesUrl(page),
     getMustWatchMoviesUrl(page),
-    getUpcomingMoviesUrl(page),
   ])
   // .then(
   //   ([

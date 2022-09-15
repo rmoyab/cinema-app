@@ -32,7 +32,7 @@ const TrailerModal = ({ videos }) => {
   return (
     <div className="movie__detail__trailer-btn">
       <div>
-        <button className="btn btn__trailer" onClick={openModal}>
+        <button className="btn btn__icon" onClick={openModal}>
           <FiPlay />
           <p>Trailer</p>
         </button>

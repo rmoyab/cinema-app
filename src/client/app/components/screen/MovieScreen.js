@@ -32,17 +32,14 @@ const MovieScreen = () => {
     >
       <div className="">
         <Header />
-
         <Search />
       </div>
 
-      <div className="wrapper">
-        <section className="movies__section">
-          <div className="container-fluid">
-            <MovieList />
-          </div>
-        </section>
-      </div>
+      <section className="movies__section">
+        <div className="container">
+          <MovieList />
+        </div>
+      </section>
 
       <Footer />
     </motion.div>

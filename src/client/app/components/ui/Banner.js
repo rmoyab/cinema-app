@@ -126,10 +126,7 @@ const Banner = () => {
                   className="banner__content__bg__image"
                   style={hover ? bgBlur : {}}
                 >
-                  <img
-                    src={getImageUrl(movie.backdrop_path, 'original')}
-                    alt=""
-                  />
+                  <img src={getImageUrl(movie.backdrop_path, 'w1280')} alt="" />
                 </div>
               </div>
             ))}

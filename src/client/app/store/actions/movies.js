@@ -1,6 +1,7 @@
 import { types } from '../types/types'
 
 import {
+  getUpcomingMoviesUrl,
   requestMovieDetailScreen,
   requestMovieScreen,
   requestSearchMovie,
@@ -11,27 +12,17 @@ export const getMovieList =
   async dispatch => {
     dispatch(getMovies())
     const res = await requestMovieScreen(page)
-      .then(
-        ([
-          { data: popular },
-          { data: toprated },
-          { data: mustwatch },
-          { data: upcoming },
-        ]) => {
-          if (type === 'Popular') {
-            return dispatch(getMoviesSuccess(popular))
-          }
-          if (type === 'Top Rated') {
-            return dispatch(getMoviesSuccess(toprated))
-          }
-          if (type === 'Must Watch') {
-            return dispatch(getMoviesSuccess(mustwatch))
-          }
-          if (type === 'Upcoming') {
-            return dispatch(getMoviesSuccess(upcoming))
-          }
+      .then(([{ data: popular }, { data: toprated }, { data: mustwatch }]) => {
+        if (type === 'Popular') {
+          return dispatch(getMoviesSuccess(popular))
         }
-      )
+        if (type === 'Top Rated') {
+          return dispatch(getMoviesSuccess(toprated))
+        }
+        if (type === 'Must Watch') {
+          return dispatch(getMoviesSuccess(mustwatch))
+        }
+      })
       .catch(err => {
         console.log(err)
         dispatch(getMoviesFail({ err }))
@@ -42,27 +33,17 @@ export const getMoreMovies = type => async (dispatch, getState) => {
   const { page } = getState().movieList
 
   const res = requestMovieScreen(page)
-    .then(
-      ([
-        { data: popular },
-        { data: toprated },
-        { data: mustwatch },
-        { data: upcoming },
-      ]) => {
-        if (type === 'Popular') {
-          return dispatch(getMoreSuccess(popular))
-        }
-        if (type === 'Top Rated') {
-          return dispatch(getMoreSuccess(toprated))
-        }
-        if (type === 'Must Watch') {
-          return dispatch(getMoreSuccess(mustwatch))
-        }
-        if (type === 'Upcoming') {
-          return dispatch(getMoreSuccess(upcoming))
-        }
+    .then(([{ data: popular }, { data: toprated }, { data: mustwatch }]) => {
+      if (type === 'Popular') {
+        return dispatch(getMoreSuccess(popular))
       }
-    )
+      if (type === 'Top Rated') {
+        return dispatch(getMoreSuccess(toprated))
+      }
+      if (type === 'Must Watch') {
+        return dispatch(getMoreSuccess(mustwatch))
+      }
+    })
     .catch(err => {
       console.log(err)
     })
@@ -80,8 +61,8 @@ export const getMoreSearchMovies = keyword => async (dispatch, getState) => {
 
 export const getMovieBanner = () => async dispatch => {
   dispatch(getBanner())
-  const res = await requestMovieScreen()
-    .then(([{ data: popular }]) => dispatch(getBannerSuccess(popular)))
+  const res = await getUpcomingMoviesUrl()
+    .then(({ data }) => dispatch(getBannerSuccess(data)))
     .catch(err => {
       dispatch(getBannerFail(err))
     })

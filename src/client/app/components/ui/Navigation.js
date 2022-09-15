@@ -24,7 +24,7 @@ const Navigation = () => {
   return (
     <nav className="nav">
       <div className="nav__elements">
-        <div className="container-fluid">
+        <div className="container">
           <div className="row justify-space-between align-center">
             <NavLink to="/" className="nav__elements__logo">
               <Logo />

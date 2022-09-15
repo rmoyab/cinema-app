@@ -6,7 +6,6 @@ import { motion } from 'framer-motion'
 import Header from '../ui/Header'
 import MovieList from '../movie/MovieList'
 import Loader from '../ui/Loader'
-import Search from '../search/Search'
 
 import { requestMovieScreen, requestSearchMovie } from '../../api/api'
 import { getImageUrl, getPopularMoviesUrl } from '../../api/url'
@@ -30,18 +29,17 @@ const MovieScreen = () => {
       exit="exit"
       transition={{ duration: 1.2 }}
     >
-      <div className="">
+      <header className="header__section">
         <Header />
-        <Search />
-      </div>
+      </header>
 
       <section className="movies__section">
-        <div className="container">
-          <MovieList />
-        </div>
+        <MovieList />
       </section>
 
-      <Footer />
+      <footer className="footer__section">
+        <Footer />
+      </footer>
     </motion.div>
   )
 }

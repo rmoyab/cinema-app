@@ -4,15 +4,56 @@
 .movies__section {
   position: relative;
   z-index: 4;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0,
-    rgb(0, 0, 0) 100%
-  );
-  margin-bottom: 10rem;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  // background: linear-gradient(
+  //   180deg,
+  //   rgba(255, 255, 255, 0) 0,
+  //   rgb(0, 0, 0) 100%
+  // );
+  // filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background-color: #080808;
+  padding-bottom: 4rem;
 }
 
 .infinite-scroll-component {
   overflow: hidden !important;
+}
+
+.option-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2rem 0;
+  flex-wrap: wrap;
+
+  @include media('<=md') {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+
+  .search {
+    width: fit-content;
+
+    @include media('<=sm') {
+      margin-top: 2rem;
+    }
+
+    @include media('<=md') {
+      width: 100%;
+    }
+
+    & input {
+      margin-bottom: 0;
+    }
+  }
+
+  .btn {
+    & button {
+      padding: 1rem 2rem;
+    }
+  }
+}
+
+.movies-title {
+  margin: 2rem 0;
 }

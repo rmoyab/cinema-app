@@ -16,6 +16,7 @@ import {
 import Scroll from '../ui/Scroll'
 import { getFavoriteList } from '../../store/actions/favorites'
 import { FiChevronDown } from 'react-icons/fi'
+import Search from '../search/Search'
 
 const MoviesList = () => {
   const dispatch = useDispatch()
@@ -65,62 +66,73 @@ const MoviesList = () => {
   }
 
   return (
-    <div className="" ref={moviesRef}>
-      <div className="btn-group">
-        <button
-          type="button"
-          onClick={handleType}
-          className="btn btn-group__item btn__small"
-        >
-          Popular
-        </button>
-        <button
-          type="button"
-          onClick={handleType}
-          className="btn btn-group__item btn__small"
-        >
-          Must Watch
-        </button>
-        <button
-          type="button"
-          onClick={handleType}
-          className="btn btn-group__item btn__small"
-        >
-          Top Rated
-        </button>
+    <div className="container" ref={moviesRef}>
+      <div className="option-fields">
+        <div className="btn-group">
+          <button
+            type="button"
+            onClick={handleType}
+            className="btn btn-group__item btn__small"
+          >
+            Popular
+          </button>
+          <button
+            type="button"
+            onClick={handleType}
+            className="btn btn-group__item btn__small"
+          >
+            Must Watch
+          </button>
+          <button
+            type="button"
+            onClick={handleType}
+            className="btn btn-group__item btn__small"
+          >
+            Top Rated
+          </button>
+        </div>
+        <Search />
       </div>
 
-      {searching ? (
-        <h3 className="mb-l mt-l">Movies about: "{keyword}"</h3>
-      ) : (
-        <h3 className="mb-l mt-l">{type} Movies</h3>
-      )}
+      <div className="movies-title">
+        {searching ? (
+          <h3 className="">Movies about: "{keyword}"</h3>
+        ) : (
+          <h3 className="">{type} Movies</h3>
+        )}
+      </div>
 
-      {!loading && (
-        <InfiniteScroll
-          dataLength={movies.length}
-          next={loadMore}
-          hasMore={active}
-          loader={item.total_results !== movies.length ? <Loader /> : ''}
-        >
-          <div className="row gap-1 justify-flex-start">
-            {movies.map((movie, id) =>
-              movie.poster_path ? (
-                <MovieCard movie={movie} favorites={favorites} key={id} />
-              ) : (
-                ''
-              )
-            )}
-          </div>
-        </InfiniteScroll>
-      )}
+      <div className="movies-infinite">
+        {!loading && (
+          <InfiniteScroll
+            dataLength={movies.length}
+            next={loadMore}
+            hasMore={active}
+            loader={item.total_results !== movies.length ? <Loader /> : ''}
+          >
+            <div className="row gap-1 justify-flex-start">
+              {movies.map((movie, id) =>
+                movie.poster_path ? (
+                  <MovieCard movie={movie} favorites={favorites} key={id} />
+                ) : (
+                  ''
+                )
+              )}
+            </div>
+          </InfiniteScroll>
+        )}
+      </div>
 
       <div className="load-more-btn">
-        {!active && (
-          <button onClick={loadMore} className="btn btn__icon">
-            <FiChevronDown />
-            Load More
-          </button>
+        {item.total_results !== movies.length && (
+          <div>
+            {!active && (
+              <button onClick={loadMore} className="btn btn__icon">
+                <FiChevronDown />
+                Load More
+              </button>
+            )}
+          </div>
         )}
       </div>
     </div>

@@ -18,7 +18,7 @@
       width: 100%;
       gap: 2rem;
       margin-top: 2rem;
-      justify-content: center;
+      justify-content: space-between;
     }
 
     @include media('<=sm') {

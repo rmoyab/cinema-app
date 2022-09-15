@@ -1,4 +1,5 @@
 @use '../abstracts/variables' as *;
+@use '../vendors/include-media' as *;
 
 .btn {
   background-color: black;
@@ -6,14 +7,35 @@
   border-radius: 50px;
   padding: 1rem 2.5rem;
   transition: 0.25s;
+  text-align: center;
   // margin: 1rem 0;
 
   &-group {
     width: fit-content;
+    display: flex;
+
+    @include media('<=md') {
+      width: 100%;
+      gap: 2rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    @include media('<=sm') {
+      margin-top: 2rem;
+      flex-direction: column;
+      align-items: center;
+    }
 
     & button {
       &:not(:last-child) {
         margin-right: 1rem;
+      }
+      @include media('<=md') {
+        width: 16rem;
+        &:not(:last-child) {
+          margin-right: 0;
+        }
       }
     }
   }
@@ -62,4 +84,5 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 6rem;
 }

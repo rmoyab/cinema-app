@@ -20,8 +20,6 @@ import { FiChevronDown } from 'react-icons/fi'
 const MoviesList = () => {
   const dispatch = useDispatch()
 
-  const moviesRef = useRef()
-
   const {
     results: movies,
     loading,
@@ -30,6 +28,9 @@ const MoviesList = () => {
   } = useSelector(state => state.movieList)
   const { favorites } = useSelector(state => state.favs)
   const { uid } = useSelector(state => state.auth)
+  const { item } = useSelector(state => state.movieList)
+
+  const moviesRef = useRef()
 
   const [type, setType] = useState('Popular')
   const [active, setActive] = useState(false)
@@ -43,14 +44,10 @@ const MoviesList = () => {
 
   const handleType = e => {
     e.preventDefault()
+    setActive(false)
     const newType = e.target.innerText
     setType(newType)
-    // setActive(true)
     dispatch(getMovieList(newType))
-    // let rect = moviesRef.current.getBoundingClientRect()
-    // console.log(rect.top)
-    // const h = window.scrollY
-    // console.log(h)
   }
 
   const loadMore = () => {
@@ -104,7 +101,7 @@ const MoviesList = () => {
           dataLength={movies.length}
           next={loadMore}
           hasMore={active}
-          loader={<Loader />}
+          loader={item.total_results !== movies.length ? <Loader /> : ''}
         >
           <div className="row gap-1 justify-flex-start">
             {movies.map((movie, id) =>

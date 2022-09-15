@@ -61,12 +61,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 10px;
         border: 1px solid $color-mercury;
         border-radius: 50px;
         padding: 0.6rem 2rem;
         transition: 0.25s;
         color: white;
+        width: 12rem;
+
+        &:not(:last-child) {
+          margin-right: 1.6rem;
+        }
 
         &:hover {
           background-color: black;
@@ -87,9 +91,13 @@
 
         @include media('<=sm') {
           text-align: center;
-          // margin: 0 0 10px 0;
-          font-size: $paragraph-l;
-          width: fit-content;
+          width: 18rem;
+          height: 4rem;
+
+          &:not(:last-child) {
+            margin-bottom: 1.6rem;
+            margin-right: 0;
+          }
         }
 
         color: $color-mercury;

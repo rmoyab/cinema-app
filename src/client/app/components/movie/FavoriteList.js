@@ -7,6 +7,8 @@ import { deleteFavorite } from '../../store/actions/favorites'
 
 const FavoriteList = () => {
   const { favorites, loading } = useSelector(state => state.favs)
+  const { name } = useSelector(state => state.auth)
+  const state = useSelector(state => state.auth)
 
   const dispatch = useDispatch()
 
@@ -34,6 +36,7 @@ const FavoriteList = () => {
     <div>
       <div className="favorite">
         <div className="favorite__wrapper">
+          <h2>{name}'s Favs</h2>
           <div className="row gap-1 justify-flex-start">
             {!loading &&
               favorites.map(f => (

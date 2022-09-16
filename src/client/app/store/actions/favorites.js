@@ -1,6 +1,7 @@
 import { axiosWithToken } from '../../api/api'
 import { prepareFavs } from '../../utils/prepareFavs'
 import { types } from '../types/types'
+import Swal from 'sweetalert2'
 
 export const addFavorite = favorite => async (dispatch, getState) => {
   dispatch(favoriteAddNew())
@@ -19,8 +20,15 @@ export const addFavorite = favorite => async (dispatch, getState) => {
       dispatch(favoriteAddNewSuccess(favorite))
     }
   } catch (err) {
-    dispatch(favoriteAddNewFailed(err))
-    console.log(err)
+    dispatch(favoriteAddNewFailed(err.response.data))
+    Swal.fire({
+      title: 'Error!',
+      text: getErrors(err.response.data),
+      icon: 'error',
+      timer: 2000,
+      showCancelButton: false,
+      showConfirmButton: false,
+    })
   }
 }
 
@@ -47,12 +55,8 @@ export const deleteFavorite = id => async (dispatch, getState) => {
     if (body.ok) {
       dispatch(favoriteDeleteSuccess(id))
     }
-    // else {
-    //    Swal.fire('Error', body.msg, 'error')
-    // }
   } catch (err) {
-    dispatch(favoriteDeleteFailed(err))
-    console.log(err)
+    dispatch(favoriteDeleteFailed(err.response.data))
   }
 }
 
@@ -95,3 +99,7 @@ const favoriteDeleteFailed = err => ({
   type: types.favoriteDeleteFailed,
   payload: { err },
 })
+
+const getErrors = body => {
+  return body.errors ? Object.values(body.errors)[0].msg : body.msg
+}

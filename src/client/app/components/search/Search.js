@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchMovies } from '../../store/actions/movies'
 
-const Search = () => {
+const Search = ({ setActive }) => {
   const dispatch = useDispatch()
   const state = useSelector(state => state.movies)
 
@@ -11,6 +11,7 @@ const Search = () => {
 
   const handleSearch = e => {
     e.preventDefault()
+    setActive(false)
     dispatch(searchMovies(query))
     setQuery('')
   }

@@ -82,6 +82,7 @@
     "react-slick": "^0.28.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.4.33"
   }
 }

@@ -1,5 +1,6 @@
 import { axiosWithoutToken, axiosWithToken } from '../../api/api'
 import { types } from '../types/types'
+import Swal from 'sweetalert2'
 
 export const startLogin = (email, password) => async dispatch => {
   try {
@@ -11,28 +12,38 @@ export const startLogin = (email, password) => async dispatch => {
       localStorage.setItem('token', body.token)
       localStorage.setItem('token-init-date', new Date().getTime())
       dispatch(login({ uid: body.uid, name: body.name }))
-    } else {
-      console.log(getErrors(body))
     }
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    Swal.fire({
+      title: 'Error!',
+      text: getErrors(err.response.data),
+      icon: 'error',
+      confirmButtonText: 'Ok',
+    })
   }
 }
 
 export const startRegister = (name, email, password) => async dispatch => {
-  const res = await axiosWithoutToken(
-    'auth/new',
-    { email, password, name },
-    'POST'
-  )
-  const body = await res.data
+  try {
+    const res = await axiosWithoutToken(
+      'auth/new',
+      { email, password, name },
+      'POST'
+    )
+    const body = await res.data
 
-  if (body.ok) {
-    localStorage.setItem('token', body.token)
-    localStorage.setItem('token-init-date', new Date().getTime())
-    dispatch(login({ uid: body.uid, name: body.name }))
-  } else {
-    console.log(getErrors(body))
+    if (body.ok) {
+      localStorage.setItem('token', body.token)
+      localStorage.setItem('token-init-date', new Date().getTime())
+      dispatch(login({ uid: body.uid, name: body.name }))
+    }
+  } catch (err) {
+    Swal.fire({
+      title: 'Error!',
+      text: getErrors(err.response.data),
+      icon: 'error',
+      confirmButtonText: 'Ok',
+    })
   }
 }
 

@@ -91,7 +91,7 @@ const MoviesList = () => {
             Top Rated
           </button>
         </div>
-        <Search />
+        <Search setActive={setActive} />
       </div>
 
       <div className="movies-title">

@@ -25,7 +25,7 @@ export const favoriteReducer = (state = initialState, action) => {
     case types.favoriteAddNewFailed:
       return {
         ...state,
-        error: action.payload.err,
+        err: action.payload.err,
         loading: false,
       }
 

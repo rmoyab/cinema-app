@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import moment from 'moment'
 
 import { yearMovie, setVoteClass } from '../../utils/movieUtils'
 import { getImageUrl } from '../../api/url'
 import { addFavorite } from '../../store/actions/favorites'
-import { useDispatch, useSelector } from 'react-redux'
-import moment from 'moment'
 
 const MovieCard = ({ movie, favorites }) => {
   const dispatch = useDispatch()

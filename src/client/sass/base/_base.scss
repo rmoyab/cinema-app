@@ -88,7 +88,8 @@ a:active {
   font-size: $paragraph-l !important;
 }
 
-.swal2-confirm {
+.swal2-confirm,
+.swal2-cancel {
   font-family: $font-inter !important;
   font-size: $paragraph-l !important;
   background-color: black !important;
@@ -97,6 +98,7 @@ a:active {
   padding: 1rem 2.5rem !important;
   transition: 0.25s !important;
   text-align: center !important;
+  min-width: 10rem !important;
   &:hover {
     transform: translateY(-3px) !important;
     background-color: $color-dark-shark !important;
@@ -105,5 +107,17 @@ a:active {
   &:active {
     border: 1px solid $color-dove-gray !important;
     color: $color-dove-gray !important;
+  }
+
+  &:active,
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.swal2-confirm {
+  &:hover {
+    background-color: #8a2a2a !important;
   }
 }

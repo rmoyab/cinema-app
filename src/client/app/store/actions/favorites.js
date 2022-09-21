@@ -18,13 +18,21 @@ export const addFavorite = favorite => async (dispatch, getState) => {
         name: name,
       }
       dispatch(favoriteAddNewSuccess(favorite))
+      Swal.fire({
+        title: false,
+        text: 'Item added to favorites',
+        icon: 'success',
+        timer: 2000,
+        showCancelButton: false,
+        showConfirmButton: false,
+      })
     }
   } catch (err) {
     dispatch(favoriteAddNewFailed(err.response.data))
     Swal.fire({
-      title: 'Error!',
+      title: false,
       text: getErrors(err.response.data),
-      icon: 'error',
+      icon: 'warning',
       timer: 2000,
       showCancelButton: false,
       showConfirmButton: false,
@@ -46,17 +54,27 @@ export const getFavoriteList = () => async dispatch => {
 }
 
 export const deleteFavorite = id => async (dispatch, getState) => {
-  dispatch(favoriteDelete())
+  const confirm = await Swal.fire({
+    title: 'Delete Item',
+    text: 'Do you want to delete this favorite?',
+    showCancelButton: true,
+    showConfirmButton: true,
+    cancelButtonText: 'Cancel',
+    confirmButtonText: 'Yes, Delete It',
+    reverseButtons: true,
+  }).then(({ isConfirmed }) => isConfirmed)
 
-  try {
-    const res = await axiosWithToken(`favorites/${id}`, {}, 'DELETE')
-    const body = await res.data
-
-    if (body.ok) {
-      dispatch(favoriteDeleteSuccess(id))
+  if (confirm) {
+    dispatch(favoriteDelete())
+    try {
+      const res = await axiosWithToken(`favorites/${id}`, {}, 'DELETE')
+      const body = await res.data
+      if (body.ok) {
+        dispatch(favoriteDeleteSuccess(id))
+      }
+    } catch (err) {
+      dispatch(favoriteDeleteFailed(err.response.data))
     }
-  } catch (err) {
-    dispatch(favoriteDeleteFailed(err.response.data))
   }
 }
 

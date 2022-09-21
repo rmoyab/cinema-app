@@ -22,7 +22,7 @@ const createFavorite = async (req, res = response) => {
   if (findMovieId.length > 0) {
     return res.status(500).json({
       ok: false,
-      msg: 'Error, favorite exists',
+      msg: 'The selected item is already in favorites',
     })
   }
 

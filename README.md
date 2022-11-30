@@ -1,12 +1,12 @@
 # Movies App 🎬
 
-## This app was created using react and sass, all data is fetched from tmdb api and displays movies and its corresponding info.
+## This app was created using react and sass, all data is fetched from the tmdb API and displays movies and their corresponding info.
 
-The central idea was create an app where I can save my liked movies, the process is separated in these phases:
+The central idea was to create an app where I can save my liked movies, the process is separated into these phases:
 
-- Use the api and get movie data ( 99.9% 😉 ).
-- Create unique page with overview data to each movie ( 99% 🏃🏻‍♂️ ).
-- Create backend to manage users and his favs movies. ( 99% ⚡️ )
+- Use the API and get movie data ( 99.9% 😉 ).
+- Create a unique page with overview data for each movie ( 99% 🏃🏻‍♂️ ).
+- Create a backend to manage users and their favs movies. ( 99% ⚡️ )
 
 You can see the demo [here](https://web-production-f82e.up.railway.app/) ⚡️
 

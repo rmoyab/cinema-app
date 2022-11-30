@@ -4,6 +4,7 @@
 .nav {
   display: flex;
   justify-content: center;
+  align-items: center;
   position: inherit;
 
   &__elements {
@@ -12,14 +13,21 @@
     z-index: 2;
     width: 100%;
     pointer-events: fill;
+    padding: 1rem 0;
 
     &__logo {
       cursor: pointer;
       animation: fade $timing $bezier both;
       animation-delay: calc(2 * $timing);
+      width: 16rem;
+      height: 3.2rem;
 
-      #logo {
-        padding: 1rem 0;
+      @include media('<=sm') {
+        width: 10rem;
+        height: 2rem;
+      }
+
+      #logo__nav {
         transition: 0.5s;
 
         &:hover {

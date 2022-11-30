@@ -7,9 +7,10 @@
   text-align: center;
   // background: linear-gradient(0deg, #080808 64.18%, rgba(8, 8, 8, 0) 140.3%);
 
-  & #logo {
+  & #logo__footer {
     margin-top: 3rem;
     cursor: pointer;
+    opacity: 0.5;
 
     &:hover {
       fill: $color-manatee-gray;

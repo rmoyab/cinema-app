@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom'
-import Logo from './Logo'
+import LogoFooter from './LogoFooter'
 
 const Footer = () => (
   <div className="footer">
     <NavLink to="/" className="footer__elements__logo">
-      <Logo />
+      <LogoFooter />
     </NavLink>
   </div>
 )

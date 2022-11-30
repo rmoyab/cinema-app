@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import { useState } from 'react'
-import Logo from './Logo'
+import LogoNav from './LogoNav'
 
 import { FiUser, FiHeart, FiLogOut } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,7 +27,7 @@ const Navigation = () => {
         <div className="container">
           <div className="row justify-space-between align-center">
             <NavLink to="/" className="nav__elements__logo">
-              <Logo />
+              <LogoNav />
             </NavLink>
             <div className={`nav__elements__links  ${isOpen ? 'change' : ''}`}>
               {!uid ? (

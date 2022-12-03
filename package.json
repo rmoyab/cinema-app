@@ -74,6 +74,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-ga4": "^1.4.1",
     "react-icons": "^4.3.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-modal": "^3.14.4",

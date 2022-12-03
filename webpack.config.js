@@ -70,7 +70,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
-      favicon: './public/favicon.ico',
+      favicon: './public/icon.svg',
       // inject: 'body',
       // minify: false,
     }),
@@ -80,7 +80,7 @@ module.exports = {
           from: './public',
           to: '',
           globOptions: {
-            ignore: ['**/*.html', '**/*.ico'],
+            ignore: ['**/*.html', '**/*.svg'],
           },
         },
       ],

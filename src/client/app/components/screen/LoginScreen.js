@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import { FiChevronLeft } from 'react-icons/fi'
 
@@ -10,6 +11,12 @@ import Navigation from '../ui/Navigation'
 
 const LoginScreen = () => {
   const dispatch = useDispatch()
+  let { pathname } = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    ReactGA.send({ hitType: 'pageview', page: pathname })
+  }, [])
 
   const [formLoginValues, handleLoginInputChange] = useForm({
     loginEmail: '',
@@ -22,8 +29,6 @@ const LoginScreen = () => {
     registerPassword: '',
     registerConfirmPassword: '',
   })
-
-  const navigate = useNavigate()
 
   const { loginEmail, loginPassword } = formLoginValues
 

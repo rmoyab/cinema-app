@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { motion } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
+import ReactGA from 'react-ga4'
 
 import Header from '../ui/Header'
 import MovieList from '../movie/MovieList'
@@ -15,6 +17,12 @@ import Banner from '../ui/Banner'
 import Footer from '../ui/Footer'
 
 const MovieScreen = () => {
+  let { pathname } = useLocation()
+
+  useEffect(() => {
+    ReactGA.send({ hitType: 'pageview', page: pathname })
+  }, [])
+
   const animationConfiguration = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },

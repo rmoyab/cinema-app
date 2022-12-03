@@ -1,8 +1,15 @@
-import { Navigate, useParams, useNavigate, NavLink } from 'react-router-dom'
+import {
+  Navigate,
+  useParams,
+  useNavigate,
+  NavLink,
+  useLocation,
+} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import moment from 'moment'
 import Slider from 'react-slick'
+import ReactGA from 'react-ga4'
 
 import { requestMovieDetailScreen } from '../../api/api'
 import { getImageUrl } from '../../api/url'
@@ -85,6 +92,7 @@ let settings = castItems => ({
 
 const MovieDetailScreen = () => {
   const dispatch = useDispatch()
+  let { pathname } = useLocation()
 
   const { loading, results: items } = useSelector(state => state.movieDetail)
 
@@ -95,6 +103,7 @@ const MovieDetailScreen = () => {
 
   useEffect(() => {
     dispatch(getMovieDetail(id))
+    ReactGA.send({ hitType: 'pageview', page: pathname })
   }, [])
 
   let movieDetailInfo = {

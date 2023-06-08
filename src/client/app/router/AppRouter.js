@@ -48,6 +48,7 @@ const AppRouter = () => {
             </PublicRoute>
           }
         />
+        
         {uid ? (
           <Route
             path="login"

@@ -10,6 +10,8 @@ const FavoriteList = () => {
   const { name } = useSelector(state => state.auth)
   const state = useSelector(state => state.auth)
 
+  console.log(favorites)
+
   const dispatch = useDispatch()
 
   const handleDeleteFav = id => {

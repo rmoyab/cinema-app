@@ -15,6 +15,7 @@ const getFavorites = async (req, res = response) => {
 }
 
 const createFavorite = async (req, res = response) => {
+  console.log(req.body)
   const id = req.body.movieId
   const uid = req.uid
   const findMovieId = await Favorite.find({ movieId: id, user: { _id: uid } })

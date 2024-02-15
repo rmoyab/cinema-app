@@ -57,7 +57,7 @@ const Banner = () => {
       ) : (
         <div className="banner">
           <Slider {...settings}>
-            {items.results.map((movie, i) => (
+            {items?.results.map((movie, i) => (
               <div key={movie.id} className="banner__content">
                 <div className="banner__content__elements">
                   <div className="banner__elements__info">

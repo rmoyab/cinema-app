@@ -61,7 +61,7 @@ export const getMoreSearchMovies = keyword => async (dispatch, getState) => {
 
 export const getMovieBanner = () => async dispatch => {
   dispatch(getBanner())
-  const res = await getUpcomingMoviesUrl()
+  const res = await getUpcomingMoviesUrl(1)
     .then(({ data }) => dispatch(getBannerSuccess(data)))
     .catch(err => {
       dispatch(getBannerFail(err))

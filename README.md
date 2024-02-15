@@ -8,7 +8,7 @@ The central idea was to create an app where I can save my liked movies, the proc
 - Create a unique page with overview data for each movie ( 99% 🏃🏻‍♂️ ).
 - Create a backend to manage users and their favs movies. ( 99% ⚡️ )
 
-You can see the demo 👉🏼 [link 1](https://web-production-f82e.up.railway.app/) or [link 2](https://cinema-app-8jnq.onrender.com) ⚡️
+You can see the demo 👉🏼 [link](https://cinema-app-8jnq.onrender.com) ⚡️
 
 ### Stack
 

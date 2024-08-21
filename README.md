@@ -1,21 +1,27 @@
-# Movies App 🎬
+# 🎬 Movies App
 
-## This app was created using MERN stack, all data is fetched from the tmdb API and displays movies and their corresponding info.
+This App allows users to save their favorite movies and view detailed information about them. It was developed using the MERN stack and retrieves data from the TMDB API.
 
-The central idea was to create an app where I can save my liked movies, the process is separated into these phases:
+## ⚡️ Features
 
-- Use the API and get movie data ( 99.9% 😉 ).
-- Create a unique page with overview data for each movie ( 99% 🏃🏻‍♂️ ).
-- Create a backend to manage users and their favs movies. ( 99% ⚡️ )
+- **Save Favorite Movies:** Add movies to your personal favorites list.
+- **View Movie Details:** Get detailed information about each movie.
+- **Search Movies:** Easily search for movies using the built-in search functionality.
 
-You can see the demo 👉🏼 [link](https://cinema-app-8jnq.onrender.com) ⚡️
+<img src="https://res.cloudinary.com/dtfzj5caw/image/upload/v1724199326/github-repos/cinema-movie-app/ma01_rpt6bg.jpg" alt="" width="830">
+<img src="https://res.cloudinary.com/dtfzj5caw/image/upload/v1724199327/github-repos/cinema-movie-app/ma02_rje4ba.jpg" alt="" width="830">
+<img src="https://res.cloudinary.com/dtfzj5caw/image/upload/v1724199328/github-repos/cinema-movie-app/ma03_rranw8.jpg" alt="" width="830">
 
-### Stack
+## 📚 Technologies Used
 
-- React
-- Redux
-- Sass
-- Node
-- Express
-- MongoDB
-- Webpack
+- **MongoDB:** Stores user favorites and movie data.
+- **Express.js:** Handles server-side logic and API routes.
+- **React:** Builds the user interface with interactive components.
+- **Node.js:** Runs the backend server and processes requests.
+- **Redux:** Manages the application's state, such as user favorites and search results, ensuring a consistent and predictable user experience.
+- **Sass:** Enhances styling with modular and maintainable CSS, allowing for variables and nested rules.
+- **TMDB API:** Provides movie data, including titles, descriptions, images and ratings.
+
+## 👀 Demo
+
+You can see the demo here 👉🏼 [link](https://cinema-app-8jnq.onrender.com) ⚡️

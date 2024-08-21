@@ -20,6 +20,7 @@ This App allows users to save their favorite movies and view detailed informatio
 - **Node.js:** Runs the backend server and processes requests.
 - **Redux:** Manages the application's state, such as user favorites and search results, ensuring a consistent and predictable user experience.
 - **Sass:** Enhances styling with modular and maintainable CSS, allowing for variables and nested rules.
+- **Webpack:** Bundles JavaScript modules and assets, optimizing the build process and improving the app's performance.
 - **TMDB API:** Provides movie data, including titles, descriptions, images and ratings.
 
 ## 👀 Demo

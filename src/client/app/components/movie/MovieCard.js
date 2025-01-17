@@ -11,6 +11,11 @@ const MovieCard = ({ movie, favorites }) => {
   const dispatch = useDispatch()
   const releaseFull = yearMovie(movie)
 
+  const movieAverage = vote_avg => {
+    const avg = Math.round(vote_avg * 10) / 10
+    return avg ? avg : 'NR'
+  }
+
   const { uid } = useSelector(state => state.auth)
 
   const now = moment().toDate()
@@ -51,7 +56,7 @@ const MovieCard = ({ movie, favorites }) => {
               movie.vote_average
             )}`}
           >
-            <h4>{movie.vote_average ? movie.vote_average : 'NR'}</h4>
+            <h4>{movieAverage(movie.vote_average)}</h4>
           </div>
           <div>
             <p>{movie.original_language}</p>

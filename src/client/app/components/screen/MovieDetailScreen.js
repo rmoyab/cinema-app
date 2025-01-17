@@ -111,6 +111,7 @@ const MovieDetailScreen = () => {
     posterImage: {},
     movieCompaniesInfo: {},
     credits: {},
+    voteAverage: 0,
   }
 
   if (!loading) {
@@ -120,6 +121,7 @@ const MovieDetailScreen = () => {
       posterImage: getImageUrl(movieData.data.poster_path, 'w500'),
       movieCompaniesInfo: movieCompanies(movieData.data),
       credits: movieCredits(credit.data),
+      voteAverage: Math.round(movieData.data.vote_average * 10) / 10,
     }
 
     if (!movieData.data) {
@@ -210,7 +212,7 @@ const MovieDetailScreen = () => {
                       </div>
                       <div className="data__vote__average">
                         <FiStar />
-                        <p>{movieData.data.vote_average}</p>
+                        <p>{movieDetailInfo.voteAverage}</p>
                       </div>
                     </div>
                   </div>

@@ -1,4 +1,4 @@
-# 🎬 Movies App
+# 🎬 Cinema App
 
 This App allows users to save their favorite movies and view detailed information about them. It was developed using the MERN stack and retrieves data from the TMDB API.
 
